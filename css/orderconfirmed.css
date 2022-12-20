@@ -1,0 +1,118 @@
+:root{
+    --black:#333;
+    --background:rgb(24, 24, 24);
+    --box-shadow:rgb(65, 65, 65);
+    --header-menu-font-size: 1.3em;
+    --header-menu-font-color: #FFFFFF;
+    --header-menu-font-style: 'Poppins', sans-serif;;
+    --activefocus-color: #FF4069;
+    --hover-color: #FF7795;
+    --border: 1rem solid var(--header-menu-font-color);
+    --second-font-style: 'Cairo Play', cursive;
+    --third-font-style: 'Righteous', cursive;
+    --fourth-font-style: font-family: 'Roboto Slab', serif;
+}
+
+body{
+    /* background-color: #151419; */
+    /* background: url(../img/sliderbg.png) no-repeat; */
+    background:linear-gradient( rgba(0, 0, 0, 0.712) 100%, rgba(0, 0, 0, 0.678)100%),url("../img/sliderbg.png");
+    opacity: 1;
+    background-size: cover;
+    background-position: center;
+    margin: auto 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+section{
+    padding: 2rem;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.body-layout{
+    display: block;
+}
+
+/* header  */
+
+.header{
+    position: relative;
+    top:0;
+    left: 0;
+    right: 0;
+    box-shadow:  var(--box-shadow);
+    z-index: 1000;
+    font-size:  var(--header-menu-font-size);
+    font-family: var(--header-menu-font-style);
+    font-weight: 500;
+    margin-bottom: 2em;
+}
+
+.header .site-logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.header img{
+    width: 15%;
+}
+
+.content .content-container{
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width:55%;
+    background-color: #35334163;
+    border-radius: 1em;
+    color: #FFFFFF;
+    font-family: var(--header-menu-font-style);
+}
+
+.content .content-box p{
+    margin: 0.5rem;
+}
+
+.content .content-box h1{
+    margin-top: 0;
+    color: #2fdb5a;
+}
+
+.content .content-box lottie-player{
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content .content-box button{
+    border: 3px solid rgba(255, 165, 165, 0.589);
+    box-shadow: rgba(255, 203, 203, 0.2) 0px 2px 8px 0px;
+    cursor: pointer;
+    outline: none;
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
+    border-radius: 1rem;
+    padding: 10px 34px 10px 34px;
+    font-family: var(--header-menu-font-style);
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    margin: 2em 1em 4em 1em;
+}
+
+.content .content-box button:hover{
+    background-color: #FF4069;
+    color: #FFFFFF;
+    box-shadow:none;
+    border: 3px solid #FF4069;
+}
+
+
