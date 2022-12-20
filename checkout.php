@@ -197,7 +197,6 @@ if (isset($userNIC) && ($userNIC !== null)) {
             ?>
                 <div class="contact-info">
                 <h1>Contact Information</h1>
-                <p>Already have an account? <span onclick="location.href='/login.php';">LOG IN</span></p>
                 </div>
 
                 <form action="" method="post">

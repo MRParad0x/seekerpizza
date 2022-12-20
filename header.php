@@ -21,7 +21,13 @@ $total_cart_items = $count_cart_items->rowCount();
 ?>
     <div class="icons">
         <div id="menu-btn" class="fa-solid fa-bars" onclick="openNav()"></div>
+
+<?php
+if ($host == 'index.php') {
+    ?>
         <div id="cart-btn" class="fa-solid fa-bag-shopping"></div><span class="cart-qty" ><?=$total_cart_items;?></span>
+<?php }?>
+
 <?php
 if (isset($_SESSION['roleType'])) {
     echo "<div id=\"user-btn\" class=\"fa-solid fa-user\"><span class=\"user-name\">Hi ";

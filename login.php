@@ -5,10 +5,12 @@ include 'conn.php';
 session_start();
 if (isset($_SESSION['roleType'])) {
     $ssid = session_id();
+    header("Location:product.php");
 } else {
     $ssid = session_id();
 }
 
+$host = "login.php";
 // if (!isset($_SESSION['userNIC'])) {
 //     header('location:product.php');
 // }
@@ -151,35 +153,6 @@ if (isset($_POST['regsubmit'])) {
     //     $insert_user->execute([$userNIC, $userName, $userPassword, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $roleId]);
     //     $regcreate[] = 'Great! <br> Your account has been successfully created.';
     // }
-
-    if (isset($_POST['delete'])) {
-        $cartitemIdd = $_POST['cartitemIdd'];
-        $delete_cart_item = $conn->prepare("DELETE FROM cart_item WHERE cartitemId = ?");
-        $delete_cart_item->execute([$cartitemIdd]);
-        $message[] = 'cart item deleted!';
-    }
-
-    if (isset($_POST['delete_all'])) {
-        $delete_cart_item = $conn->prepare("DELETE FROM cart_item WHERE sessionId = ?");
-        $delete_cart_item->execute([$ssid]);
-        $message[] = 'deleted all from cart!';
-    }
-
-    if (isset($_POST['update_qty'])) {
-        foreach ($_POST['cartitemId'] as $row => $id) {
-            $cartitemId = $id;
-            echo "<br/>" . $cartitemId . "<br/>";
-            $cartitemQty = ($_POST['cartitemQty'][$row]);
-            echo "<br/>" . $cartitemQty . "<br/>";
-            $update_qty = $conn->prepare("UPDATE cart_item SET cartitemQty =? WHERE cartitemId =?");
-            $update_qty->execute([$cartitemQty, $cartitemId]);
-            // echo '<script language="javascript">alert("juas");</script>';
-        }
-    }
-
-    if (isset($_POST['checkout'])) {
-        header('location:checkout.php');
-    }
 }
 
 ?>
@@ -348,8 +321,6 @@ if ($show_role->rowCount() > 0) {
     <p>Your account has been sucessfully created.</p>
     <button onclick="okay();">Okay</button>
     </div>
-
-    <?php include 'cart.php'?>
 
     <footer class="footer">
         <section class="flex">

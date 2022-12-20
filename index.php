@@ -12,6 +12,8 @@ if (isset($_SESSION['roleType'])) {
     echo $ssid;
 }
 
+$host = "index.php";
+
 if (isset($_POST['add_to_cart'])) {
 
     $productId = $_POST['productId'];
