@@ -19,7 +19,7 @@ if (!isset($_SESSION['roleType'])) {
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <!-- custom css file link  -->
-    <link rel='stylesheet' type='text/css' media='screen' href='css/order.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/dashboard.css'>
 
      <!-- favicon file link  -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
@@ -96,8 +96,87 @@ if (!isset($_SESSION['roleType'])) {
 
     </section>
     </div>
+</dv>
 
 <!-- End Header -->
+
+<div class="main">
+
+    <div class="block-box-one">
+
+        <div class="dashboard-welcome">
+            <h1>Hello Amal,</h1>
+            <p>Welcome Back!</p>
+        </div>
+
+        <div class="dashboard-monthly">
+
+            <p class="monthly">Monthly</p>
+
+            <div class="monthly-container">
+            <div class="monthly-box-one">
+                <p class="title">Sales</p>
+                <h2>LKR 100,000</h2>
+                <img src="img/sales.svg">
+            </div>
+
+            <div class="monthly-box-two">
+                <p class="title">Orders</p>
+                <h2>10K</h2>
+                <img src="img/orders.svg">
+            </div>
+
+            <!-- <div class="monthly-box-three">
+                <img src="img/sales.svg">
+
+                <h2>Orders</h2>
+                <h2>LKR 100,000</h2>
+            </div> -->
+            </div>
+
+        </div>
+
+        <div class="dashboard-today">
+
+            <div class="today-container-one">
+                <div class="today-box-one">
+                <h1>1000+</h1>
+                <p>Sales</p>
+                <h2>Today</h2>
+                </div>
+
+                <div class="today-box-one">
+                <h1>LKR 10000</h1>
+                <p>Orders</p>
+                <h2>Today</h2>
+                </div>
+            </div>
+
+            <div class="today-container-two">
+                <div class="today-box-two">
+                <h1>100+</h1>
+                <p>Subscribers</p>
+                <h2>Today</h2>
+                </div>
+
+                <div class="today-box-two">
+                <h1>100+</h1>
+                <p>Customers</p>
+                <h2>Today</h2>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="block-box-two">
+
+    <h1>Lifetime Sales Revenue</h1>
+
+    </div>
+
+</div>
 
     <!-- custom js file link  -->
     <script src='js/main.js'></script>
