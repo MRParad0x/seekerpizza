@@ -111,27 +111,18 @@ if (!isset($_SESSION['roleType'])) {
 
         <div class="dashboard-monthly">
 
-            <p class="monthly">Monthly</p>
-
             <div class="monthly-container">
             <div class="monthly-box-one">
-                <p class="title">Sales</p>
+                <p class="title">Revenue</p>
                 <h2>LKR 100,000</h2>
-                <img src="img/sales.svg">
+                <img src="img/revenue.svg">
             </div>
 
             <div class="monthly-box-two">
                 <p class="title">Orders</p>
                 <h2>10K</h2>
-                <img src="img/orders.svg">
+                <img src="img/order.svg">
             </div>
-
-            <!-- <div class="monthly-box-three">
-                <img src="img/sales.svg">
-
-                <h2>Orders</h2>
-                <h2>LKR 100,000</h2>
-            </div> -->
             </div>
 
         </div>
@@ -141,11 +132,11 @@ if (!isset($_SESSION['roleType'])) {
             <div class="today-container-one">
                 <div class="today-box-one">
                 <h1>1000+</h1>
-                <p>Sales</p>
+                <p>Revenue</p>
                 <h2>Today</h2>
                 </div>
 
-                <div class="today-box-one">
+                <div class="today-box-two">
                 <h1>LKR 10000</h1>
                 <p>Orders</p>
                 <h2>Today</h2>
@@ -153,7 +144,7 @@ if (!isset($_SESSION['roleType'])) {
             </div>
 
             <div class="today-container-two">
-                <div class="today-box-two">
+                <div class="today-box-one">
                 <h1>100+</h1>
                 <p>Subscribers</p>
                 <h2>Today</h2>
@@ -172,7 +163,89 @@ if (!isset($_SESSION['roleType'])) {
 
     <div class="block-box-two">
 
-    <h1>Lifetime Sales Revenue</h1>
+    <h1>Lifetime Summary</h1>
+
+    <div class="block-box-two-container">
+
+        <div class="lifetime-box-one-row">
+
+            <div class="lifetime-box-one">
+                <img src="img/order.svg" alt="">
+                <div class="content">
+                <h1>87K</h1>
+                <p>Orders</p>
+                </div>
+            </div>
+
+            <div class="lifetime-box-one">
+                <img src="img/category.svg" alt="">
+                <div class="content">
+                <h1>10</h1>
+                <p>Category</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="lifetime-box-one-row">
+
+            <div class="lifetime-box-one">
+                <img src="img/products.svg" alt="">
+                <div class="content">
+                <h1>10</h1>
+                <p>Products</p>
+                </div>
+            </div>
+
+            <div class="lifetime-box-one">
+                <img src="img/customer.svg" alt="">
+                <div class="content">
+                <h1>100</h1>
+                <p>Customers</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="lifetime-box-one-row">
+
+            <div class="lifetime-box-one">
+                <img src="img/coupon.svg" alt="">
+                <div class="content">
+                <h1>20</h1>
+                <p>Coupons</p>
+                </div>
+            </div>
+
+            <div class="lifetime-box-one">
+                <img src="img/subscribe.svg" alt="">
+                <div class="content">
+                <h1>1000</h1>
+                <p>Subscribers</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="lifetime-box-one-row">
+
+            <div class="lifetime-box-one">
+                <img src="img/feedback.svg" alt="">
+                <div class="content">
+                <h1>4</h1>
+                <p>Feedbacks</p>
+                </div>
+            </div>
+
+            <div class="lifetime-box-one">
+                <img src="img/users.svg" alt="">
+                <div class="content">
+                <h1>1100</h1>
+                <p>Users</p>
+                </div>
+            </div>
+
+        </div>
 
     </div>
 
