@@ -355,8 +355,8 @@ if ($show_role->rowCount() > 0) {
                         <a href="#menu">Menu</a>
                         <a href="#about">About</a>
                         <a href="#contact">Contact</a>
-                        <a href="#register">Register</a>
-                        <a href="#login">Login</a>
+                        <a href="/login.php">Register</a>
+                        <a href="/login.php">Login</a>
                         <a href="#tou">Term of USe</a>
                         <a href="#tou">Privacy policy</a>
                     </div>

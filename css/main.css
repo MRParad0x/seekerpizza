@@ -384,10 +384,11 @@ section{
 
 .offer-box .box-container .box-row-one{
     display: flex;
+    justify-content: center;
 }
 
 .offer-box .box-container img{
-    width: 300px;
+    width: 350px;
     /* flex: 1 1 250px; */
 }
 
@@ -798,13 +799,14 @@ section{
 /* Start Newsletter Content */
 
 .newsletter-box{
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     height:0;
 }
 
 .newsletter-box-container{
+    display: flex;
     position: relative;
     top:3em;
     bottom:0;

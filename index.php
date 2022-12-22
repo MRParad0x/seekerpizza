@@ -240,9 +240,9 @@ if (isset($_POST['checkout'])) {
                     <img src="img/ads03.png" alt="">
                     <img src="img/ads02.png" alt="">
                 </div>
-                <div class="box-row-two">
+                <!-- <div class="box-row-two">
                     <img src="img/ads04.png" alt="">
-                </div>
+                </div> -->
             </div>
 
         </section>
@@ -402,24 +402,25 @@ if ($show_products->rowCount() > 0) {
         </section>
     </div>
 
-    <div class="newsletter-box-bg">
+    <!-- <div class="newsletter-box-bg">
         <section class="newsletter-box">
             <div class="newsletter-box-container">
-
-                <img src="img/subimage.jpg" alt="">
-
-            <div class="subscribe">
-                <h2>Stay updated with latest the Pizza updates and best deals</h2>
-                <p>Subscribe and never miss out on finds & deals delivered to your inbox.</p>
-                <div class="form">
-                    <input type="email" name="email" id="email" placeholder="Enter your email address" autocomplete="off">
-                    <button type="button">Subscribe</button>
+                <div class="newsletter-box-image">
+                    <img src="img/subimage.jpg" alt="">
+                </div>
+                <div class="newsletter-box-subscribe">
+                    <div class="newsletter-box-content">
+                        <h2>Stay updated with latest the Pizza updates and best deals</h2>
+                        <p>Subscribe and never miss out on finds & deals delivered to your inbox.</p>
+                    </div>
+                    <div class="newsletter-box-form">
+                        <input type="email" name="email" id="email" placeholder="Enter your email address" autocomplete="off">
+                        <button type="button">Subscribe</button>
+                    </div>
                 </div>
             </div>
-
-            </div>
         </section>
-    </div>
+    </div> -->
 
     <?php include 'cart.php'?>
 
@@ -452,8 +453,8 @@ if ($show_products->rowCount() > 0) {
                         <a href="#menu">Menu</a>
                         <a href="#about">About</a>
                         <a href="#contact">Contact</a>
-                        <a href="#register">Register</a>
-                        <a href="#login">Login</a>
+                        <a href="/login.php">Register</a>
+                        <a href="/login.php">Login</a>
                         <a href="#tou">Term of USe</a>
                         <a href="#tou">Privacy policy</a>
                     </div>
