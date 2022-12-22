@@ -3,11 +3,11 @@ include 'conn.php';
 
 session_start();
 
-if(!isset($_SESSION['roleType'])){
-   header('location:login.php');
+if (!isset($_SESSION['roleType'])) {
+    header('location:login.php');
 }
 
-if(isset($_POST['add_role'])){
+if (isset($_POST['add_role'])) {
 
     $roleType = $_POST['roleType'];
     $roleType = filter_var($roleType, FILTER_UNSAFE_RAW);
@@ -17,7 +17,7 @@ if(isset($_POST['add_role'])){
     $add[] = 'New Role has been successfully added.';
 }
 
-if(isset($_POST['update_role'])){
+if (isset($_POST['update_role'])) {
 
     $roleId = $_POST['roleId'];
     $roleId = filter_var($roleId, FILTER_UNSAFE_RAW);
@@ -28,8 +28,8 @@ if(isset($_POST['update_role'])){
     $update_role->execute([$roleType, $roleId]);
     $update[] = 'Role has been successfully updated.';
 }
-    
-    if(isset($_GET['delete'])){
+
+if (isset($_GET['delete'])) {
 
     $delete_id = $_GET['delete'];
     $delete_role = $conn->prepare("DELETE FROM role WHERE roleId = ?");
@@ -88,28 +88,7 @@ if(isset($_POST['update_role'])){
 
 <!-- Start Verticle Menu -->
 
-<div class="flexbox" id="blur">
-<div class="box-one">
-
-    <div class="logo">
-    <img src="img/logovertical.png" alt="">
-    </div>
-
-    <?php include 'menu.php' ?>
-    
-    <div class="profile-box">
-    <div class="profile-logo">
-    <img src="img/profile.png" alt="">
-    <h4>Lahiru Chinthana</h4>
-    </div>
-
-    <div class="profile-setting">
-    <i class="fa-solid fa-gear"></i>
-    <a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
-    </div>
-    </div>
-
-</div>
+<?php include 'menu.php'?>
 
 <!-- End Verticle Menu -->
 
@@ -125,26 +104,32 @@ if(isset($_POST['update_role'])){
 
     <div>
     <?php
-    if(isset($add)){
-    foreach($add as $add){
-    echo '<span id="success" class="success-msg">'.$add.'</span>';
-    };
-    };
-    ?>
+if (isset($add)) {
+    foreach ($add as $add) {
+        echo '<span id="success" class="success-msg">' . $add . '</span>';
+    }
+    ;
+}
+;
+?>
     <?php
-    if(isset($update)){
-    foreach($update as $update){
-    echo '<span id="success" class="success-msg">'.$update.'</span>';
-    };
-    };
-    ?>
+if (isset($update)) {
+    foreach ($update as $update) {
+        echo '<span id="success" class="success-msg">' . $update . '</span>';
+    }
+    ;
+}
+;
+?>
     <?php
-    if(isset($delete)){
-    foreach($delete as $delete){
-    echo '<span id="delete" class="delete-msg">'.$delete.'</span>';
-    };
-    };
-    ?>
+if (isset($delete)) {
+    foreach ($delete as $delete) {
+        echo '<span id="delete" class="delete-msg">' . $delete . '</span>';
+    }
+    ;
+}
+;
+?>
     </div>
 
         <div><i class="fa-solid fa-bell"></i><button id="addbtn" onclick="openPopup()"> + Add Role</button></div>
@@ -195,32 +180,32 @@ if(isset($_POST['update_role'])){
 				</thead>
 				<tbody id="pltable">
     <?php
-    $show_role = $conn->prepare("SELECT * FROM role");
-    $show_role->execute();
-    if($show_role->rowCount() > 0){
-    while($fetch_role = $show_role->fetch(PDO::FETCH_ASSOC)){
-    ?>
+$show_role = $conn->prepare("SELECT * FROM role");
+$show_role->execute();
+if ($show_role->rowCount() > 0) {
+    while ($fetch_role = $show_role->fetch(PDO::FETCH_ASSOC)) {
+        ?>
 
 					<tr>
-                        <td><?= $fetch_role['roleId']; ?></td>
-                        <td><?= $fetch_role['roleType']; ?></td>
+                        <td><?=$fetch_role['roleId'];?></td>
+                        <td><?=$fetch_role['roleType'];?></td>
 						<td>
                             <div class="action">
-                                <a id="clickMe" href="role.php?update=<?= $fetch_role['roleId']; ?>" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="role.php?delete=<?= $fetch_role['roleId']; ?>" class="delete" onclick="return confirm('Are you sure you want to delete this role?');" ><i class="fa-solid fa-trash"></i></a>
+                                <a id="clickMe" href="role.php?update=<?=$fetch_role['roleId'];?>" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="role.php?delete=<?=$fetch_role['roleId'];?>" class="delete" onclick="return confirm('Are you sure you want to delete this role?');" ><i class="fa-solid fa-trash"></i></a>
                             </div>
 						</td>
 					</tr>
         <?php
-            }
-        }
-        ?>
+}
+}
+?>
 				</tbody>
 			</table>
         </div>
 </div>
 </section>
-    </div> 
+    </div>
 </div>
 </div>
 
@@ -264,21 +249,21 @@ if(isset($_POST['update_role'])){
     <h2>Update role</h2>
 
     <?php
-    if(isset($_GET['update'])){
+if (isset($_GET['update'])) {
     $update_id = $_GET['update'];
     $show_role = $conn->prepare("SELECT * FROM role WHERE roleId = ?");
     $show_role->execute([$update_id]);
-    if($show_role->rowCount() > 0){
-    while($fetch_role = $show_role->fetch(PDO::FETCH_ASSOC)){  
-    ?>
+    if ($show_role->rowCount() > 0) {
+        while ($fetch_role = $show_role->fetch(PDO::FETCH_ASSOC)) {
+            ?>
 
     <form action="role.php" method="post" enctype="multipart/form-data">
         <table class="pro-form">
             <tr>
-                <td><input type="hidden" name="roleId" value="<?= $fetch_role['roleId']; ?>" ></td>
+                <td><input type="hidden" name="roleId" value="<?=$fetch_role['roleId'];?>" ></td>
             </tr>
             <tr>
-                <td><input type="text" name="roleType" placeholder="Role Type" value="<?= $fetch_role['roleType']; ?>" required></td>
+                <td><input type="text" name="roleType" placeholder="Role Type" value="<?=$fetch_role['roleType'];?>" required></td>
             </tr>
             <tr>
                 <td><input type="submit" name="update_role" value="Update"></td>
@@ -286,12 +271,12 @@ if(isset($_POST['update_role'])){
         </table>
     </form>
     <?php
-         }
-    }else{
-    echo '<p class="empty">no role added yet!</p>';
+}
+    } else {
+        echo '<p class="empty">no role added yet!</p>';
     }
-    }
-    ?>
+}
+?>
     </div>
 
     <!-- <div class="popup-box-four" id="popupfour">
@@ -312,9 +297,9 @@ if(isset($_POST['update_role'])){
     <script src='js/print.js'></script>
     <script src='js/export.js'></script>
     <script src='js/sort.js'></script>
-    
+
 </body>
 
 </html>
-    
+
 

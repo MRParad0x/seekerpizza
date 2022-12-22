@@ -419,7 +419,7 @@ if ($show_products->rowCount() > 0) {
             }}
 
         if ($dbcouponCode == $couponCode) {
-            echo '<script>alert("Coupon is valid")</script>';
+
         }
 
         ?>

@@ -146,28 +146,7 @@ if (isset($_GET['delete'])) {
 
 <!-- Start Verticle Menu -->
 
-<div class="flexbox" id="blur">
-<div class="box-one">
-
-    <div class="logo">
-    <img src="img/logovertical.png" alt="">
-    </div>
-
-    <?php include 'menu.php'?>
-
-    <div class="profile-box">
-    <div class="profile-logo">
-    <img src="img/profile.png" alt="">
-    <h4>Lahiru Chinthana</h4>
-    </div>
-
-    <div class="profile-setting">
-    <i class="fa-solid fa-gear"></i>
-    <a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
-    </div>
-    </div>
-
-</div>
+<?php include 'menu.php'?>
 
 <!-- End Verticle Menu -->
 

@@ -3,11 +3,11 @@ include 'conn.php';
 
 session_start();
 
-if(!isset($_SESSION['roleType'])){
-   header('location:login.php');
+if (!isset($_SESSION['roleType'])) {
+    header('location:login.php');
 }
 
-if(isset($_POST['add_user'])){
+if (isset($_POST['add_user'])) {
 
     $roleId = $_POST['roleId'];
     $roleId = filter_var($roleId, FILTER_UNSAFE_RAW);
@@ -40,26 +40,26 @@ if(isset($_POST['add_user'])){
     $select_username->execute([$userName]);
     $row3 = $select_username->fetch(PDO::FETCH_ASSOC);
 
-    if($select_users->rowCount() > 0 && $select_email->rowCount() > 0 && $select_username->rowCount() > 0){
-        if($row['userNIC'] == ($userNIC) && $row2['userEmail'] == ($userEmail) && $row3['userName'] == ($userName)){
-        $regerror[] = 'NIC , Email , Username already exists!';
+    if ($select_users->rowCount() > 0 && $select_email->rowCount() > 0 && $select_username->rowCount() > 0) {
+        if ($row['userNIC'] == ($userNIC) && $row2['userEmail'] == ($userEmail) && $row3['userName'] == ($userName)) {
+            $regerror[] = 'NIC , Email , Username already exists!';
         }
-    }elseif($select_users->rowCount() > 0){
-        if($row['userNIC'] == ($userNIC)){
-        $regerror[] = 'NIC already exists!';
+    } elseif ($select_users->rowCount() > 0) {
+        if ($row['userNIC'] == ($userNIC)) {
+            $regerror[] = 'NIC already exists!';
         }
-    }elseif($select_email->rowCount() > 0){
-        if($row2['userEmail'] == ($userEmail)){
-        $regerror[] = 'Email already exists!'; 
+    } elseif ($select_email->rowCount() > 0) {
+        if ($row2['userEmail'] == ($userEmail)) {
+            $regerror[] = 'Email already exists!';
         }
-    }elseif($select_username->rowCount() > 0){
-        if($row3['userName'] == ($userName)){
-        $regerror[] = 'Username already exists!'; 
+    } elseif ($select_username->rowCount() > 0) {
+        if ($row3['userName'] == ($userName)) {
+            $regerror[] = 'Username already exists!';
         }
-    } else{
-    $insert_user = $conn->prepare("INSERT INTO user (userNIC, userName, userPassword, userFName, userLName, userEmail, userNumber, userAddress, roleId) VALUES(?,?,?,?,?,?,?,?,?)");
-    $insert_user->execute([$userNIC, $userName, $userPassword, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $roleId]);
-    $add[] = 'New Customer has been successfully Added.'; 
+    } else {
+        $insert_user = $conn->prepare("INSERT INTO user (userNIC, userName, userPassword, userFName, userLName, userEmail, userNumber, userAddress, roleId) VALUES(?,?,?,?,?,?,?,?,?)");
+        $insert_user->execute([$userNIC, $userName, $userPassword, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $roleId]);
+        $add[] = 'New Customer has been successfully Added.';
     }
 
     // $select_users = $conn->prepare("SELECT * FROM user WHERE userNIC = ?");
@@ -69,7 +69,7 @@ if(isset($_POST['add_user'])){
     // $add[] = 'New User has been successfully added.';
 }
 
-if(isset($_POST['update_user'])){
+if (isset($_POST['update_user'])) {
 
     $roleId = $_POST['roleId'];
     $roleId = filter_var($roleId, FILTER_UNSAFE_RAW);
@@ -91,11 +91,11 @@ if(isset($_POST['update_user'])){
     $userAddress = filter_var($userAddress, FILTER_UNSAFE_RAW);
 
     $update_user = $conn->prepare("UPDATE user SET userName = ?, userPassword = ?, userFName = ?, userLName = ?, userEmail = ?, userNumber = ?, userAddress = ?, roleId = ? WHERE userNIC = ?");
-    $update_user->execute([$userName,$userPassword, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $roleId, $userNIC]);
+    $update_user->execute([$userName, $userPassword, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $roleId, $userNIC]);
     $update[] = 'User has been successfully updated.';
 }
-    
-    if(isset($_GET['delete'])){
+
+if (isset($_GET['delete'])) {
 
     $delete_id = $_GET['delete'];
     $delete_user = $conn->prepare("DELETE FROM user WHERE userNIC = ?");
@@ -154,28 +154,7 @@ if(isset($_POST['update_user'])){
 
 <!-- Start Verticle Menu -->
 
-<div class="flexbox" id="blur">
-<div class="box-one">
-
-    <div class="logo">
-    <img src="img/logovertical.png" alt="">
-    </div>
-
-    <?php include 'menu.php' ?>
-    
-    <div class="profile-box">
-    <div class="profile-logo">
-    <img src="img/profile.png" alt="">
-    <h4>Lahiru Chinthana</h4>
-    </div>
-
-    <div class="profile-setting">
-    <i class="fa-solid fa-gear"></i>
-    <a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
-    </div>
-    </div>
-
-</div>
+<?php include 'menu.php'?>
 
 <!-- End Verticle Menu -->
 
@@ -191,33 +170,41 @@ if(isset($_POST['update_user'])){
 
     <div>
     <?php
-    if(isset($add)){
-    foreach($add as $add){
-    echo '<span id="success" class="success-msg">'.$add.'</span>';
-    };
-    };
-    ?>
+if (isset($add)) {
+    foreach ($add as $add) {
+        echo '<span id="success" class="success-msg">' . $add . '</span>';
+    }
+    ;
+}
+;
+?>
     <?php
-    if(isset($update)){
-    foreach($update as $update){
-    echo '<span id="success" class="success-msg">'.$update.'</span>';
-    };
-    };
-    ?>
+if (isset($update)) {
+    foreach ($update as $update) {
+        echo '<span id="success" class="success-msg">' . $update . '</span>';
+    }
+    ;
+}
+;
+?>
     <?php
-    if(isset($delete)){
-    foreach($delete as $delete){
-    echo '<span id="delete" class="delete-msg">'.$delete.'</span>';
-    };
-    };
-    ?>
+if (isset($delete)) {
+    foreach ($delete as $delete) {
+        echo '<span id="delete" class="delete-msg">' . $delete . '</span>';
+    }
+    ;
+}
+;
+?>
     <?php
-    if(isset($regerror)){
-    foreach($regerror as $regerror){
-    echo '<span id="error" class="error-msg">'.$regerror.'</span>';
-    };
-    };
-    ?>
+if (isset($regerror)) {
+    foreach ($regerror as $regerror) {
+        echo '<span id="error" class="error-msg">' . $regerror . '</span>';
+    }
+    ;
+}
+;
+?>
     </div>
 
         <div><i class="fa-solid fa-bell"></i><button id="addbtn" onclick="openPopup()"> + Add User</button></div>
@@ -273,38 +260,38 @@ if(isset($_POST['update_user'])){
 				</thead>
 				<tbody id="pltable">
     <?php
-    $show_users = $conn->prepare("SELECT user.userNIC, user.userName, user.userFName, user.userLName, user.userEmail, user.userNumber, user.userAddress, user.userEmail, role.roleId, role.roleType from user INNER JOIN role ON user.roleId = role.roleId WHERE roleType IN ('Admin', 'Manager', 'Cashier')");
-    // $show_users = $conn->prepare("SELECT * FROM user WHERE roleType IN ('Admin', 'Manager', 'Cashier') ");
-    $show_users->execute();
-    if($show_users->rowCount() > 0){
-    while($fetch_users = $show_users->fetch(PDO::FETCH_ASSOC)){
-    ?>
+$show_users = $conn->prepare("SELECT user.userNIC, user.userName, user.userFName, user.userLName, user.userEmail, user.userNumber, user.userAddress, user.userEmail, role.roleId, role.roleType from user INNER JOIN role ON user.roleId = role.roleId WHERE roleType IN ('Admin', 'Manager', 'Cashier')");
+// $show_users = $conn->prepare("SELECT * FROM user WHERE roleType IN ('Admin', 'Manager', 'Cashier') ");
+$show_users->execute();
+if ($show_users->rowCount() > 0) {
+    while ($fetch_users = $show_users->fetch(PDO::FETCH_ASSOC)) {
+        ?>
 
 					<tr>
-                        <td><input type="hidden" name="userNIC" value="<?= $fetch_users['userNIC']; ?>" ><?= $fetch_users['userNIC']; ?></td>
-                        <td><?= $fetch_users['userName']; ?></td>
-						<td><?= $fetch_users['userFName']; ?>&nbsp;<?= $fetch_users['userLName']; ?></td>
-						<td><?= $fetch_users['userEmail']; ?></td>
-                        <td><?= $fetch_users['userNumber']; ?></td>
-                        <td><?= $fetch_users['userAddress']; ?></td>
-                        <td><?= $fetch_users['roleType']; ?></td>
+                        <td><input type="hidden" name="userNIC" value="<?=$fetch_users['userNIC'];?>" ><?=$fetch_users['userNIC'];?></td>
+                        <td><?=$fetch_users['userName'];?></td>
+						<td><?=$fetch_users['userFName'];?>&nbsp;<?=$fetch_users['userLName'];?></td>
+						<td><?=$fetch_users['userEmail'];?></td>
+                        <td><?=$fetch_users['userNumber'];?></td>
+                        <td><?=$fetch_users['userAddress'];?></td>
+                        <td><?=$fetch_users['roleType'];?></td>
 						<td>
                             <div class="action">
-                                <a id="clickMe" href="user.php?update=<?= $fetch_users['userNIC']; ?>" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="user.php?delete=<?= $fetch_users['userNIC']; ?>" class="delete" onclick="return confirm('Are you sure you want to delete this user?');" ><i class="fa-solid fa-trash"></i></a>
+                                <a id="clickMe" href="user.php?update=<?=$fetch_users['userNIC'];?>" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="user.php?delete=<?=$fetch_users['userNIC'];?>" class="delete" onclick="return confirm('Are you sure you want to delete this user?');" ><i class="fa-solid fa-trash"></i></a>
                             </div>
 						</td>
 					</tr>
         <?php
-            }
-        }
-        ?>
+}
+}
+?>
 				</tbody>
 			</table>
         </div>
 </div>
 </section>
-    </div> 
+    </div>
 </div>
 </div>
 
@@ -323,16 +310,16 @@ if(isset($_POST['update_user'])){
                 <select name="roleId" required>
             <option value="" disabled selected hidden>Select Category<i class="fa-solid fa-caret-down"></i></option>
     <?php
-    $show_category = $conn->prepare("SELECT * FROM role WHERE roleType IN ('Admin', 'Manager', 'Cashier')");
-    $show_category->execute();
-    if($show_category->rowCount() > 0){
-    while($fetch_category = $show_category->fetch(PDO::FETCH_ASSOC)){  
-    ?>              
-                    <option value="<?= $fetch_category['roleId']; ?>"><?= $fetch_category['roleType']; ?></option>
+$show_category = $conn->prepare("SELECT * FROM role WHERE roleType IN ('Admin', 'Manager', 'Cashier')");
+$show_category->execute();
+if ($show_category->rowCount() > 0) {
+    while ($fetch_category = $show_category->fetch(PDO::FETCH_ASSOC)) {
+        ?>
+                    <option value="<?=$fetch_category['roleId'];?>"><?=$fetch_category['roleType'];?></option>
     <?php
-    }
-    }
-    ?>
+}
+}
+?>
                 </select>
                 </td>
             <tr>
@@ -391,14 +378,14 @@ if(isset($_POST['update_user'])){
     <h2>Update User</h2>
 
     <?php
-    if(isset($_GET['update'])){
+if (isset($_GET['update'])) {
     $update_id = $_GET['update'];
     $show_user = $conn->prepare("SELECT user.userNIC, user.userName, user.userFName, user.userLName, user.userEmail, user.userPassword, user.userNumber, user.userAddress, user.userEmail, role.roleId, role.roleType from user INNER JOIN role ON user.roleId = role.roleId WHERE userNIC = ?");
     // $show_user = $conn->prepare("SELECT * FROM user WHERE userNIC = ?");
     $show_user->execute([$update_id]);
-    if($show_user->rowCount() > 0){
-    while($fetch_user = $show_user->fetch(PDO::FETCH_ASSOC)){  
-    ?>
+    if ($show_user->rowCount() > 0) {
+        while ($fetch_user = $show_user->fetch(PDO::FETCH_ASSOC)) {
+            ?>
 
     <form action="user.php" method="post" enctype="multipart/form-data">
         <table class="pro-form">
@@ -406,48 +393,48 @@ if(isset($_POST['update_user'])){
                 <td>
 
                 <select name="roleId" required>
-                <option value="<?= $fetch_user['roleId']; ?>" selected hidden><?= $fetch_user['roleType']; ?></option>
+                <option value="<?=$fetch_user['roleId'];?>" selected hidden><?=$fetch_user['roleType'];?></option>
     <?php
-    $show_role = $conn->prepare("SELECT * FROM role WHERE roleType IN ('Admin', 'Manager', 'Cashier')");
-    $show_role->execute();
-    if($show_role->rowCount() > 0){
-    while($fetch_role = $show_role->fetch(PDO::FETCH_ASSOC)){  
-    ?>              
-                <option value="<?= $fetch_role['roleId']; ?>"><?= $fetch_role['roleType']; ?></option>
+$show_role = $conn->prepare("SELECT * FROM role WHERE roleType IN ('Admin', 'Manager', 'Cashier')");
+            $show_role->execute();
+            if ($show_role->rowCount() > 0) {
+                while ($fetch_role = $show_role->fetch(PDO::FETCH_ASSOC)) {
+                    ?>
+                <option value="<?=$fetch_role['roleId'];?>"><?=$fetch_role['roleType'];?></option>
     <?php
-    }
-    }
-    ?>
+}
+            }
+            ?>
                 </select>
                 </td>
             </tr>
             <tr>
-                <td><input id="pId" type="text" name="userNIC" placeholder="User NIC" value="<?= $fetch_user['userNIC']; ?>" id="checkNIC" pattern="[\d{9}]+V$" required ></td>
+                <td><input id="pId" type="text" name="userNIC" placeholder="User NIC" value="<?=$fetch_user['userNIC'];?>" id="checkNIC" pattern="[\d{9}]+V$" required ></td>
             </tr>
             </tr>
             <tr>
-                <td><input type="text" name="userName" placeholder="Username" value="<?= $fetch_user['userName']; ?>" ></td>
+                <td><input type="text" name="userName" placeholder="Username" value="<?=$fetch_user['userName'];?>" ></td>
             </tr>
             <tr>
-                <td><input type="password" name="userPassword" placeholder="User Password" value="<?= $fetch_user['userPassword']; ?>" id="password" minlength="8"></td>
+                <td><input type="password" name="userPassword" placeholder="User Password" value="<?=$fetch_user['userPassword'];?>" id="password" minlength="8"></td>
             </tr>
             <tr>
-                <td><input type="password" name="userConPassword" placeholder="Confirm Password" value="<?= $fetch_user['userPassword']; ?>" id="confirm_password" minlength="8"></td>
+                <td><input type="password" name="userConPassword" placeholder="Confirm Password" value="<?=$fetch_user['userPassword'];?>" id="confirm_password" minlength="8"></td>
             </tr>
             <tr>
-                <td><input type="text" name="userFName" placeholder="User First Name" value="<?= $fetch_user['userFName']; ?>" ></td>
+                <td><input type="text" name="userFName" placeholder="User First Name" value="<?=$fetch_user['userFName'];?>" ></td>
             </tr>
             <tr>
-                <td><input type="text" name="userLName" placeholder="User Last Name" value="<?= $fetch_user['userLName']; ?>" ></td>
+                <td><input type="text" name="userLName" placeholder="User Last Name" value="<?=$fetch_user['userLName'];?>" ></td>
             </tr>
             <tr>
-                <td><input type="email" name="userEmail" placeholder="User Email" value="<?= $fetch_user['userEmail']; ?>" ></td>
+                <td><input type="email" name="userEmail" placeholder="User Email" value="<?=$fetch_user['userEmail'];?>" ></td>
             </tr>
             <tr>
-                <td><input type="text" name="userNumber" placeholder="User Phone No" value="<?= $fetch_user['userNumber']; ?>" id="checkNumber" pattern="\d{10}"></td>
+                <td><input type="text" name="userNumber" placeholder="User Phone No" value="<?=$fetch_user['userNumber'];?>" id="checkNumber" pattern="\d{10}"></td>
             </tr>
             <tr>
-                <td><input type="text" name="userAddress" placeholder="User Address" value="<?= $fetch_user['userAddress']; ?>" ></td>
+                <td><input type="text" name="userAddress" placeholder="User Address" value="<?=$fetch_user['userAddress'];?>" ></td>
             </tr>
             <tr>
             <tr>
@@ -456,12 +443,12 @@ if(isset($_POST['update_user'])){
         </table>
     </form>
     <?php
-         }
-    }else{
-    echo '<p class="empty">no users added yet!</p>';
+}
+    } else {
+        echo '<p class="empty">no users added yet!</p>';
     }
-    }
-    ?>
+}
+?>
     </div>
 
     <!-- <div class="popup-box-four" id="popupfour">
@@ -482,9 +469,9 @@ if(isset($_POST['update_user'])){
     <script src='js/print.js'></script>
     <script src='js/export.js'></script>
     <script src='js/sort.js'></script>
-    
+
 </body>
 
 </html>
-    
+
 

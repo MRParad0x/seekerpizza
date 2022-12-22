@@ -7,6 +7,8 @@ if (isset($_SESSION['roleType'])) {
     $ssid = session_id();
     echo $ssid;
     echo $_SESSION['userNIC'];
+    echo $_SESSION['userFName'];
+    echo $_SESSION['userLName'];
 } else {
     $ssid = session_id();
     echo $ssid;
@@ -233,11 +235,16 @@ if (isset($_POST['checkout'])) {
             <h1>Pizza Promotions!</h1>
             <p>Grab the latest promotions and deals to enjoy great savings, only at US Pizza!</p>
             <div class="box-container">
+                <div class="box-row-one">
                     <img src="img/ads001.png" alt="">
                     <img src="img/ads03.png" alt="">
                     <img src="img/ads02.png" alt="">
+                </div>
+                <div class="box-row-two">
+                    <img src="img/ads04.png" alt="">
+                </div>
             </div>
-            <img src="img/ads04.png" alt="">
+
         </section>
     </div>
 

@@ -30,6 +30,7 @@ if (isset($_POST['logsubmit'])) {
             $_SESSION['roleType'] = $row['roleType'];
             $_SESSION['userNIC'] = $row['userNIC'];
             $_SESSION['userFName'] = $row['userFName'];
+            $_SESSION['userLName'] = $row['userLName'];
             if (isset($_SESSION['redirectcheckout'])) {
                 header('location: ' . $_SESSION['redirectcheckout']);
                 die();
@@ -40,6 +41,7 @@ if (isset($_POST['logsubmit'])) {
             $_SESSION['roleType'] = $row['roleType'];
             $_SESSION['userNIC'] = $row['userNIC'];
             $_SESSION['userFName'] = $row['userFName'];
+            $_SESSION['userLName'] = $row['userLName'];
             if (isset($_SESSION['redirectcheckout'])) {
                 header('location: ' . $_SESSION['redirectcheckout']);
             } else {
@@ -49,6 +51,7 @@ if (isset($_POST['logsubmit'])) {
             $_SESSION['roleType'] = $row['roleType'];
             $_SESSION['userNIC'] = $row['userNIC'];
             $_SESSION['userFName'] = $row['userFName'];
+            $_SESSION['userLName'] = $row['userLName'];
             if (isset($_SESSION['redirectcheckout'])) {
                 header('location: ' . $_SESSION['redirectcheckout']);
             } else {
@@ -58,6 +61,7 @@ if (isset($_POST['logsubmit'])) {
             $_SESSION['roleType'] = $row['roleType'];
             $_SESSION['userNIC'] = $row['userNIC'];
             $_SESSION['userFName'] = $row['userFName'];
+            $_SESSION['userLName'] = $row['userLName'];
             if (isset($_SESSION['redirectcheckout'])) {
                 header('location: ' . $_SESSION['redirectcheckout']);
             } else {

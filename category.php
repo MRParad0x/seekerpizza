@@ -3,11 +3,11 @@ include 'conn.php';
 
 session_start();
 
-if(!isset($_SESSION['roleType'])){
-   header('location:login.php');
+if (!isset($_SESSION['roleType'])) {
+    header('location:login.php');
 }
 
-if(isset($_POST['add_category'])){
+if (isset($_POST['add_category'])) {
 
     $categoryName = $_POST['categoryName'];
     $categoryName = filter_var($categoryName, FILTER_UNSAFE_RAW);
@@ -17,7 +17,7 @@ if(isset($_POST['add_category'])){
     $add[] = 'New Category has been successfully added.';
 }
 
-if(isset($_POST['update_category'])){
+if (isset($_POST['update_category'])) {
 
     $categoryId = $_POST['categoryId'];
     $categoryId = filter_var($categoryId, FILTER_UNSAFE_RAW);
@@ -28,8 +28,8 @@ if(isset($_POST['update_category'])){
     $update_category->execute([$categoryName, $categoryId]);
     $update[] = 'Category has been successfully updated.';
 }
-    
-    if(isset($_GET['delete'])){
+
+if (isset($_GET['delete'])) {
 
     $delete_id = $_GET['delete'];
     $delete_category = $conn->prepare("DELETE FROM category WHERE categoryId = ?");
@@ -88,28 +88,7 @@ if(isset($_POST['update_category'])){
 
 <!-- Start Verticle Menu -->
 
-<div class="flexbox" id="blur">
-<div class="box-one">
-
-    <div class="logo">
-    <img src="img/logovertical.png" alt="">
-    </div>
-
-    <?php include 'menu.php' ?>
-    
-    <div class="profile-box">
-    <div class="profile-logo">
-    <img src="img/profile.png" alt="">
-    <h4>Lahiru Chinthana</h4>
-    </div>
-
-    <div class="profile-setting">
-    <i class="fa-solid fa-gear"></i>
-    <a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
-    </div>
-    </div>
-
-</div>
+<?php include 'menu.php'?>
 
 <!-- End Verticle Menu -->
 
@@ -124,26 +103,32 @@ if(isset($_POST['update_category'])){
         <div><h1>Category</h1></div>
         <div>
         <?php
-        if(isset($add)){
-        foreach($add as $add){
-        echo '<span id="success" class="success-msg">'.$add.'</span>';
-        };
-        };
-        ?>
+if (isset($add)) {
+    foreach ($add as $add) {
+        echo '<span id="success" class="success-msg">' . $add . '</span>';
+    }
+    ;
+}
+;
+?>
         <?php
-        if(isset($update)){
-        foreach($update as $update){
-        echo '<span id="success" class="success-msg">'.$update.'</span>';
-        };
-        };
-        ?>
+if (isset($update)) {
+    foreach ($update as $update) {
+        echo '<span id="success" class="success-msg">' . $update . '</span>';
+    }
+    ;
+}
+;
+?>
         <?php
-        if(isset($delete)){
-        foreach($delete as $delete){
-        echo '<span id="delete" class="delete-msg">'.$delete.'</span>';
-        };
-        };
-        ?>
+if (isset($delete)) {
+    foreach ($delete as $delete) {
+        echo '<span id="delete" class="delete-msg">' . $delete . '</span>';
+    }
+    ;
+}
+;
+?>
         </div>
         <div><i class="fa-solid fa-bell"></i><button id="addbtn" onclick="openPopup()"> + Add Category</button></div>
     </div>
@@ -193,32 +178,32 @@ if(isset($_POST['update_category'])){
 				</thead>
 				<tbody id="pltable">
     <?php
-    $show_category = $conn->prepare("SELECT * FROM category");
-    $show_category->execute();
-    if($show_category->rowCount() > 0){
-    while($fetch_category = $show_category->fetch(PDO::FETCH_ASSOC)){
-    ?>
+$show_category = $conn->prepare("SELECT * FROM category");
+$show_category->execute();
+if ($show_category->rowCount() > 0) {
+    while ($fetch_category = $show_category->fetch(PDO::FETCH_ASSOC)) {
+        ?>
 
 					<tr>
-                        <td><?= $fetch_category['categoryId']; ?></td>
-                        <td><?= $fetch_category['categoryName']; ?></td>
+                        <td><?=$fetch_category['categoryId'];?></td>
+                        <td><?=$fetch_category['categoryName'];?></td>
 						<td>
                             <div class="action">
-                                <a id="clickMe" href="category.php?update=<?= $fetch_category['categoryId']; ?>" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="category.php?delete=<?= $fetch_category['categoryId']; ?>" class="delete" onclick="return confirm('Are you sure you want to delete this category?');" ><i class="fa-solid fa-trash"></i></a>
+                                <a id="clickMe" href="category.php?update=<?=$fetch_category['categoryId'];?>" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="category.php?delete=<?=$fetch_category['categoryId'];?>" class="delete" onclick="return confirm('Are you sure you want to delete this category?');" ><i class="fa-solid fa-trash"></i></a>
                             </div>
 						</td>
 					</tr>
         <?php
-            }
-        }
-        ?>
+}
+}
+?>
 				</tbody>
 			</table>
         </div>
 </div>
 </section>
-    </div> 
+    </div>
 </div>
 </div>
 
@@ -262,21 +247,21 @@ if(isset($_POST['update_category'])){
     <h2>Update Category</h2>
 
     <?php
-    if(isset($_GET['update'])){
+if (isset($_GET['update'])) {
     $update_id = $_GET['update'];
     $show_category = $conn->prepare("SELECT * FROM category WHERE categoryId = ?");
     $show_category->execute([$update_id]);
-    if($show_category->rowCount() > 0){
-    while($fetch_category = $show_category->fetch(PDO::FETCH_ASSOC)){  
-    ?>
+    if ($show_category->rowCount() > 0) {
+        while ($fetch_category = $show_category->fetch(PDO::FETCH_ASSOC)) {
+            ?>
 
     <form action="category.php" method="post" enctype="multipart/form-data">
         <table class="pro-form">
             <tr>
-                <td><input type="hidden" name="categoryId" value="<?= $fetch_category['categoryId']; ?>" ></td>
+                <td><input type="hidden" name="categoryId" value="<?=$fetch_category['categoryId'];?>" ></td>
             </tr>
             <tr>
-                <td><input type="text" name="categoryName" placeholder="Category Name" value="<?= $fetch_category['categoryName']; ?>" ></td>
+                <td><input type="text" name="categoryName" placeholder="Category Name" value="<?=$fetch_category['categoryName'];?>" ></td>
             </tr>
             <tr>
                 <td><input type="submit" name="update_category" value="Update"></td>
@@ -284,12 +269,12 @@ if(isset($_POST['update_category'])){
         </table>
     </form>
     <?php
-         }
-    }else{
-    echo '<p class="empty">no category added yet!</p>';
+}
+    } else {
+        echo '<p class="empty">no category added yet!</p>';
     }
-    }
-    ?>
+}
+?>
     </div>
 
     <!-- <div class="popup-box-four" id="popupfour">
@@ -310,9 +295,9 @@ if(isset($_POST['update_category'])){
     <script src='js/print.js'></script>
     <script src='js/export.js'></script>
     <script src='js/sort.js'></script>
-    
+
 </body>
 
 </html>
-    
+
 

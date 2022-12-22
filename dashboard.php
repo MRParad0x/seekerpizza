@@ -56,28 +56,7 @@ if (!isset($_SESSION['roleType'])) {
 
 <!-- Start Verticle Menu -->
 
-<div class="flexbox" id="blur">
-<div class="box-one">
-
-    <div class="logo">
-    <img src="img/logovertical.png" alt="">
-    </div>
-
-    <?php include 'menu.php'?>
-
-    <div class="profile-box">
-    <div class="profile-logo">
-    <img src="img/profile.png" alt="">
-    <h4>Lahiru Chinthana</h4>
-    </div>
-
-    <div class="profile-setting">
-    <i class="fa-solid fa-gear"></i>
-    <a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
-    </div>
-    </div>
-
-</div>
+<?php include 'menu.php'?>
 
 <!-- End Verticle Menu -->
 
@@ -105,7 +84,7 @@ if (!isset($_SESSION['roleType'])) {
     <div class="block-box-one">
 
         <div class="dashboard-welcome">
-            <h1>Hello Amal,</h1>
+            <h1>Hello <?php echo $_SESSION['userFName'] ?>,</h1>
             <p>Welcome Back!</p>
         </div>
 
@@ -252,11 +231,7 @@ if (!isset($_SESSION['roleType'])) {
 </div>
 
     <!-- custom js file link  -->
-    <script src='js/main.js'></script>
-    <script src='js/status.js'></script>
-    <script src='js/print.js'></script>
-    <script src='js/export.js'></script>
-    <script src='js/sort.js'></script>
+
 </body>
 
 </html>

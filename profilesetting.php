@@ -15,7 +15,7 @@ if (!isset($_SESSION['roleType'])) {
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Report</title>
+    <title>Edit Profile</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <!-- custom css file link  -->
@@ -68,7 +68,7 @@ if (!isset($_SESSION['roleType'])) {
     <section class="flex">
 
     <div class="header-container">
-        <div><h1>Report</h1></div>
+        <div><h1>Edit Profile</h1></div>
         <div><i class="fa-solid fa-bell"></i></div>
         <!-- <button id="addbtn" onclick="openPopup()"> + Create Order</button> -->
     </div>

@@ -3,11 +3,11 @@ include 'conn.php';
 
 session_start();
 
-if(!isset($_SESSION['roleType'])){
-   header('location:login.php');
+if (!isset($_SESSION['roleType'])) {
+    header('location:login.php');
 }
 
-if(isset($_POST['add_coupon'])){
+if (isset($_POST['add_coupon'])) {
 
     $couponCode = $_POST['couponCode'];
     $couponCode = filter_var($couponCode, FILTER_UNSAFE_RAW);
@@ -16,12 +16,12 @@ if(isset($_POST['add_coupon'])){
 
     $insert_coupon = $conn->prepare("INSERT INTO coupon (couponCode, couponDiscount) VALUES(?,?)");
     $insert_coupon->execute([$couponCode, $couponDiscount]);
-    $add[] = 'New Coupon has been successfully added.'; 
+    $add[] = 'New Coupon has been successfully added.';
 }
 
-if(isset($_POST['update_coupon'])){
+if (isset($_POST['update_coupon'])) {
 
-    $couponId= $_POST['couponId'];
+    $couponId = $_POST['couponId'];
     $couponId = filter_var($couponId, FILTER_UNSAFE_RAW);
     $couponCode = $_POST['couponCode'];
     $couponCode = filter_var($couponCode, FILTER_UNSAFE_RAW);
@@ -32,8 +32,8 @@ if(isset($_POST['update_coupon'])){
     $update_coupon->execute([$couponCode, $couponDiscount, $couponId]);
     $update[] = 'Coupon has been successfully updated.';
 }
-    
-    if(isset($_GET['delete'])){
+
+if (isset($_GET['delete'])) {
 
     $delete_id = $_GET['delete'];
     $delete_coupon = $conn->prepare("DELETE FROM coupon WHERE couponId = ?");
@@ -92,28 +92,7 @@ if(isset($_POST['update_coupon'])){
 
 <!-- Start Verticle Menu -->
 
-<div class="flexbox" id="blur">
-<div class="box-one">
-
-    <div class="logo">
-    <img src="img/logovertical.png" alt="">
-    </div>
-
-    <?php include 'menu.php' ?>
-    
-    <div class="profile-box">
-    <div class="profile-logo">
-    <img src="img/profile.png" alt="">
-    <h4>Lahiru Chinthana</h4>
-    </div>
-
-    <div class="profile-setting">
-    <i class="fa-solid fa-gear"></i>
-    <a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
-    </div>
-    </div>
-
-</div>
+<?php include 'menu.php'?>
 
 <!-- End Verticle Menu -->
 
@@ -129,26 +108,32 @@ if(isset($_POST['update_coupon'])){
 
             <div>
     <?php
-    if(isset($add)){
-    foreach($add as $add){
-    echo '<span id="success" class="success-msg">'.$add.'</span>';
-    };
-    };
-    ?>
+if (isset($add)) {
+    foreach ($add as $add) {
+        echo '<span id="success" class="success-msg">' . $add . '</span>';
+    }
+    ;
+}
+;
+?>
     <?php
-    if(isset($update)){
-    foreach($update as $update){
-    echo '<span id="success" class="success-msg">'.$update.'</span>';
-    };
-    };
-    ?>
+if (isset($update)) {
+    foreach ($update as $update) {
+        echo '<span id="success" class="success-msg">' . $update . '</span>';
+    }
+    ;
+}
+;
+?>
     <?php
-    if(isset($delete)){
-    foreach($delete as $delete){
-    echo '<span id="delete" class="delete-msg">'.$delete.'</span>';
-    };
-    };
-    ?>
+if (isset($delete)) {
+    foreach ($delete as $delete) {
+        echo '<span id="delete" class="delete-msg">' . $delete . '</span>';
+    }
+    ;
+}
+;
+?>
     </div>
 
         <div><i class="fa-solid fa-bell"></i><button id="addbtn" onclick="openPopup()"> + Add Coupon</button></div>
@@ -200,33 +185,33 @@ if(isset($_POST['update_coupon'])){
 				</thead>
 				<tbody id="pltable">
     <?php
-    $show_coupon = $conn->prepare("SELECT * FROM coupon");
-    $show_coupon->execute();
-    if($show_coupon->rowCount() > 0){
-    while($fetch_coupon = $show_coupon->fetch(PDO::FETCH_ASSOC)){
-    ?>
+$show_coupon = $conn->prepare("SELECT * FROM coupon");
+$show_coupon->execute();
+if ($show_coupon->rowCount() > 0) {
+    while ($fetch_coupon = $show_coupon->fetch(PDO::FETCH_ASSOC)) {
+        ?>
 
 					<tr>
-                        <td><?= $fetch_coupon['couponId']; ?></td>
-                        <td><?= $fetch_coupon['couponCode']; ?></td>
-                        <td><?= $fetch_coupon['couponDiscount']; ?></td>
+                        <td><?=$fetch_coupon['couponId'];?></td>
+                        <td><?=$fetch_coupon['couponCode'];?></td>
+                        <td><?=$fetch_coupon['couponDiscount'];?></td>
 						<td>
                             <div class="action">
-                                <a id="clickMe" href="coupon.php?update=<?= $fetch_coupon['couponId']; ?>" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="coupon.php?delete=<?= $fetch_coupon['couponId']; ?>" class="delete" onclick="return confirm('Are you sure you want to delete this coupon?');" ><i class="fa-solid fa-trash"></i></a>
+                                <a id="clickMe" href="coupon.php?update=<?=$fetch_coupon['couponId'];?>" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="coupon.php?delete=<?=$fetch_coupon['couponId'];?>" class="delete" onclick="return confirm('Are you sure you want to delete this coupon?');" ><i class="fa-solid fa-trash"></i></a>
                             </div>
 						</td>
 					</tr>
         <?php
-            }
-        }
-        ?>
+}
+}
+?>
 				</tbody>
 			</table>
         </div>
 </div>
 </section>
-    </div> 
+    </div>
 </div>
 </div>
 
@@ -273,24 +258,24 @@ if(isset($_POST['update_coupon'])){
     <h2>Update Coupon</h2>
 
     <?php
-    if(isset($_GET['update'])){
+if (isset($_GET['update'])) {
     $update_id = $_GET['update'];
     $show_coupon = $conn->prepare("SELECT * FROM coupon WHERE couponId = ?");
     $show_coupon->execute([$update_id]);
-    if($show_coupon->rowCount() > 0){
-    while($fetch_coupon = $show_coupon->fetch(PDO::FETCH_ASSOC)){  
-    ?>
+    if ($show_coupon->rowCount() > 0) {
+        while ($fetch_coupon = $show_coupon->fetch(PDO::FETCH_ASSOC)) {
+            ?>
 
     <form action="coupon.php" method="post" enctype="multipart/form-data">
         <table class="pro-form">
             <tr>
-                <td><input type="hidden" name="couponId" value="<?= $fetch_coupon['couponId']; ?>" ></td>
+                <td><input type="hidden" name="couponId" value="<?=$fetch_coupon['couponId'];?>" ></td>
             </tr>
             <tr>
-                <td><input type="text" name="couponCode" placeholder="Coupon Name" value="<?= $fetch_coupon['couponCode']; ?>" ></td>
+                <td><input type="text" name="couponCode" placeholder="Coupon Name" value="<?=$fetch_coupon['couponCode'];?>" ></td>
             </tr>
             <tr>
-                <td><input type="number" step='0.01' placeholder='0.00' name="couponDiscount" placeholder="Coupon Discount" value="<?= $fetch_coupon['couponDiscount']; ?>" ></td>
+                <td><input type="number" step='0.01' placeholder='0.00' name="couponDiscount" placeholder="Coupon Discount" value="<?=$fetch_coupon['couponDiscount'];?>" ></td>
             </tr>
             <tr>
                 <td><input type="submit" name="update_coupon" value="Update"></td>
@@ -298,12 +283,12 @@ if(isset($_POST['update_coupon'])){
         </table>
     </form>
     <?php
-         }
-    }else{
-    echo '<p class="empty">no coupon added yet!</p>';
+}
+    } else {
+        echo '<p class="empty">no coupon added yet!</p>';
     }
-    }
-    ?>
+}
+?>
     </div>
 
     <!-- <div class="popup-box-four" id="popupfour">
@@ -324,9 +309,9 @@ if(isset($_POST['update_coupon'])){
     <script src='js/print.js'></script>
     <script src='js/export.js'></script>
     <script src='js/sort.js'></script>
-    
+
 </body>
 
 </html>
-    
+
 
