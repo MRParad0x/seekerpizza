@@ -35,7 +35,7 @@ if (isset($_POST['logsubmit'])) {
                 header('location: ' . $_SESSION['redirectcheckout']);
                 die();
             } else {
-                header('location: product.php');
+                header('location: dashboard.php');
             }
         } elseif ($row['roleType'] == ('Manager')) {
             $_SESSION['roleType'] = $row['roleType'];
@@ -45,7 +45,7 @@ if (isset($_POST['logsubmit'])) {
             if (isset($_SESSION['redirectcheckout'])) {
                 header('location: ' . $_SESSION['redirectcheckout']);
             } else {
-                header('location: product.php');
+                header('location: dashboard.php');
             }
         } elseif ($row['roleType'] == ('Cashier')) {
             $_SESSION['roleType'] = $row['roleType'];
@@ -55,7 +55,7 @@ if (isset($_POST['logsubmit'])) {
             if (isset($_SESSION['redirectcheckout'])) {
                 header('location: ' . $_SESSION['redirectcheckout']);
             } else {
-                header('location: product.php');
+                header('location: dashboard.php');
             }
         } elseif ($row['roleType'] == ('Customer')) {
             $_SESSION['roleType'] = $row['roleType'];
@@ -65,7 +65,7 @@ if (isset($_POST['logsubmit'])) {
             if (isset($_SESSION['redirectcheckout'])) {
                 header('location: ' . $_SESSION['redirectcheckout']);
             } else {
-                header('location: product.php');
+                header('location: userdashboard.php');
             }
         }
     } else {

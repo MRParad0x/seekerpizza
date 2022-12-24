@@ -85,81 +85,16 @@ if (!isset($_SESSION['roleType'])) {
 
 <div class="main">
 
-    <div class="main-container">
-
-    <div class="flexbox-one">
+    <div class="block-box-one">
 
         <div class="dashboard-welcome">
             <h1>Hello <?php echo $_SESSION['userFName'] ?>,</h1>
             <p>Welcome Back!</p>
         </div>
 
-        <div class="bar-chart-div">
+        <div class="lifetime-box-one-row">
 
-            <div class="bar-chart-container">
-            <h3>Sales & Revenue</h3>
-                <div class="bar-chart">
-                    <canvas id="barchart"></canvas>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="Total-box-container">
-
-        <div class="Total-box">
-            <div>
-                <img src="img/customer.svg" alt="">
-            </div>
-            <div class="content">
-                <p class="orderNo">1000</p>
-                <p>Total Customers</p>
-            </div>
-        </div>
-
-        <div class="Total-box">
-            <div>
-                <img src="img/subscribe.svg" alt="">
-            </div>
-            <div class="content">
-                <p class="orderNo">1000</p>
-                <p>Total Subscribers</p>
-            </div>
-        </div>
-
-        </div>
-
-        <div class="Total-box-container">
-
-            <div class="Total-box" id="Total-box-one">
-                <div>
-                    <img src="img/products.svg" alt="">
-                </div>
-                <div class="content">
-                    <p class="orderNo">1000</p>
-                    <p>Total Products</p>
-                </div>
-            </div>
-
-        <div class="Total-box" id="Total-box-two">
-            <div>
-                <img src="img/feedback.svg" alt="">
-            </div>
-            <div class="content">
-                <p class="orderNo">1000</p>
-                <p>Total Feedbacks</p>
-            </div>
-        </div>
-
-</div>
-
-    </div>
-
-    <div class="flexbox-two">
-
-        <div class="Total-box-container">
-
-            <div class="Total-box">
+            <div class="lifetime-box-one">
                 <div>
                     <img src="img/order.svg" alt="">
                 </div>
@@ -169,50 +104,98 @@ if (!isset($_SESSION['roleType'])) {
                 </div>
             </div>
 
-            <div class="Total-box">
+            <div class="lifetime-box-two">
                 <div>
-                    <img src="img/revenue.svg" alt="">
+                <img src="img/revenue.svg" alt="">
                 </div>
                 <div class="content">
-                    <p class="orderNo">1000</p>
+                    <p class="orderNo"><span style="font-size: 20px;color:#ffffffab;">LKR</span> 10k</p>
                     <p>Lifetime Revenue</p>
                 </div>
             </div>
+
         </div>
 
-        <div class="chart-container">
+    </div>
 
-        <div class="pie-chart-container">
-        <h3>Highest Selling Categories</h3>
-            <div class="pie-chart">
-                <canvas id="pieChart"></canvas>
-            </div>
-        </div>
+    <div class="block-box-two">
 
-        <div class="polar-chart-container">
+    <div class="bar-chart-container">
+        <h3>Sales & Revenue</h3>
+    <div class="bar-chart">
+        <canvas id="barchart"></canvas>
+    </div>
+    </div>
+
+    <div class="pie-chart-container">
+    <div class="pie-chart">
+        <h3>Highest Selling Products</h3>
+        <canvas id="pieChart"></canvas>
+    </div>
+    </div>
+
+    <div class="polar-chart-container">
+    <div class="polar-area">
         <h3>Users</h3>
-            <div class="polar-area">
-                <canvas id="polararea"></canvas>
-            </div>
+        <canvas id="polararea"></canvas>
+    </div>
+    </div>
+
+    </div>
+
+    <div class="block-box-three">
+    <div class="lifetime-box-one-row">
+
+    <div class="lifetime-box-one">
+        <div>
+            <img src="img/order.svg" alt="">
         </div>
-
+        <div class="content">
+            <p class="orderNo">1000</p>
+            <p>Lifetime Sales</p>
         </div>
+    </div>
 
-        <div class="bar-chart-div">
-
-            <div class="bar-chart-container">
-                    <h3>Highest Selling Foods</h3>
-                <div class="bar-chart">
-                    <canvas id="Hbarchart"></canvas>
-                </div>
-
-            </div>
+    <div class="lifetime-box-two">
+        <div>
+            <img src="img/order.svg" alt="">
         </div>
+        <div class="content">
+            <p class="orderNo">1000</p>
+            <p>Lifetime Sales</p>
+        </div>
+    </div>
+
+    </div>
+
+    <div class="lifetime-box-two-row">
+
+    <div class="lifetime-box-one">
+        <div>
+            <img src="img/order.svg" alt="">
+        </div>
+        <div class="content">
+            <p class="orderNo">1000</p>
+            <p>Lifetime Sales</p>
+        </div>
+    </div>
+
+    <div class="lifetime-box-two">
+        <div>
+        <img src="img/revenue.svg" alt="">
+        </div>
+        <div class="content">
+            <p class="orderNo"><span style="font-size: 20px;color:#ffffffab;">LKR</span> 10k</p>
+            <p>Lifetime Revenue</p>
+        </div>
+    </div>
+
+    </div>
+
 </div>
 
-    </div>
+</div>
 
-    </div>
 </div>
 
     <!-- custom js file link  -->

@@ -15,11 +15,11 @@ if (!isset($_SESSION['roleType'])) {
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Report</title>
+    <title>Dashboard</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <!-- custom css file link  -->
-    <link rel='stylesheet' type='text/css' media='screen' href='css/report.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/dashboard.css'>
 
      <!-- favicon file link  -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
@@ -68,7 +68,7 @@ if (!isset($_SESSION['roleType'])) {
     <section class="flex">
 
     <div class="header-container">
-        <div><h1>Report</h1></div>
+        <div><h1>Dashboard</h1></div>
         <div><i class="fa-solid fa-bell"></i></div>
         <!-- <button id="addbtn" onclick="openPopup()"> + Create Order</button> -->
     </div>
@@ -79,39 +79,22 @@ if (!isset($_SESSION['roleType'])) {
 
 <!-- End Header -->
 
-<!-- Start Search Filter Export Functions -->
+<div class="main">
 
-<div class="function">
-    <section class="flex">
+    <div class="block-box-one">
 
-    <div class="function-container">
-
-    <div class="date-form">
-        <p class="date-form-label">From</p>
-        <input id="search" type="date" required />
-        <p class="date-form-label">To</p>
-        <input id="search" type="date" required />
-    </div>
-
-    <div class="function-button">
-    <button id="repviewbtn"><i class="fa-solid fa-eye"></i><span>View</span></button>
-    <button id="ordprintbtn"><i class="fa-solid fa-print"></i><span>Print</span></button>
-    <button id="exportbtn"><i class="fa-solid fa-file-export"></i><span>Export</span></button>
-    </div>
+        <div class="dashboard-welcome">
+            <h1>Hello <?php echo $_SESSION['userFName'] ?>,</h1>
+            <p>Welcome Back!</p>
+            <p>From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.</p>
+        </div>
 
     </div>
 
-    </section>
-    </div>
-
-<!-- End Start Search Filter Export Functions -->
+</div>
 
     <!-- custom js file link  -->
-    <script src='js/main.js'></script>
-    <script src='js/status.js'></script>
-    <script src='js/print.js'></script>
-    <script src='js/export.js'></script>
-    <script src='js/sort.js'></script>
+
 </body>
 
 </html>
