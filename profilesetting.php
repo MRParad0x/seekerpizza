@@ -7,6 +7,32 @@ if (!isset($_SESSION['roleType'])) {
     header('location:login.php');
 }
 
+if (isset($_POST['update_user'])) {
+
+    $userNIC = $_SESSION['userNIC'];
+    $userNIC = filter_var($userNIC, FILTER_UNSAFE_RAW);
+    $userName = $_POST['userName'];
+    $userName = filter_var($userName, FILTER_UNSAFE_RAW);
+    $userFName = $_POST['userFName'];
+    $userFName = filter_var($userFName, FILTER_UNSAFE_RAW);
+    $userLName = $_POST['userLName'];
+    $userLName = filter_var($userLName, FILTER_UNSAFE_RAW);
+    $userEmail = $_POST['userEmail'];
+    $userEmail = filter_var($userEmail, FILTER_UNSAFE_RAW);
+    $userNumber = $_POST['userNumber'];
+    $userNumber = filter_var($userNumber, FILTER_UNSAFE_RAW);
+    $userAddress = $_POST['userAddress'];
+    $userAddress = filter_var($userAddress, FILTER_UNSAFE_RAW);
+    $userCity = $_POST['userCity'];
+    $userCity = filter_var($userCity, FILTER_UNSAFE_RAW);
+    $userPostalCode = $_POST['userPostalCode'];
+    $userPostalCode = filter_var($userPostalCode, FILTER_UNSAFE_RAW);
+
+    $update_user = $conn->prepare("UPDATE user SET userName = ?, userFName = ?, userLName = ?, userEmail = ?, userNumber = ?, userAddress = ?, userCity = ?, userPostalCode = ? WHERE userNIC = ?");
+    $update_user->execute([$userName, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $userCity, $userPostalCode, $userNIC]);
+    $update[] = 'Profile details has been successfully updated.';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +45,7 @@ if (!isset($_SESSION['roleType'])) {
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <!-- custom css file link  -->
-    <link rel='stylesheet' type='text/css' media='screen' href='css/report.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/profilesetting.css'>
 
      <!-- favicon file link  -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
@@ -69,6 +95,19 @@ if (!isset($_SESSION['roleType'])) {
 
     <div class="header-container">
         <div><h1>Edit Profile</h1></div>
+
+        <div>
+    <?php
+if (isset($update)) {
+    foreach ($update as $update) {
+        echo '<span id="success" class="success-msg">' . $update . '</span>';
+    }
+    ;
+}
+;
+?>
+    </div>
+
         <div><i class="fa-solid fa-bell"></i></div>
         <!-- <button id="addbtn" onclick="openPopup()"> + Create Order</button> -->
     </div>
@@ -81,6 +120,84 @@ if (!isset($_SESSION['roleType'])) {
 
 <div class="main">
 
+    <div class="main-container">
+
+    <div class="flexbox-one">
+
+        <div>
+            <img src="img/profile.png" alt="">
+        </div>
+
+        <?php
+$show_user_address = $conn->prepare("SELECT * FROM user WHERE userNIC = ? ");
+$show_user_address->execute([$_SESSION['userNIC']]);
+
+if ($show_user_address->rowCount() > 0) {
+    while ($fetch_address = $show_user_address->fetch(PDO::FETCH_ASSOC)) {
+
+        ?>
+
+        <div>
+        <form action="" method="post">
+        <table class="table-two">
+                    <tr>
+                        <td colspan="2">
+                            <input type="text" name="userNIC" placeholder="NIC" value="<?=$fetch_address['userNIC'];?>" required disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="text" name="userName" placeholder="Username" value="<?=$fetch_address['userName'];?>" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="text" name="userEmail" placeholder="Email" value="<?=$fetch_address['userEmail'];?>" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name="userFName" placeholder="First Name" value="<?=$fetch_address['userFName'];?>" required>
+                        </td>
+                        <td>
+                            <input type="text" name="userLName" placeholder="Last Name" value="<?=$fetch_address['userLName'];?>" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="text" name="userAddress" placeholder="Address" value="<?=$fetch_address['userAddress'];?>" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name="userCity" placeholder="City" value="<?=$fetch_address['userCity'];?>" required>
+                        </td>
+                        <td>
+                            <input type="text" name="userPostalCode" placeholder="Postal Code" value="<?=$fetch_address['userPostalCode'];?>" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="text" name="userNumber" placeholder="User Phone No" value="<?=$fetch_address['userNumber'];?>" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" name="update_user" value="Update">
+                        </td>
+                    </tr>
+                </table>
+        </form>
+        </div>
+
+        <?php
+}
+}
+?>
+
+    </div>
+
+    </div>
 
 </div>
 

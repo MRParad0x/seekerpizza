@@ -371,6 +371,7 @@ if ($show_ordered_items->rowCount() > 0) {
     <script src='js/print.js'></script>
     <script src='js/export.js'></script>
     <script src='js/sort.js'></script>
+
 </body>
 
 </html>

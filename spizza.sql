@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2022 at 05:33 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Dec 25, 2022 at 05:18 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,11 +30,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `cart_item` (
   `Id` int(4) NOT NULL,
   `cartitemId` varchar(10) NOT NULL,
-  `sessionId` varchar(10) NOT NULL,
+  `sessionId` varchar(50) DEFAULT NULL,
   `productId` varchar(10) NOT NULL,
   `cartitemQty` int(11) NOT NULL,
-  `cartitemDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `cartitemDate` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart_item`
+--
+
+INSERT INTO `cart_item` (`Id`, `cartitemId`, `sessionId`, `productId`, `cartitemQty`, `cartitemDate`) VALUES
+(278, 'CII-0278', '25k1aaq5aqcvq3qcfusjqatbu6', 'PR-0015', 1, '2022-12-20');
 
 --
 -- Triggers `cart_item`
@@ -56,18 +63,19 @@ DELIMITER ;
 CREATE TABLE `category` (
   `id` int(4) NOT NULL,
   `categoryId` varchar(10) NOT NULL,
-  `categoryName` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `categoryName` varchar(50) NOT NULL,
+  `categoryDate` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`id`, `categoryId`, `categoryName`) VALUES
-(1, 'CA-0001', 'Pizza'),
-(2, 'CA-0002', 'Pasta'),
-(3, 'CA-0003', 'Dessert'),
-(4, 'CA-0004', 'Beverage');
+INSERT INTO `category` (`id`, `categoryId`, `categoryName`, `categoryDate`) VALUES
+(1, 'CA-0001', 'Pizza', '2022-12-24'),
+(2, 'CA-0002', 'Pasta', '2022-12-24'),
+(3, 'CA-0003', 'Dessert', '2022-12-24'),
+(4, 'CA-0004', 'Beverage', '2022-12-24');
 
 --
 -- Triggers `category`
@@ -90,17 +98,20 @@ CREATE TABLE `coupon` (
   `id` int(4) NOT NULL,
   `couponId` varchar(10) NOT NULL,
   `couponCode` varchar(100) NOT NULL,
-  `couponDiscount` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `couponDiscount` double NOT NULL,
+  `couponDate` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `coupon`
 --
 
-INSERT INTO `coupon` (`id`, `couponId`, `couponCode`, `couponDiscount`) VALUES
-(1, 'CO-0001', 'none', 0),
-(2, 'CO-0002', 'flash35', 0.35),
-(3, 'CO-0003', 'flash15', 0.15);
+INSERT INTO `coupon` (`id`, `couponId`, `couponCode`, `couponDiscount`, `couponDate`) VALUES
+(1, 'CO-0001', 'none', 0, '2022-12-24'),
+(2, 'CO-0002', 'flash35', 0.35, '2022-12-24'),
+(3, 'CO-0003', 'flash15', 0.15, '2022-12-24'),
+(4, 'CO-0004', 'flash20', 0.2, '2022-12-24'),
+(5, 'CO-0005', 'flash25', 0.25, '2022-12-24');
 
 --
 -- Triggers `coupon`
@@ -116,12 +127,322 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `guest`
+--
+
+CREATE TABLE `guest` (
+  `guestId` int(11) NOT NULL,
+  `guestNIC` varchar(30) NOT NULL,
+  `guestEmail` varchar(30) NOT NULL,
+  `guestFName` varchar(30) NOT NULL,
+  `guestLName` varchar(30) NOT NULL,
+  `guestAddress` varchar(100) NOT NULL,
+  `guestCity` varchar(20) NOT NULL,
+  `guestPostalCode` int(11) NOT NULL,
+  `guestNumber` int(10) NOT NULL,
+  `guestDate` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `guest`
+--
+
+INSERT INTO `guest` (`guestId`, `guestNIC`, `guestEmail`, `guestFName`, `guestLName`, `guestAddress`, `guestCity`, `guestPostalCode`, `guestNumber`, `guestDate`) VALUES
+(6, 'GID-04e3e2ce', 'test@gmail.com', 'test', 'name', 'test', 'test', 10640, 771233243, '2022-12-24');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `id_cart_item`
 --
 
 CREATE TABLE `id_cart_item` (
   `Id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `id_cart_item`
+--
+
+INSERT INTO `id_cart_item` (`Id`) VALUES
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8),
+(9),
+(10),
+(11),
+(12),
+(13),
+(14),
+(15),
+(17),
+(18),
+(21),
+(22),
+(23),
+(24),
+(25),
+(26),
+(27),
+(28),
+(29),
+(30),
+(31),
+(32),
+(33),
+(34),
+(35),
+(36),
+(37),
+(38),
+(39),
+(40),
+(41),
+(42),
+(43),
+(45),
+(46),
+(47),
+(48),
+(49),
+(50),
+(51),
+(52),
+(53),
+(54),
+(55),
+(56),
+(57),
+(58),
+(59),
+(60),
+(61),
+(62),
+(63),
+(64),
+(65),
+(66),
+(67),
+(68),
+(69),
+(70),
+(71),
+(72),
+(73),
+(74),
+(75),
+(76),
+(77),
+(78),
+(79),
+(80),
+(81),
+(82),
+(83),
+(84),
+(85),
+(86),
+(87),
+(88),
+(89),
+(90),
+(91),
+(92),
+(93),
+(94),
+(95),
+(96),
+(97),
+(98),
+(99),
+(100),
+(101),
+(102),
+(103),
+(104),
+(105),
+(106),
+(107),
+(108),
+(109),
+(110),
+(111),
+(112),
+(113),
+(114),
+(115),
+(116),
+(117),
+(118),
+(119),
+(120),
+(121),
+(122),
+(123),
+(124),
+(125),
+(126),
+(127),
+(128),
+(129),
+(130),
+(131),
+(132),
+(133),
+(134),
+(135),
+(136),
+(137),
+(138),
+(139),
+(140),
+(141),
+(142),
+(143),
+(144),
+(145),
+(146),
+(147),
+(148),
+(149),
+(150),
+(151),
+(152),
+(153),
+(154),
+(155),
+(156),
+(157),
+(158),
+(159),
+(160),
+(161),
+(162),
+(163),
+(164),
+(165),
+(166),
+(167),
+(168),
+(169),
+(170),
+(171),
+(172),
+(173),
+(174),
+(175),
+(176),
+(177),
+(178),
+(179),
+(180),
+(181),
+(182),
+(183),
+(184),
+(185),
+(186),
+(187),
+(188),
+(189),
+(190),
+(191),
+(192),
+(193),
+(194),
+(195),
+(196),
+(197),
+(198),
+(199),
+(200),
+(201),
+(202),
+(203),
+(204),
+(205),
+(206),
+(207),
+(208),
+(209),
+(210),
+(211),
+(212),
+(213),
+(214),
+(215),
+(216),
+(217),
+(218),
+(219),
+(220),
+(221),
+(222),
+(223),
+(224),
+(225),
+(226),
+(227),
+(228),
+(229),
+(230),
+(231),
+(232),
+(233),
+(234),
+(235),
+(236),
+(237),
+(238),
+(239),
+(240),
+(241),
+(242),
+(243),
+(244),
+(245),
+(246),
+(247),
+(248),
+(249),
+(250),
+(251),
+(252),
+(253),
+(254),
+(255),
+(256),
+(257),
+(258),
+(259),
+(260),
+(261),
+(262),
+(263),
+(264),
+(265),
+(266),
+(267),
+(268),
+(269),
+(270),
+(271),
+(272),
+(273),
+(274),
+(275),
+(276),
+(277),
+(278),
+(279),
+(280),
+(281),
+(282);
 
 -- --------------------------------------------------------
 
@@ -131,7 +452,7 @@ CREATE TABLE `id_cart_item` (
 
 CREATE TABLE `id_category` (
   `id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_category`
@@ -151,7 +472,7 @@ INSERT INTO `id_category` (`id`) VALUES
 
 CREATE TABLE `id_coupon` (
   `id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_coupon`
@@ -160,7 +481,9 @@ CREATE TABLE `id_coupon` (
 INSERT INTO `id_coupon` (`id`) VALUES
 (1),
 (2),
-(3);
+(3),
+(4),
+(5);
 
 -- --------------------------------------------------------
 
@@ -170,7 +493,7 @@ INSERT INTO `id_coupon` (`id`) VALUES
 
 CREATE TABLE `id_order` (
   `Id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_order`
@@ -180,7 +503,8 @@ INSERT INTO `id_order` (`Id`) VALUES
 (1),
 (2),
 (3),
-(4);
+(4),
+(5);
 
 -- --------------------------------------------------------
 
@@ -190,7 +514,7 @@ INSERT INTO `id_order` (`Id`) VALUES
 
 CREATE TABLE `id_order_items` (
   `id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_order_items`
@@ -202,7 +526,110 @@ INSERT INTO `id_order_items` (`id`) VALUES
 (3),
 (4),
 (5),
-(6);
+(6),
+(7),
+(8),
+(9),
+(10),
+(11),
+(12),
+(13),
+(14),
+(15),
+(16),
+(17),
+(18),
+(19),
+(20),
+(21),
+(22),
+(23),
+(24),
+(25),
+(26),
+(27),
+(28),
+(29),
+(30),
+(31),
+(32),
+(33),
+(34),
+(35),
+(36),
+(37),
+(38),
+(39),
+(40),
+(41),
+(42),
+(43),
+(44),
+(45),
+(46),
+(47),
+(48),
+(49),
+(50),
+(51),
+(52),
+(53),
+(54),
+(55),
+(56),
+(57),
+(58),
+(59),
+(60),
+(61),
+(62),
+(63),
+(64),
+(65),
+(66),
+(67),
+(68),
+(69),
+(70),
+(71),
+(72),
+(73),
+(74),
+(75),
+(76),
+(77),
+(78),
+(79),
+(80),
+(81),
+(82),
+(83),
+(84),
+(85),
+(86),
+(87),
+(88),
+(89),
+(90),
+(91),
+(92),
+(93),
+(94),
+(95),
+(96),
+(97),
+(103),
+(104),
+(105),
+(106),
+(107),
+(108),
+(112),
+(113),
+(114),
+(115),
+(116),
+(117);
 
 -- --------------------------------------------------------
 
@@ -212,7 +639,7 @@ INSERT INTO `id_order_items` (`id`) VALUES
 
 CREATE TABLE `id_product` (
   `id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_product`
@@ -228,7 +655,15 @@ INSERT INTO `id_product` (`id`) VALUES
 (7),
 (8),
 (10),
-(11);
+(11),
+(14),
+(15),
+(16),
+(18),
+(19),
+(20),
+(21),
+(22);
 
 -- --------------------------------------------------------
 
@@ -238,7 +673,7 @@ INSERT INTO `id_product` (`id`) VALUES
 
 CREATE TABLE `id_role` (
   `id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_role`
@@ -259,7 +694,19 @@ INSERT INTO `id_role` (`id`) VALUES
 
 CREATE TABLE `id_shopping_session` (
   `Id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `id_shopping_session`
+--
+
+INSERT INTO `id_shopping_session` (`Id`) VALUES
+(1),
+(3),
+(7),
+(9),
+(11),
+(13);
 
 -- --------------------------------------------------------
 
@@ -269,7 +716,7 @@ CREATE TABLE `id_shopping_session` (
 
 CREATE TABLE `id_subscriber` (
   `id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_subscriber`
@@ -288,23 +735,23 @@ INSERT INTO `id_subscriber` (`id`) VALUES
 CREATE TABLE `order_items` (
   `Id` int(4) NOT NULL,
   `orderitemsId` varchar(10) NOT NULL,
-  `orderId` varchar(10) NOT NULL,
+  `orderId` varchar(20) NOT NULL,
   `productId` varchar(10) NOT NULL,
   `orderitemsQty` int(11) NOT NULL,
-  `orderitemsTotal` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `orderitemsTotal` int(11) NOT NULL,
+  `orderitemsDate` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `order_items`
 --
 
-INSERT INTO `order_items` (`Id`, `orderitemsId`, `orderId`, `productId`, `orderitemsQty`, `orderitemsTotal`) VALUES
-(1, 'OII-0001', 'OI-0004', 'PR-0010', 2, 4000),
-(2, 'OII-0002', 'OI-0004', 'PR-0011', 1, 3000),
-(3, 'OII-0003', 'OI-0004', 'PR-0010', 1, 2000),
-(4, 'OII-0004', 'OI-0004', 'PR-0011', 1, 3000),
-(5, 'OII-0005', 'OI-0004', 'PR-0010', 2, 2000),
-(6, 'OII-0006', 'OI-0004', 'PR-0011', 3, 3000);
+INSERT INTO `order_items` (`Id`, `orderitemsId`, `orderId`, `productId`, `orderitemsQty`, `orderitemsTotal`, `orderitemsDate`) VALUES
+(111, 'OII-0113', 'OID-bb1ebc88', 'PR-0020', 1, 1500, '2022-12-19'),
+(112, 'OII-0114', 'OID-a026acb8', 'PR-0015', 1, 1300, '2022-12-22'),
+(113, 'OII-0115', 'OID-3d0dc956', 'PR-0015', 1, 1300, '2022-12-24'),
+(114, 'OII-0116', 'OID-3d0dc956', 'PR-0021', 1, 500, '2022-12-24'),
+(115, 'OII-0117', 'OID-3d0dc956', 'PR-0022', 1, 500, '2022-12-24');
 
 --
 -- Triggers `order_items`
@@ -331,16 +778,24 @@ CREATE TABLE `products` (
   `productDescription` text DEFAULT NULL,
   `productImage` varchar(100) NOT NULL,
   `categoryId` varchar(10) NOT NULL,
-  `couponId` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `couponId` varchar(10) NOT NULL,
+  `productDate` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`Id`, `productId`, `productName`, `productPrice`, `productDescription`, `productImage`, `categoryId`, `couponId`) VALUES
-(10, 'PR-0010', 'Chicken Pizza', 2000, 'Chicken Pizza\", \"tomato sauce, mozzarella cheese, cocktail, shrimps salmon, mussels, lemon, parsley', 'pizza11.png', 'CA-0001', 'CO-0002'),
-(11, 'PR-0011', 'Seafood Pizza', 3000, 'Chicken Pizza\", \"tomato sauce, mozzarella cheese, cocktail, shrimps salmon, mussels, lemon, parsley', 'pizza06.png', 'CA-0001', 'CO-0001');
+INSERT INTO `products` (`Id`, `productId`, `productName`, `productPrice`, `productDescription`, `productImage`, `categoryId`, `couponId`, `productDate`) VALUES
+(10, 'PR-0010', 'Chicken Pizza', 2000, 'Chicken Pizza\", \"tomato sauce, mozzarella cheese, cocktail, shrimps salmon, mussels, lemon, parsley', 'pizza11.png', 'CA-0001', 'CO-0004', '2022-12-24'),
+(11, 'PR-0011', 'Seafood Pizza', 3000, 'Chicken Pizza\", \"tomato sauce, mozzarella cheese, cocktail, shrimps salmon, mussels, lemon, parsley', 'pizza06.png', 'CA-0001', 'CO-0002', '2022-12-24'),
+(15, 'PR-0015', 'Cheese Pizza', 1300, 'Chicken Pizza\", \"tomato sauce, mozzarella cheese, cocktail, shrimps salmon, mussels, lemon, parsley', 'pizza09.png', 'CA-0001', 'CO-0001', '2022-12-24'),
+(16, 'PR-0016', 'Sausage Pizza', 1500, 'Chicken Pizza\", \"tomato sauce, mozzarella cheese, cocktail, shrimps salmon, mussels, lemon, parsley 	\r\n', 'pizza08.png', 'CA-0001', 'CO-0001', '2022-12-24'),
+(18, 'PR-0018', 'Vegetable Pizza', 1000, 'Chicken Pizza\", \"tomato sauce, mozzarella cheese, cocktail, shrimps salmon, mussels, lemon, parsley 	\r\n', 'pizza12.png', 'CA-0001', 'CO-0005', '2022-12-24'),
+(19, 'PR-0019', 'Chicken Pasta', 2000, 'Chicken Pizza\", \"tomato sauce, mozzarella cheese, cocktail, shrimps salmon, mussels, lemon, parsley 	\r\n', 'pasta01.png', 'CA-0002', 'CO-0001', '2022-12-24'),
+(20, 'PR-0020', 'Cheese Pasta', 1500, 'Chicken Pizza\", \"tomato sauce, mozzarella cheese, cocktail, shrimps salmon, mussels, lemon, parsley 	\r\n', 'pasta02.png', 'CA-0002', 'CO-0001', '2022-12-24'),
+(21, 'PR-0021', 'Mix Ice Cream', 500, 'Chicken Pizza\", \"tomato sauce, mozzarella cheese, cocktail, shrimps salmon, mussels, lemon, parsley 	\r\n', 'des02.png', 'CA-0003', 'CO-0001', '2022-12-24'),
+(22, 'PR-0022', 'Banana Juice', 500, 'Chicken Pizza\", \"tomato sauce, mozzarella cheese, cocktail, shrimps salmon, mussels, lemon, parsley 	\r\n', 'bev04.png', 'CA-0004', 'CO-0001', '2022-12-24');
 
 --
 -- Triggers `products`
@@ -362,19 +817,20 @@ DELIMITER ;
 CREATE TABLE `role` (
   `id` int(4) NOT NULL,
   `roleId` varchar(10) NOT NULL,
-  `roleType` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `roleType` varchar(20) NOT NULL,
+  `roleDate` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `role`
 --
 
-INSERT INTO `role` (`id`, `roleId`, `roleType`) VALUES
-(1, 'RO-0001', 'Admin'),
-(2, 'RO-0002', 'Manager'),
-(3, 'RO-0003', 'Cashier'),
-(4, 'RO-0004', 'Customer'),
-(5, 'RO-0005', 'test');
+INSERT INTO `role` (`id`, `roleId`, `roleType`, `roleDate`) VALUES
+(1, 'RO-0001', 'Admin', '2022-12-24'),
+(2, 'RO-0002', 'Manager', '2022-12-24'),
+(3, 'RO-0003', 'Cashier', '2022-12-24'),
+(4, 'RO-0004', 'Customer', '2022-12-24'),
+(5, 'RO-0005', 'test', '2022-12-24');
 
 --
 -- Triggers `role`
@@ -394,23 +850,17 @@ DELIMITER ;
 --
 
 CREATE TABLE `shopping_session` (
-  `Id` int(4) NOT NULL,
-  `ssId` varchar(10) NOT NULL,
-  `userNIC` varchar(15) NOT NULL,
-  `ssTotal` double NOT NULL,
-  `ssDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `ssId` varchar(50) NOT NULL,
+  `userNIC` varchar(50) DEFAULT NULL,
+  `ssDate` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Triggers `shopping_session`
+-- Dumping data for table `shopping_session`
 --
-DELIMITER $$
-CREATE TRIGGER `getshoppingsessionId` BEFORE INSERT ON `shopping_session` FOR EACH ROW BEGIN
-INSERT INTO id_shopping_session VALUES (NULL);
-SET NEW.ssId = CONCAT("SSI-", LPAD(LAST_INSERT_ID(), 4, "0"));
-END
-$$
-DELIMITER ;
+
+INSERT INTO `shopping_session` (`ssId`, `userNIC`, `ssDate`) VALUES
+('25k1aaq5aqcvq3qcfusjqatbu6', NULL, '2022-12-19');
 
 -- --------------------------------------------------------
 
@@ -419,31 +869,23 @@ DELIMITER ;
 --
 
 CREATE TABLE `sp_order` (
-  `Id` int(4) NOT NULL,
-  `orderId` varchar(10) NOT NULL,
-  `userNIC` varchar(15) NOT NULL,
-  `orderDate` date NOT NULL,
+  `orderId` varchar(20) NOT NULL,
+  `userNIC` varchar(50) DEFAULT NULL,
+  `guestNIC` varchar(30) DEFAULT NULL,
+  `orderDiscount` double DEFAULT NULL,
   `orderTotal` double NOT NULL,
-  `orderStatus` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `orderStatus` varchar(50) NOT NULL,
+  `orderDate` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sp_order`
 --
 
-INSERT INTO `sp_order` (`Id`, `orderId`, `userNIC`, `orderDate`, `orderTotal`, `orderStatus`) VALUES
-(2, 'OI-0004', '202225225V', '2022-11-09', 7000, 'Completed');
-
---
--- Triggers `sp_order`
---
-DELIMITER $$
-CREATE TRIGGER `getorderId` BEFORE INSERT ON `sp_order` FOR EACH ROW BEGIN
-INSERT INTO id_order VALUES (NULL);
-SET NEW.orderId = CONCAT("OI-", LPAD(LAST_INSERT_ID(), 4, "0"));
-END
-$$
-DELIMITER ;
+INSERT INTO `sp_order` (`orderId`, `userNIC`, `guestNIC`, `orderDiscount`, `orderTotal`, `orderStatus`, `orderDate`) VALUES
+('OID-3d0dc956', '202525238V', NULL, 0, 1840, 'Processing', '2022-12-24'),
+('OID-a026acb8', '202525238V', NULL, 0, 1040, 'Completed', '2022-12-22'),
+('OID-bb1ebc88', NULL, 'GID-04e3e2ce', 0, 1500, 'Processing', '2022-12-19');
 
 -- --------------------------------------------------------
 
@@ -455,16 +897,17 @@ CREATE TABLE `subscriber` (
   `id` int(4) NOT NULL,
   `subscriberId` varchar(10) NOT NULL,
   `subscriberName` varchar(50) NOT NULL,
-  `subscriberEmail` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `subscriberEmail` varchar(100) NOT NULL,
+  `subscriberDate` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `subscriber`
 --
 
-INSERT INTO `subscriber` (`id`, `subscriberId`, `subscriberName`, `subscriberEmail`) VALUES
-(1, 'SU-0001', 'nimal', 'nimal@gmail.com'),
-(2, 'SU-0002', 'amal', 'amal@gmail.com');
+INSERT INTO `subscriber` (`id`, `subscriberId`, `subscriberName`, `subscriberEmail`, `subscriberDate`) VALUES
+(1, 'SU-0001', 'nimal', 'nimal@gmail.com', '2022-12-24'),
+(2, 'SU-0002', 'amal', 'amal@gmail.com', '2022-12-24');
 
 --
 -- Triggers `subscriber`
@@ -484,7 +927,7 @@ DELIMITER ;
 --
 
 CREATE TABLE `user` (
-  `userNIC` varchar(15) NOT NULL,
+  `userNIC` varchar(50) NOT NULL,
   `userName` varchar(20) NOT NULL,
   `userPassword` varchar(20) NOT NULL,
   `userFName` varchar(50) NOT NULL,
@@ -492,24 +935,27 @@ CREATE TABLE `user` (
   `userEmail` varchar(50) NOT NULL,
   `userNumber` int(10) NOT NULL,
   `userAddress` varchar(100) NOT NULL,
-  `roleId` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `userCity` varchar(20) NOT NULL,
+  `userPostalCode` int(10) NOT NULL,
+  `roleId` varchar(10) NOT NULL,
+  `userDate` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`userNIC`, `userName`, `userPassword`, `userFName`, `userLName`, `userEmail`, `userNumber`, `userAddress`, `roleId`) VALUES
-('202225225V', 'yudee', '12345678', 'Yudee', 'Perera', 'yudee@gmail.com', 778956324, '10D, gemunupura 1st lane, Maharagama', 'RO-0002'),
-('202225298V', 'vimal', '12345678', 'Vimal', 'Perera', 'vimal@gmail.com', 778956324, 'Moratuwa', 'RO-0004'),
-('202256238V', 'kamal', '12345678', 'Kamal', 'Perera', 'kamal@gmail.com', 778956321, 'Moratuwa', 'RO-0004'),
-('202256268V', 'manoj', '12345678', 'Manoj', 'Prasanna', 'manoj@gmail.com', 785263256, 'Badulla', 'RO-0004'),
-('202256278V', 'nethmi', '12345678', 'Nethmi', 'de silva', 'nethmi@gmail.com', 778523651, 'Dehiwala', 'RO-0002'),
-('202516238V', 'customer', '12345678', 'Amal', 'Perera', 'customer@gmail.com', 775236982, 'Kaduwela', 'RO-0004'),
-('202522238V', 'manager', '12345678', 'Thushan', 'Pereraa', 'manager@gmail.com', 772563489, 'Colombo 04', 'RO-0002'),
-('202525238V', 'admin', '12345678', 'Lahiru', 'Chinthana', 'lahiru@gmail.com', 785295963, 'Malabe', 'RO-0001'),
-('9311314V', 'wafwaf', '12345678', 'awfwaf', 'awfwa', 'wafwa@gmail.com', 785263256, 'fgawfwaf', 'RO-0004'),
-('982545632V', 'cashier', '12345678', 'Super', 'Man', 'cashier@gmail.com', 778526325, 'Galle', 'RO-0003');
+INSERT INTO `user` (`userNIC`, `userName`, `userPassword`, `userFName`, `userLName`, `userEmail`, `userNumber`, `userAddress`, `userCity`, `userPostalCode`, `roleId`, `userDate`) VALUES
+('202225225V', 'yudee', '12345678', 'Yudee', 'Perera', 'yudee@gmail.com', 778956324, '10D, gemunupura 1st lane, Maharagama', '', 0, 'RO-0002', '2022-12-24'),
+('202225298V', 'vimal', '12345678', 'Vimal', 'Perera', 'vimal@gmail.com', 778956324, 'Moratuwa', '', 0, 'RO-0004', '2022-12-24'),
+('202256238V', 'kamal', '12345678', 'Kamal', 'Perera', 'kamal@gmail.com', 778956321, 'Moratuwa', '', 0, 'RO-0004', '2022-12-24'),
+('202256268V', 'manoj', '12345678', 'Manoj', 'Prasanna', 'manoj@gmail.com', 785263256, 'Badulla', '', 0, 'RO-0004', '2022-12-24'),
+('202256278V', 'nethmi', '12345678', 'Nethmi', 'de silva', 'nethmi@gmail.com', 778523651, 'Dehiwala', '', 0, 'RO-0002', '2022-12-24'),
+('202516238V', 'customer', '12345678', 'Amal', 'Perera', 'customer@gmail.com', 775236982, 'Kaduwela', '', 0, 'RO-0004', '2022-12-24'),
+('202522238V', 'manager', '12345678', 'Thushan', 'Pereraa', 'manager@gmail.com', 772563489, 'Colombo 04', '', 0, 'RO-0002', '2022-12-24'),
+('202525238V', 'admin', '12345678', 'Lahiru', 'Chinthana', 'lahiru@gmail.com', 785295963, '11/2, Pittugala road', 'Malabe', 10640, 'RO-0001', '2022-12-24'),
+('9311314V', 'wafwaf', '12345678', 'awfwaf', 'awfwa', 'wafwa@gmail.com', 785263256, 'fgawfwaf', '', 0, 'RO-0004', '2022-12-24'),
+('982545632V', 'cashier', '12345678', 'Super', 'Man', 'cashier@gmail.com', 778526325, 'Galle', '', 0, 'RO-0003', '2022-12-24');
 
 --
 -- Indexes for dumped tables
@@ -537,6 +983,13 @@ ALTER TABLE `category`
 ALTER TABLE `coupon`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `couponId` (`couponId`);
+
+--
+-- Indexes for table `guest`
+--
+ALTER TABLE `guest`
+  ADD PRIMARY KEY (`guestId`),
+  ADD UNIQUE KEY `guestNIC` (`guestNIC`);
 
 --
 -- Indexes for table `id_cart_item`
@@ -607,7 +1060,6 @@ ALTER TABLE `order_items`
 ALTER TABLE `products`
   ADD PRIMARY KEY (`Id`),
   ADD UNIQUE KEY `productId` (`productId`),
-  ADD UNIQUE KEY `couponId` (`couponId`),
   ADD KEY `category` (`categoryId`);
 
 --
@@ -621,17 +1073,16 @@ ALTER TABLE `role`
 -- Indexes for table `shopping_session`
 --
 ALTER TABLE `shopping_session`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `ssId` (`ssId`,`userNIC`),
+  ADD PRIMARY KEY (`ssId`),
   ADD UNIQUE KEY `userNIC` (`userNIC`);
 
 --
 -- Indexes for table `sp_order`
 --
 ALTER TABLE `sp_order`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `orderId` (`orderId`,`userNIC`),
-  ADD KEY `ouser` (`userNIC`);
+  ADD PRIMARY KEY (`orderId`),
+  ADD KEY `usernic` (`userNIC`),
+  ADD KEY `guestnic` (`guestNIC`);
 
 --
 -- Indexes for table `subscriber`
@@ -659,7 +1110,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=283;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -671,13 +1122,19 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `coupon`
 --
 ALTER TABLE `coupon`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `guest`
+--
+ALTER TABLE `guest`
+  MODIFY `guestId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `id_cart_item`
 --
 ALTER TABLE `id_cart_item`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=283;
 
 --
 -- AUTO_INCREMENT for table `id_category`
@@ -689,25 +1146,25 @@ ALTER TABLE `id_category`
 -- AUTO_INCREMENT for table `id_coupon`
 --
 ALTER TABLE `id_coupon`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `id_order`
 --
 ALTER TABLE `id_order`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `id_order_items`
 --
 ALTER TABLE `id_order_items`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT for table `id_product`
 --
 ALTER TABLE `id_product`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `id_role`
@@ -719,7 +1176,7 @@ ALTER TABLE `id_role`
 -- AUTO_INCREMENT for table `id_shopping_session`
 --
 ALTER TABLE `id_shopping_session`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `id_subscriber`
@@ -731,31 +1188,19 @@ ALTER TABLE `id_subscriber`
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
   MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `shopping_session`
---
-ALTER TABLE `shopping_session`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `sp_order`
---
-ALTER TABLE `sp_order`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `subscriber`
@@ -785,8 +1230,7 @@ ALTER TABLE `order_items`
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
-  ADD CONSTRAINT `category` FOREIGN KEY (`categoryId`) REFERENCES `category` (`categoryId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `coupon` FOREIGN KEY (`couponId`) REFERENCES `coupon` (`couponId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `category` FOREIGN KEY (`categoryId`) REFERENCES `category` (`categoryId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `shopping_session`
@@ -798,7 +1242,8 @@ ALTER TABLE `shopping_session`
 -- Constraints for table `sp_order`
 --
 ALTER TABLE `sp_order`
-  ADD CONSTRAINT `ouser` FOREIGN KEY (`userNIC`) REFERENCES `user` (`userNIC`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `guestnic` FOREIGN KEY (`guestNIC`) REFERENCES `guest` (`guestNIC`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `usernic` FOREIGN KEY (`userNIC`) REFERENCES `user` (`userNIC`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `user`

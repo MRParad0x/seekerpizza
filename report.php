@@ -91,6 +91,12 @@ if (!isset($_SESSION['roleType'])) {
         <input id="search" type="date" required />
         <p class="date-form-label">To</p>
         <input id="search" type="date" required />
+        <select>
+            <option>Most Selling Products</option>
+            <option>Least Selling Products</option>
+            <option>Most Spend Customer</option>
+            <option>Least Spend Customer</option>
+        </select>
     </div>
 
     <div class="function-button">
@@ -105,6 +111,12 @@ if (!isset($_SESSION['roleType'])) {
     </div>
 
 <!-- End Start Search Filter Export Functions -->
+
+<!-- Start view List -->
+
+
+
+<!-- End view List -->
 
     <!-- custom js file link  -->
     <script src='js/main.js'></script>
