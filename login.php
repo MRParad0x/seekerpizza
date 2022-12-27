@@ -5,7 +5,7 @@ include 'conn.php';
 session_start();
 if (isset($_SESSION['roleType'])) {
     $ssid = session_id();
-    header("Location:product.php");
+    header("Location:dashboard.php");
 } else {
     $ssid = session_id();
 }
@@ -210,7 +210,7 @@ if (isset($_POST['regsubmit'])) {
     <div class=login-form>
     <section class="flex">
     <div class="form">
-        <h1>My Account</h1>
+        <h2>My Account</h2>
                     <?php
 if (isset($regerror)) {
     foreach ($regerror as $regerror) {

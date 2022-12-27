@@ -116,7 +116,7 @@ if (isset($_POST['checkout'])) {
 
 </head>
 
-<body>
+<body onload="load()">
 
 <!-- Start header -->
 
@@ -470,6 +470,8 @@ if ($show_products->rowCount() > 0) {
 
     <script>
     /* Start logo image click functions */
+
+    let url = "index.php";
 
     function imageClicked() {
     window.open("index.php", "_self");

@@ -93,7 +93,7 @@ if (isset($_POST['send'])) {
           <td><input type="email" class="input-field" name ="feedbackEmail" placeholder="Email" required></td>
         </tr>
         <tr>
-          <td><textarea id="w3review" name="feedbackMessage" rows="8"  placeholder="Your Feedback"></textarea></td>
+          <td><textarea name="feedbackMessage" rows="8"  placeholder="Your Feedback"></textarea></td>
         </tr>
         <tr>
           <td><input type="submit" name="send" Value="Send"></td>
@@ -121,9 +121,6 @@ if (isset($message)) {
 }
 ?>
     </div>
-
-    <!-- custom js file link  -->
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
 <script>
    function imageClicked() {

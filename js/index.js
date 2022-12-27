@@ -72,6 +72,16 @@ function clickMenu(event) {
   event.currentTarget.className += " active";
 }
 
+function load() {
+  if (url == "contact.php") {
+    var element = document.getElementById("activecontact");
+    element.classList.add("active");
+  } else if (url == "index.php") {
+    var element = document.getElementById("activehome");
+    element.classList.add("active");
+  }
+}
+
 /* End Home Page Tabbed Main Menu*/
 
 /* Start Cart functions */

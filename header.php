@@ -6,11 +6,11 @@
     <img onclick="imageClicked()" src="img/logovertical.png" alt="">
         <nav id="mySidenav" class="navbar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a onclick="clickMenu(event)" class='target' href="/#home">Home</a>
+            <a id="activehome" onload="load()" onclick="clickMenu(event)" class='target' href="/#home">Home</a>
             <a onclick="clickMenu(event)" class='target' href="/#menu">Menu</a>
             <a onclick="clickMenu(event)" class='target' href="/#deals">Deals</a>
             <a onclick="clickMenu(event)" class='target' href="/#services">Services</a>
-            <a onclick="clickMenu(event)" class='target' href="/#contactus">Contact</a>
+            <a id="activecontact" onclick="clickMenu(event)" class='target' href="/contact.php">Contact</a>
         </nav>
 
 <?php
