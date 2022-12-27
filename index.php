@@ -422,6 +422,8 @@ if ($show_products->rowCount() > 0) {
         </section>
     </div> -->
 
+    <i onclick="topFunction()" id="scrollback" title="Go to top" class="fa-solid fa-caret-up"></i>
+
     <?php include 'cart.php'?>
 
     <footer class="footer">
@@ -467,6 +469,7 @@ if ($show_products->rowCount() > 0) {
 
     <!-- custom js file link  -->
     <script src='js/index.js'></script>
+    <script src='js/scrollback.js'></script>
 
     <script>
     /* Start logo image click functions */
