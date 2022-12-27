@@ -159,6 +159,7 @@ body{
     padding: 14px;
     font-size: 0.8rem;
     border-radius: 1em;
+    margin-left: 0.9em;
 }
 
 .box-two .header .header-container i:hover{
@@ -300,7 +301,6 @@ body{
     font-family: var(--header-menu-font-style);
     font-size: 0.8rem;
     font-weight: 700;
-    margin-left: 0.9em;
     transition: 0.3s ease-in-out;
 }
   

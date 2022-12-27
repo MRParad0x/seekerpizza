@@ -909,6 +909,7 @@ section{
    width: 33rem;
    z-index: 1100;
    background-color: #151419;
+   overflow-y: auto;
 }
 
 .shopping-cart .cart-box{

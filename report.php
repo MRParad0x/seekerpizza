@@ -7,6 +7,27 @@ if (!isset($_SESSION['roleType'])) {
     header('location:login.php');
 }
 
+$dateone = "2013-01-08";
+$datetwo = "2022-12-25";
+$_SESSION['dateone'] = $dateone;
+$_SESSION['datetwo'] = $datetwo;
+$_SESSION['reportType'] = "Total Earnings";
+
+if (isset($_POST['datesubmit'])) {
+
+    $reportType = $_POST['reportType'];
+    $reportType = filter_var($reportType, FILTER_UNSAFE_RAW);
+    $_SESSION['reportType'] = $reportType;
+    $dateone = $_POST['dateone'];
+    $dateone = filter_var($dateone, FILTER_UNSAFE_RAW);
+    $_SESSION['dateone'] = $dateone;
+    $dateone = $_SESSION['dateone'];
+    $datetwo = $_POST['datetwo'];
+    $datetwo = filter_var($datetwo, FILTER_UNSAFE_RAW);
+    $_SESSION['datetwo'] = $datetwo;
+    $datetwo = $_SESSION['datetwo'];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -69,8 +90,7 @@ if (!isset($_SESSION['roleType'])) {
 
     <div class="header-container">
         <div><h1>Report</h1></div>
-        <div><i class="fa-solid fa-bell"></i></div>
-        <!-- <button id="addbtn" onclick="openPopup()"> + Create Order</button> -->
+        <div><i class="fa-solid fa-bell"></i><a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></div>
     </div>
 
     </section>
@@ -84,43 +104,133 @@ if (!isset($_SESSION['roleType'])) {
 <div class="function">
     <section class="flex">
 
+    <form action="" method="post">
     <div class="function-container">
 
     <div class="date-form">
         <p class="date-form-label">From</p>
-        <input id="search" type="date" required />
+        <input id="search" name="dateone" type="date" value="2013-01-08" required />
         <p class="date-form-label">To</p>
-        <input id="search" type="date" required />
-        <select>
+        <input id="search" name="datetwo" type="date" value="2022-12-25" required />
+        <select name="reportType">
+            <option>Total Earnings</option>
             <option>Most Selling Products</option>
             <option>Least Selling Products</option>
-            <option>Most Spend Customer</option>
-            <option>Least Spend Customer</option>
         </select>
     </div>
 
     <div class="function-button">
-    <button id="repviewbtn"><i class="fa-solid fa-eye"></i><span>View</span></button>
-    <button id="ordprintbtn"><i class="fa-solid fa-print"></i><span>Print</span></button>
-    <button id="exportbtn"><i class="fa-solid fa-file-export"></i><span>Export</span></button>
+        <button name="datesubmit" id="repviewbtn"><i class="fa-solid fa-eye"></i><span>View</span></button>
+        <button id="ordprintbtn"><i class="fa-solid fa-print"></i><span>Print</span></button>
+        <button id="exportbtn"><i class="fa-solid fa-file-export"></i><span>Export</span></button>
     </div>
-
     </div>
+    </form>
 
     </section>
     </div>
 
 <!-- End Start Search Filter Export Functions -->
+    <div class="filter-title">
+        <h2><?php echo $_SESSION['reportType']; ?></h2>
+        <P><?php echo $_SESSION['dateone'] . " To " . $_SESSION['datetwo']; ?></P>
+    </div>
 
 <!-- Start view List -->
 
+<div class="order-list">
+    <section class="flex">
 
+    <?php
+if (isset($_SESSION['reportType']) && ($_SESSION['reportType'] !== "Total Earnings")) {
+
+    $show_orders = $conn->prepare("select SUM(orderitemsQty) as total_qunatity,SUM(orderitemsTotal) as total_revenue from order_items where orderitemsDate between '$dateone' and '$datetwo';");
+    $show_orders->execute();
+    while ($fetch_orders = $show_orders->fetch(PDO::FETCH_ASSOC)) {?>
+
+
+    <div class="order-list-container">
+            <table class="grand-total-table">
+                <tr>
+                    <td>Grand Total</td>
+                    <td></td>
+                    <td><?=$fetch_orders['total_qunatity'];?></td>
+                    <td><?=$fetch_orders['total_revenue'];?></td>
+                </tr>
+            </table>
+    <?php }?>
+
+			<table id="productlist" class="order-list-table">
+				<thead>
+					<tr>
+						<th>ID<i class="fa-solid fa-sort"></i></th>
+                        <th>Product<i class="fa-solid fa-sort"></i></th>
+						<th>QTY<i class="fa-solid fa-sort"></i></th>
+                        <th>Total Price<i class="fa-solid fa-sort"></i></th>
+					</tr>
+				</thead>
+				<tbody id="pltable">
+
+<?php } else {
+
+    $show_orders = $conn->prepare("select SUM(orderitemsTotal) as revenue from order_items where orderitemsTotal between '2022-12-19' and '2023-01-23' is not null;");
+    $show_orders->execute();
+    while ($fetch_orders = $show_orders->fetch(PDO::FETCH_ASSOC)) {?>
+
+    <div>
+        <p class="revenue">LKR <?=$fetch_orders['revenue'];?></p>
+    </div>
+
+<?php }}?>
+
+    <?php
+if (isset($_SESSION['reportType']) && ($_SESSION['reportType'] == "Most Selling Products")) {
+    $show_orders = $conn->prepare("select o.productId, p.productName, SUM(o.orderitemsQty) as QTY, SUM(o.orderitemsQty*p.productPrice) as Total_Price from order_items as o, products as p where p.productId = o.productId and o.orderitemsDate between '$dateone' and '$datetwo' group by p.productName order by SUM(orderitemsQty) DESC");
+    $show_orders->execute();
+    if ($show_orders->rowCount() > 0) {
+        while ($fetch_orders = $show_orders->fetch(PDO::FETCH_ASSOC)) {
+            ?>
+
+					<tr>
+                        <td><?=$fetch_orders['productId'];?></td>
+						<td><?=$fetch_orders['productName'];?></td>
+						<td><?=$fetch_orders['QTY'];?></td>
+                        <td><?=$fetch_orders['Total_Price'];?></td>
+					</tr>
+        <?php
+}
+    }
+} else if (isset($_SESSION['reportType']) && ($_SESSION['reportType'] == "Least Selling Products")) {
+    $show_orders = $conn->prepare("select o.productId, p.productName, SUM(o.orderitemsQty) as QTY, SUM(o.orderitemsQty*p.productPrice) as Total_Price from order_items as o, products as p where p.productId = o.productId and o.orderitemsDate between '$dateone' and '$datetwo' group by p.productName order by SUM(orderitemsQty) ASC");
+    $show_orders->execute();
+    if ($show_orders->rowCount() > 0) {
+        while ($fetch_orders = $show_orders->fetch(PDO::FETCH_ASSOC)) {
+            ?>
+
+					<tr>
+                        <td><?=$fetch_orders['productId'];?></td>
+						<td><?=$fetch_orders['productName'];?></td>
+						<td><?=$fetch_orders['QTY'];?></td>
+                        <td><?=$fetch_orders['Total_Price'];?></td>
+					</tr>
+<?php
+}
+    }
+}
+?>
+				</tbody>
+			</table>
+        </div>
+</div>
+</section>
+    </div>
+</div>
+</div>
 
 <!-- End view List -->
 
     <!-- custom js file link  -->
     <script src='js/main.js'></script>
-    <script src='js/status.js'></script>
     <script src='js/print.js'></script>
     <script src='js/export.js'></script>
     <script src='js/sort.js'></script>

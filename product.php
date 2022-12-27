@@ -190,7 +190,7 @@ if (isset($delete)) {
 ?>
     </div>
 
-        <div><i class="fa-solid fa-bell"></i><button id="addbtn" onclick="openPopup()"> + Add Product</button></div>
+        <div><button id="addbtn" onclick="openPopup()"> + Add Product</button><i class="fa-solid fa-bell"></i><a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></div>
     </div>
 
     </section>

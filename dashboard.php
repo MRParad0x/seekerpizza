@@ -73,8 +73,7 @@ if (!isset($_SESSION['roleType'])) {
 
     <div class="header-container">
         <div><h1>Dashboard</h1></div>
-        <div><i class="fa-solid fa-bell"></i></div>
-        <!-- <button id="addbtn" onclick="openPopup()"> + Create Order</button> -->
+        <div><i class="fa-solid fa-bell"></i><a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></div>
     </div>
 
     </section>

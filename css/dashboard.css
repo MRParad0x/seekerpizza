@@ -169,6 +169,10 @@ body{
     cursor: pointer;
 }
 
+.box-two .header .header-container .menubtn{
+    margin-left: 0.8em;
+}
+
 .success-msg{
     margin-left: auto;
     margin-right: auto;
