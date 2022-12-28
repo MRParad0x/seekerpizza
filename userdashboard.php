@@ -50,6 +50,10 @@ if (!isset($_SESSION['roleType'])) {
     <!-- Export component -->
     <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.1.1/chart.min.js"></script>
+
 </head>
 
 <body>
@@ -69,8 +73,7 @@ if (!isset($_SESSION['roleType'])) {
 
     <div class="header-container">
         <div><h1>Dashboard</h1></div>
-        <div><i class="fa-solid fa-bell"></i></div>
-        <!-- <button id="addbtn" onclick="openPopup()"> + Create Order</button> -->
+        <div><i class="fa-solid fa-bell"></i><a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></div>
     </div>
 
     </section>
@@ -81,19 +84,26 @@ if (!isset($_SESSION['roleType'])) {
 
 <div class="main">
 
-    <div class="block-box-one">
+    <div class="main-container">
+
+    <div class="flexbox-one">
 
         <div class="dashboard-welcome">
             <h1>Hello <?php echo $_SESSION['userFName'] ?>,</h1>
             <p>Welcome Back!</p>
-            <p>From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.</p>
         </div>
 
+        <div class="dashboard-welcome">
+            <p>From your account dashboard you can view your recent orders, manage your profile details, and edit and account details.</p>
+        </div>
     </div>
 
 </div>
+</div>
 
     <!-- custom js file link  -->
+    <script src='js/chart.js'></script>
+
 
 </body>
 

@@ -6,34 +6,7 @@ session_start();
 if (!isset($_SESSION['roleType'])) {
     header('location:login.php');
 }
-
-if (isset($_POST['update_order'])) {
-
-    $orderId = $_POST['orderId'];
-    $orderId = filter_var($orderId, FILTER_UNSAFE_RAW);
-    $orderStatus = $_POST['orderStatus'];
-    $orderStatus = filter_var($orderStatus, FILTER_UNSAFE_RAW);
-
-    $update_order = $conn->prepare("UPDATE sp_order SET orderStatus = ? WHERE orderId = ?");
-    $update_order->execute([$orderStatus, $orderId]);
-    $update[] = 'Order status has been successfully updated.';
-}
-
-if (isset($_GET['delete'])) {
-
-    $delete_id = $_GET['delete'];
-    $delete_order_image = $conn->prepare("SELECT * FROM orders WHERE orderId = ?");
-    $delete_order_image->execute([$delete_id]);
-    $fetch_delete_image = $delete_order_image->fetch(PDO::FETCH_ASSOC);
-    unlink('uploads/' . $fetch_delete_image['image']);
-    $delete_order = $conn->prepare("DELETE FROM orders WHERE orderId = ?");
-    $delete_order->execute([$delete_id]);
-    // $delete_cart = $conn->prepare("DELETE FROM cart WHERE orderId = ?");
-    // $delete_cart->execute([$delete_id]);
-    header('location:order.php');
-
-}
-
+$userNIC = $_SESSION['userNIC'];
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +19,7 @@ if (isset($_GET['delete'])) {
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <!-- custom css file link  -->
-    <link rel='stylesheet' type='text/css' media='screen' href='css/order.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/userorder.css'>
 
      <!-- favicon file link  -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
@@ -96,38 +69,7 @@ if (isset($_GET['delete'])) {
 
     <div class="header-container">
         <div><h1>Orders</h1></div>
-
-    <div>
-    <?php
-if (isset($add)) {
-    foreach ($add as $add) {
-        echo '<span id="success" class="success-msg">' . $add . '</span>';
-    }
-    ;
-}
-;
-?>
-    <?php
-if (isset($update)) {
-    foreach ($update as $update) {
-        echo '<span id="success" class="success-msg">' . $update . '</span>';
-    }
-    ;
-}
-;
-?>
-    <?php
-if (isset($delete)) {
-    foreach ($delete as $delete) {
-        echo '<span id="delete" class="delete-msg">' . $delete . '</span>';
-    }
-    ;
-}
-;
-?>
-    </div>
         <div><i class="fa-solid fa-bell"></i><a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></div>
-        <!-- <button id="addbtn" onclick="openPopup()"> + Create Order</button> -->
     </div>
 
     </section>
@@ -178,9 +120,8 @@ if (isset($delete)) {
 				</thead>
 				<tbody id="pltable">
     <?php
-// $show_orders = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderTotal, sp_order.orderStatus, user.userFName, user.userLName FROM sp_order INNER JOIN USER ON sp_order.userNIC = user.userNIC");
-$show_orders = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderTotal, sp_order.orderStatus, user.userFName, user.userLName FROM sp_order INNER JOIN USER ON sp_order.userNIC = user.userNIC UNION SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderTotal, sp_order.orderStatus, guest.guestFName, guest.guestLName FROM sp_order INNER JOIN guest ON sp_order.guestNIC = guest.guestNIC");
-$show_orders->execute();
+$show_orders = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderTotal, sp_order.orderStatus, user.userFName, user.userLName from sp_order INNER JOIN user ON sp_order.userNIC = user.userNIC WHERE user.userNIC = ?;");
+$show_orders->execute([$userNIC]);
 if ($show_orders->rowCount() > 0) {
     while ($fetch_orders = $show_orders->fetch(PDO::FETCH_ASSOC)) {
         ?>
@@ -190,12 +131,11 @@ if ($show_orders->rowCount() > 0) {
                         <td><?=$fetch_orders['orderDate'];?></td>
 						<td><?=$fetch_orders['userFName'];?> <?=$fetch_orders['userLName'];?></td>
 						<td><?=$fetch_orders['orderTotal'];?></td>
-                        <td id="status_color" ><?=$fetch_orders['orderStatus'];?></td>
+                        <td id="status_color"><?=$fetch_orders['orderStatus'];?></td>
 						<td>
                             <div class="action">
-                                <a href="order.php?vieworder=<?=$fetch_orders['orderId'];?>" class="vieworder" ><i class="fa-solid fa-eye"></i></a>
-                                <a id="clickMe" href="order.php?update=<?=$fetch_orders['orderId'];?>" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="order.php?delete=<?=$fetch_orders['orderId'];?>" class="delete" onclick="return confirm('Are you sure you want to delete this order?');" ><i class="fa-solid fa-trash"></i></a>
+                                <a href="userorder.php?vieworder=<?=$fetch_orders['orderId'];?>" class="vieworder" ><i class="fa-solid fa-eye"></i></a>
+                                <a id="clickMe" href="/userfeedback.php" target="_blank" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
                             </div>
 						</td>
 					</tr>
@@ -213,61 +153,6 @@ if ($show_orders->rowCount() > 0) {
 </div>
 
 <!-- End order List -->
-
-<!-- Start Pop-up order Add Box -  -->
-
-
-
-<!-- End Pop-up order Add Box -  -->
-
-<!-- Start Pop-up order Update Box -  -->
-
-    <div class="popup-container">
-    <div class="popup-box-three" id="popupthree">
-    <button class="fa-solid fa-circle-xmark" onclick="closeUpdatePopup()"></button>
-    <h2>Update Order</h2>
-
-    <?php
-if (isset($_GET['update'])) {
-    $update_id = $_GET['update'];
-    $show_orders = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderTotal, sp_order.orderStatus, user.userFName, user.userLName FROM sp_order INNER JOIN USER ON sp_order.userNIC = user.userNIC WHERE orderId = ?");
-    $show_orders->execute([$update_id]);
-    if ($show_orders->rowCount() > 0) {
-        while ($fetch_orders = $show_orders->fetch(PDO::FETCH_ASSOC)) {
-            ?>
-
-    <form action="order.php" method="post" enctype="multipart/form-data">
-        <table class="pro-form">
-            <tr>
-                <td><input type="hidden" name="orderId" value="<?=$fetch_orders['orderId'];?>" ></td>
-            </tr>
-            <tr>
-                <td>
-                <select name="orderStatus" required>
-                <option value="" selected hidden><?=$fetch_orders['orderStatus'];?></option>
-                <option value="Cancelled">Cancelled</option>
-                <option value="Refunded">Refunded</option>
-                <option value="Pending">Pending</option>
-                <option value="Preparing">Preparing</option>
-                <option value="Ready">Ready</option>
-                <option value="Completed">Completed</option>
-                </select>
-                </td>
-            <tr>
-                <td><input type="submit" name="update_order" value="Update"></td>
-            </tr>
-        </table>
-    </form>
-    <?php
-}
-    } else {
-        echo '<p class="empty">no orders added yet!</p>';
-    }
-}
-?>
-    </div>
-
-<!-- End Pop-up order Update Box -  -->
 
 <!-- Start Pop-up View order Update Box -  -->
 
@@ -291,22 +176,21 @@ if (isset($_GET['update'])) {
     <?php
 if (isset($_GET['vieworder'])) {
     $order_id = $_GET['vieworder'];
-    $show_orders = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderStatus, sp_order.orderTotal, user.userFName, user.userLName, user.userAddress from sp_order INNER JOIN user ON sp_order.userNIC = user.userNIC WHERE orderId = ?");
-    // $show_orders = $conn->prepare("SELECT products.productId, products.productName, order_items.orderitemsQty, order_items.orderitemsTotal from products INNER JOIN order_items ON products.productId = order_items.productId WHERE orderId = ?");
-    $show_orders->execute([$order_id]);
+    $show_user_details = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderStatus, sp_order.orderTotal, user.userFName, user.userLName, user.userAddress from sp_order INNER JOIN user ON sp_order.userNIC = user.userNIC WHERE orderId = ?");
+    $show_user_details->execute([$order_id]);
     if ($show_orders->rowCount() > 0) {
-        while ($fetch_orders = $show_orders->fetch(PDO::FETCH_ASSOC)) {
+        while ($fetch_user_details = $show_user_details->fetch(PDO::FETCH_ASSOC)) {
             ?>
 
             <tbody class="tbody-one">
 
                      <tr>
-                        <td><?=$fetch_orders['orderId'];?></td>
-						<td><?=$fetch_orders['orderDate'];?></td>
-                        <td><?=$fetch_orders['orderStatus'];?></td>
-						<td><?=$fetch_orders['orderTotal'];?></td>
-                        <td><?=$fetch_orders['userFName'];?> <?=$fetch_orders['userLName'];?></td>
-						<td><?=$fetch_orders['userAddress'];?></td>
+                        <td><?=$fetch_user_details['orderId'];?></td>
+						<td><?=$fetch_user_details['orderDate'];?></td>
+                        <td><?=$fetch_user_details['orderStatus'];?></td>
+						<td><?=$fetch_user_details['orderTotal'];?></td>
+                        <td><?=$fetch_user_details['userFName'];?> <?=$fetch_user_details['userLName'];?></td>
+						<td><?=$fetch_user_details['userAddress'];?></td>
 					</tr>
 
             </tbody>

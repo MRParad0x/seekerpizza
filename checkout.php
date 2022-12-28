@@ -10,7 +10,6 @@ if (isset($_SESSION['roleType'])) {
     $ssid = session_id();
     echo $ssid;
     $userNIC = $_SESSION['userNIC'];
-    echo $userNIC;
 } else {
     $ssid = session_id();
     echo $ssid;

@@ -27,8 +27,6 @@ if ($_SESSION['roleType'] == 'Admin'): ?>
 if ($_SESSION['roleType'] == 'Manager'): ?>
     <div class="navbar" id="navid">
         <a class="menubtn" href="dashboard.php"><i id="icon" class="fa-solid fa-gauge"></i>Dashboard</a>
-        <a class="menubtn" href="order.php"><i id="icon" class="fa-solid fa-chart-line"></i>Orders</a>
-        <a class="menubtn" href="product.php"><i id="icon" class="fa-solid fa-pizza-slice"></i>Product</a>
         <a class="menubtn" href="feedback.php"><i id="icon" class="fa-solid fa-comments"></i>Feedback</a>
         <a class="menubtn" href="report.php"><i id="icon" class="fa-solid fa-table"></i>Report</a>
     </div>
@@ -41,16 +39,14 @@ if ($_SESSION['roleType'] == 'Cashier'): ?>
         <a class="menubtn" href="order.php"><i id="icon" class="fa-solid fa-chart-line"></i>Orders</a>
         <a class="menubtn" href="product.php"><i id="icon" class="fa-solid fa-pizza-slice"></i>Product</a>
         <a class="menubtn" href="category.php"><i id="icon" class="fa-solid fa-layer-group"></i>Category</a>
-        <a class="menubtn" href="feedback.php"><i id="icon" class="fa-solid fa-comments"></i>Feedback</a>
     </div>
     <?php endif;?>
 
     <?php
 if ($_SESSION['roleType'] == 'Customer'): ?>
     <div class="navbar" id="navid">
-        <a class="menubtn" href="dashboard.php"><i id="icon" class="fa-solid fa-gauge"></i>Dashboard</a>
-        <a class="menubtn" href="order.php"><i id="icon" class="fa-solid fa-chart-line"></i>Orders</a>
-        <a class="menubtn" href="product.php"><i id="icon" class="fa-solid fa-pizza-slice"></i>Product</a>
+        <a class="menubtn" href="userdashboard.php"><i id="icon" class="fa-solid fa-gauge"></i>Dashboard</a>
+        <a class="menubtn" href="userorder.php"><i id="icon" class="fa-solid fa-chart-line"></i>Orders</a>
     </div>
     <?php endif;?>
 

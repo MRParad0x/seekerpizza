@@ -93,7 +93,7 @@ if (isset($_POST['send'])) {
           <td><input type="email" class="input-field" name ="feedbackEmail" placeholder="Email" required></td>
         </tr>
         <tr>
-          <td><textarea name="feedbackMessage" rows="8"  placeholder="Your Feedback"></textarea></td>
+          <td><textarea name="feedbackMessage" rows="8"  placeholder="Your Feedback" required></textarea></td>
         </tr>
         <tr>
           <td><input type="submit" name="send" Value="Send"></td>

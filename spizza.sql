@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2022 at 05:18 AM
+-- Generation Time: Dec 27, 2022 at 03:35 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -41,7 +41,8 @@ CREATE TABLE `cart_item` (
 --
 
 INSERT INTO `cart_item` (`Id`, `cartitemId`, `sessionId`, `productId`, `cartitemQty`, `cartitemDate`) VALUES
-(278, 'CII-0278', '25k1aaq5aqcvq3qcfusjqatbu6', 'PR-0015', 1, '2022-12-20');
+(278, 'CII-0278', '25k1aaq5aqcvq3qcfusjqatbu6', 'PR-0015', 1, '2022-12-20'),
+(283, 'CII-0283', 'pidg4e1dkbocn3c3ctt7vcoata', 'PR-0011', 1, '2022-12-25');
 
 --
 -- Triggers `cart_item`
@@ -91,6 +92,42 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `id` int(4) NOT NULL,
+  `contactId` varchar(10) NOT NULL,
+  `contactFName` varchar(100) NOT NULL,
+  `contactSubject` varchar(100) NOT NULL,
+  `contactEmail` varchar(100) NOT NULL,
+  `contactMessage` longtext NOT NULL,
+  `contactDate` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`id`, `contactId`, `contactFName`, `contactSubject`, `contactEmail`, `contactMessage`, `contactDate`) VALUES
+(1, 'CU-0001', 'Amila F', 'Login page issue', 'amila@gmail.com', 'can\'t login my acount', '2022-12-27'),
+(2, 'CU-0002', 'Kasuni S', 'Order issue', 'kasuni@aol.com', 'can\'t place a order', '2022-12-27'),
+(3, 'CU-0003', 'Nimal S', 'Order ', 'nimal@gmail.com', ' How to place a order?', '2022-12-27');
+
+--
+-- Triggers `contact`
+--
+DELIMITER $$
+CREATE TRIGGER `getcontactId` BEFORE INSERT ON `contact` FOR EACH ROW BEGIN
+INSERT INTO id_contact VALUES (NULL);
+SET NEW.contactId = CONCAT("CU-", LPAD(LAST_INSERT_ID(), 4, "0"));
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `coupon`
 --
 
@@ -120,6 +157,45 @@ DELIMITER $$
 CREATE TRIGGER `getcouponId` BEFORE INSERT ON `coupon` FOR EACH ROW BEGIN
 INSERT INTO id_coupon VALUES (NULL);
 SET NEW.couponId = CONCAT("CO-", LPAD(LAST_INSERT_ID(), 4, "0"));
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `id` int(4) NOT NULL,
+  `feedbackId` varchar(10) NOT NULL,
+  `feedbackFName` varchar(100) NOT NULL,
+  `feedbackEmail` varchar(50) NOT NULL,
+  `feedbackMessage` longtext NOT NULL,
+  `feedbackDate` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`id`, `feedbackId`, `feedbackFName`, `feedbackEmail`, `feedbackMessage`, `feedbackDate`) VALUES
+(1, 'FE-0001', 'Amila L', 'amila@gmail.com', 'Delicious foods.. Great!!', '2022-12-26'),
+(2, 'FE-0002', 'Sanjaya', 'sanjaya@gmail.com', 'Yummy Foods!', '2022-12-27'),
+(3, 'FE-0003', 'Nirmal K', 'nirmal@yahoo.com', 'Best food ever!', '2022-12-27'),
+(4, 'FE-0004', 'Dasun K', 'dasun@gmail.com', 'nice clean fresh food!', '2022-12-27'),
+(5, 'FE-0005', 'Kelum H', 'kemlum@aol.com', 'Great pizza!', '2022-12-27'),
+(6, 'FE-0006', 'Nimali H', 'nimali@yandex.com', 'fresh & clean foods!', '2022-12-27'),
+(7, 'FE-0007', 'Bimali K', 'bimali@gmail.com', 'Great yummy meals!', '2022-12-27');
+
+--
+-- Triggers `feedback`
+--
+DELIMITER $$
+CREATE TRIGGER `getfeedbackId` BEFORE INSERT ON `feedback` FOR EACH ROW BEGIN
+INSERT INTO id_feedback VALUES (NULL);
+SET NEW.feedbackId = CONCAT("FE-", LPAD(LAST_INSERT_ID(), 4, "0"));
 END
 $$
 DELIMITER ;
@@ -442,7 +518,12 @@ INSERT INTO `id_cart_item` (`Id`) VALUES
 (279),
 (280),
 (281),
-(282);
+(282),
+(283),
+(284),
+(285),
+(286),
+(287);
 
 -- --------------------------------------------------------
 
@@ -467,6 +548,25 @@ INSERT INTO `id_category` (`id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `id_contact`
+--
+
+CREATE TABLE `id_contact` (
+  `id` int(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `id_contact`
+--
+
+INSERT INTO `id_contact` (`id`) VALUES
+(1),
+(2),
+(3);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `id_coupon`
 --
 
@@ -484,6 +584,29 @@ INSERT INTO `id_coupon` (`id`) VALUES
 (3),
 (4),
 (5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `id_feedback`
+--
+
+CREATE TABLE `id_feedback` (
+  `id` int(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `id_feedback`
+--
+
+INSERT INTO `id_feedback` (`id`) VALUES
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7);
 
 -- --------------------------------------------------------
 
@@ -629,7 +752,9 @@ INSERT INTO `id_order_items` (`id`) VALUES
 (114),
 (115),
 (116),
-(117);
+(117),
+(118),
+(119);
 
 -- --------------------------------------------------------
 
@@ -751,7 +876,9 @@ INSERT INTO `order_items` (`Id`, `orderitemsId`, `orderId`, `productId`, `orderi
 (112, 'OII-0114', 'OID-a026acb8', 'PR-0015', 1, 1300, '2022-12-22'),
 (113, 'OII-0115', 'OID-3d0dc956', 'PR-0015', 1, 1300, '2022-12-24'),
 (114, 'OII-0116', 'OID-3d0dc956', 'PR-0021', 1, 500, '2022-12-24'),
-(115, 'OII-0117', 'OID-3d0dc956', 'PR-0022', 1, 500, '2022-12-24');
+(115, 'OII-0117', 'OID-3d0dc956', 'PR-0022', 1, 500, '2022-12-24'),
+(116, 'OII-0118', 'OID-5d08eef8', 'PR-0016', 2, 3000, '2022-12-27'),
+(117, 'OII-0119', 'OID-5d08eef8', 'PR-0018', 3, 3000, '2022-12-27');
 
 --
 -- Triggers `order_items`
@@ -860,7 +987,8 @@ CREATE TABLE `shopping_session` (
 --
 
 INSERT INTO `shopping_session` (`ssId`, `userNIC`, `ssDate`) VALUES
-('25k1aaq5aqcvq3qcfusjqatbu6', NULL, '2022-12-19');
+('25k1aaq5aqcvq3qcfusjqatbu6', NULL, '2022-12-19'),
+('pidg4e1dkbocn3c3ctt7vcoata', NULL, '2022-12-25');
 
 -- --------------------------------------------------------
 
@@ -884,6 +1012,7 @@ CREATE TABLE `sp_order` (
 
 INSERT INTO `sp_order` (`orderId`, `userNIC`, `guestNIC`, `orderDiscount`, `orderTotal`, `orderStatus`, `orderDate`) VALUES
 ('OID-3d0dc956', '202525238V', NULL, 0, 1840, 'Processing', '2022-12-24'),
+('OID-5d08eef8', '202525238V', NULL, 0, 6000, 'Processing', '2022-12-27'),
 ('OID-a026acb8', '202525238V', NULL, 0, 1040, 'Completed', '2022-12-22'),
 ('OID-bb1ebc88', NULL, 'GID-04e3e2ce', 0, 1500, 'Processing', '2022-12-19');
 
@@ -978,11 +1107,23 @@ ALTER TABLE `category`
   ADD UNIQUE KEY `categoryId` (`categoryId`);
 
 --
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `coupon`
 --
 ALTER TABLE `coupon`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `couponId` (`couponId`);
+
+--
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `guest`
@@ -1004,9 +1145,21 @@ ALTER TABLE `id_category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `id_contact`
+--
+ALTER TABLE `id_contact`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `id_coupon`
 --
 ALTER TABLE `id_coupon`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `id_feedback`
+--
+ALTER TABLE `id_feedback`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1110,7 +1263,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=283;
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -1119,10 +1272,22 @@ ALTER TABLE `category`
   MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `coupon`
 --
 ALTER TABLE `coupon`
   MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `guest`
@@ -1134,7 +1299,7 @@ ALTER TABLE `guest`
 -- AUTO_INCREMENT for table `id_cart_item`
 --
 ALTER TABLE `id_cart_item`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=283;
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
 
 --
 -- AUTO_INCREMENT for table `id_category`
@@ -1143,10 +1308,22 @@ ALTER TABLE `id_category`
   MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `id_contact`
+--
+ALTER TABLE `id_contact`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `id_coupon`
 --
 ALTER TABLE `id_coupon`
   MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `id_feedback`
+--
+ALTER TABLE `id_feedback`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `id_order`
@@ -1158,7 +1335,7 @@ ALTER TABLE `id_order`
 -- AUTO_INCREMENT for table `id_order_items`
 --
 ALTER TABLE `id_order_items`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT for table `id_product`
@@ -1188,7 +1365,7 @@ ALTER TABLE `id_subscriber`
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT for table `products`

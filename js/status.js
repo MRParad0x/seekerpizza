@@ -1,7 +1,7 @@
 /* Start Order Status color change Function */
 
 var color = document.getElementById("status_color").innerText;
-
+var i;
 switch (true) {
   case color == "Completed":
     document.getElementById("status_color").style.background = "#29a64f";

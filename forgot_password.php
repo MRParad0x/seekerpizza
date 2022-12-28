@@ -11,22 +11,6 @@ if (isset($_SESSION['roleType'])) {
 
 $host = "login.php";
 
-if (isset($_POST['send'])) {
-
-    $contactFName = $_POST['contactFName'];
-    $contactFName = filter_var($contactFName, FILTER_UNSAFE_RAW);
-    $contactSubject = $_POST['contactSubject'];
-    $contactSubject = filter_var($contactSubject, FILTER_UNSAFE_RAW);
-    $contactEmail = $_POST['contactEmail'];
-    $contactEmail = filter_var($contactEmail, FILTER_UNSAFE_RAW);
-    $contactMessage = $_POST['contactMessage'];
-    $contactMessage = filter_var($contactMessage, FILTER_UNSAFE_RAW);
-
-    $insert_contact = $conn->prepare("INSERT INTO contact (contactFName, contactSubject, contactEmail, contactMessage) VALUES(?,?,?,?)");
-    $insert_contact->execute([$contactFName, $contactSubject, $contactEmail, $contactMessage]);
-    $message[] = 'Thanks for getting in touch with us! <br/> We\'ll get back to you as soon as we can.';
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -35,12 +19,12 @@ if (isset($_POST['send'])) {
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Contact</title>
+    <title>Reset Password</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <!-- custom css file link  -->
 
-    <link rel='stylesheet' type='text/css' media='screen' href='css/contact.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/forgot_password.css'>
 
     <!-- favicon file link  -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
@@ -78,28 +62,34 @@ if (isset($_POST['send'])) {
     <div class="form-container">
 
 <div class="contact-title">
-          <h2>How Can we help?</h2>
-          <p>Have any questions? We'd love to hear from you.</p>
+          <h2>Forgot Your Password?</h2>
+          <p>Please enter your NIC, Email & Username to reset your password.</p>
     </div>
 
-    <?php if (!isset($_POST['send'])) {
-    ?>
+    <?php
+if (isset($regerror)) {
+    foreach ($regerror as $regerror) {
+        echo '<span id="error" class="error-msg">' . $regerror . '</span>';
+    }
+    ;
+}
+;
+?>
+
+    <?php if (!isset($_POST['send'])) {?>
 
     <div class="content">
       <div class="content-container">
       <form action="" method="POST">
         <table class="contact-table">
         <tr>
-          <td><input type="text" class="input-field" name ="contactFName" placeholder="Full Name" required></td>
+          <td><input type="text" class="input-field" name ="userNIC" placeholder="User NIC" required></td>
         </tr>
         <tr>
-          <td><input type="text" class="input-field" name ="contactSubject" placeholder="Subject" required></td>
+          <td><input type="email" class="input-field" name ="userEmail" placeholder="userEmail" required></td>
         </tr>
         <tr>
-          <td><input type="email" class="input-field" name ="contactEmail" placeholder="Email" required></td>
-        </tr>
-        <tr>
-          <td><textarea name="contactMessage" rows="8"  placeholder="Your Message" required></textarea></td>
+          <td><input type="text" class="input-field" name ="userName" placeholder="userName" required></td>
         </tr>
         <tr>
           <td><input type="submit" name="send" Value="Send"></td>
@@ -109,24 +99,48 @@ if (isset($_POST['send'])) {
       </div>
     </div>
 
-<?php } else {?>
+<?php } else if (isset($_POST['send'])) {
+
+    $userNIC = $_POST['userNIC'];
+    $userNIC = filter_var($userNIC, FILTER_UNSAFE_RAW);
+    $userEmail = $_POST['userEmail'];
+    $userEmail = filter_var($userEmail, FILTER_UNSAFE_RAW);
+    $userName = $_POST['userName'];
+    $userName = filter_var($userName, FILTER_UNSAFE_RAW);
+
+    $select_user = $conn->prepare("SELECT user.userNIC, user.userName, user.userFName, user.userLName, user.userEmail, user.userNumber, user.userAddress, user.userEmail, role.roleId, role.roleType from user INNER JOIN role ON user.roleId = role.roleId WHERE (userEmail = ? OR userName = ?) AND userNIC = ? ");
+    $select_user->execute([$userNIC, $userEmail, $userName]);
+    $row = $select_user->fetch(PDO::FETCH_ASSOC);
+
+    if ($select_user->rowCount() > 0) {
+        if ($row['userNIC'] == $userNIC && $row['userEmail'] == $userEmail && $row['userName'] == $userName) {
+            ?>
+
+  <div class="content-container">
+      <form action="" method="POST">
+        <table class="contact-table">
+        <tr>
+          <td><input type="text" class="input-field" name ="userPassword" placeholder="New Password" required></td>
+        </tr>
+        <tr>
+          <td><input type="text" class="input-field" name ="userNewPassword" placeholder="Confirm Password" required></td>
+        </tr>
+        <tr>
+          <td><input type="submit" name="send" Value="Submit"></td>
+        </tr>
+        </table>
+      </form>
+      </div>
+
+<?php } else {
+            $regerror[] = 'incorrect NIC, Username or Email!';
+        }
+    }
+}?>
 
 </section>
 </div>
 
-<div>
-    <?php
-if (isset($message)) {
-    foreach ($message as $message) {
-        echo '<span id="success" class="success-msg">' . $message . '</span>';
-    }
-    ;
-}
-    ;
-    echo "<button class=\"feedback-go-back-button\" onclick=\"location.href='/index.php';\"><i class=\"fa-solid fa-circle-chevron-left\"></i>&nbsp;&nbsp;Go Home</button>";
-}
-?>
-    </div>
 
     </div>
     </div>

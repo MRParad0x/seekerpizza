@@ -5,13 +5,8 @@ include 'conn.php';
 session_start();
 if (isset($_SESSION['roleType'])) {
     $ssid = session_id();
-    echo $ssid;
-    echo $_SESSION['userNIC'];
-    echo $_SESSION['userFName'];
-    echo $_SESSION['userLName'];
 } else {
     $ssid = session_id();
-    echo $ssid;
 }
 
 $host = "index.php";
@@ -136,7 +131,7 @@ if (isset($_POST['checkout'])) {
                         <h4>Ingredients:</h4>
                         <p>tomato sauce, mozzarella cheese, cocktail, shrimps<br/> salmon, mussels, lemon, parsley</p>
                         <h2>Rs: 2000.00</h2>
-                        <button>Go to Menu</button><br/>
+                        <button onclick="location.href='#menu';">Go to Menu</button><br/>
                         <div class="fa-solid fa-circle-left" onclick="prev()"></div>
                         <div class="fa-solid fa-circle-right" onclick="next()"></div>
                     </div>
@@ -402,7 +397,7 @@ if ($show_products->rowCount() > 0) {
         </section>
     </div>
 
-    <!-- <div class="newsletter-box-bg">
+    <div class="newsletter-box-bg">
         <section class="newsletter-box">
             <div class="newsletter-box-container">
                 <div class="newsletter-box-image">
@@ -414,58 +409,21 @@ if ($show_products->rowCount() > 0) {
                         <p>Subscribe and never miss out on finds & deals delivered to your inbox.</p>
                     </div>
                     <div class="newsletter-box-form">
-                        <input type="email" name="email" id="email" placeholder="Enter your email address" autocomplete="off">
+                        <form action="" method="post">
+                        <input type="text" name="subscribeFName" id="email" placeholder="Enter your Full Name" autocomplete="off">
+                        <input type="email" name="subscribeEmail" id="email" placeholder="Enter your email address" autocomplete="off">
                         <button type="button">Subscribe</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </section>
-    </div> -->
+    </div>
 
     <i onclick="topFunction()" id="scrollback" title="Go to top" class="fa-solid fa-caret-up"></i>
 
     <?php include 'cart.php'?>
-
-    <footer class="footer">
-        <section class="flex" id="contactus">
-            <div class="footer-container">
-                <div class="footer-box-block">
-
-                    <a href="#home"><img class="logo" src="img/logovertical.png" alt=""></a>
-                        <p>Follow us on social</p>
-
-                        <div class="icons-scoial">
-                            <a href="facebook.com" class="fa-brands fa-facebook-f"></a>
-                            <a href="instagram.com" class="fa-brands fa-instagram"></a>
-                            <a href="twitter.com" class="fa-brands fa-twitter"></a>
-                            <a href="youtube.com" class="fa-brands fa-youtube"></a>
-                            <a href="tiktok.com" class="fa-brands fa-tiktok"></a>
-                        </div>
-
-                        <div class="icons-details">
-                            <a class="fa-solid fa-phone"></a><label>+94 112768453</label>
-                            <a class="fa-solid fa-envelope"></a><label>support@seekerspizza.com</label>
-                            <a class="fa-solid fa-location-dot"></a><label>10C, Pittugala Road, Kaduwela</label>
-                            <a class="fa-solid fa-calendar-days"></a><label>Monday -  Sunday</label>
-                            <a class="fa-solid fa-clock"></a><label>11:00 AM -  11:00 PM</label>
-                        </div>
-
-                    <div class="navbar">
-                        <a href="#home">Home</a>
-                        <a href="#menu">Menu</a>
-                        <a href="#about">About</a>
-                        <a href="#contact">Contact</a>
-                        <a href="/login.php">Register</a>
-                        <a href="/login.php">Login</a>
-                        <a href="#tou">Term of USe</a>
-                        <a href="#tou">Privacy policy</a>
-                    </div>
-                    <p class="footer-copy">Copyright © 2022 Seekers Pizza All Rights Reserved.</p>
-                    <p>Made with <i class="fa-solid fa-heart"></i> By Seeker Group.</p>
-                </div>
-            </div>
-        </section>
-    </footer>
+    <?php include 'footer.php'?>
 
     <!-- custom js file link  -->
     <script src='js/index.js'></script>

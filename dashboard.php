@@ -111,7 +111,7 @@ if (!isset($_SESSION['roleType'])) {
                 <img src="img/customer.svg" alt="">
             </div>
             <div class="content">
-                <p class="orderNo">1000</p>
+                <p class="orderNo">2345</p>
                 <p>Total Customers</p>
             </div>
         </div>
@@ -121,7 +121,7 @@ if (!isset($_SESSION['roleType'])) {
                 <img src="img/subscribe.svg" alt="">
             </div>
             <div class="content">
-                <p class="orderNo">1000</p>
+                <p class="orderNo">1879</p>
                 <p>Total Subscribers</p>
             </div>
         </div>
@@ -135,7 +135,7 @@ if (!isset($_SESSION['roleType'])) {
                     <img src="img/products.svg" alt="">
                 </div>
                 <div class="content">
-                    <p class="orderNo">1000</p>
+                    <p class="orderNo">55</p>
                     <p>Total Products</p>
                 </div>
             </div>
@@ -145,7 +145,7 @@ if (!isset($_SESSION['roleType'])) {
                 <img src="img/feedback.svg" alt="">
             </div>
             <div class="content">
-                <p class="orderNo">1000</p>
+                <p class="orderNo">950</p>
                 <p>Total Feedbacks</p>
             </div>
         </div>
@@ -163,7 +163,7 @@ if (!isset($_SESSION['roleType'])) {
                     <img src="img/order.svg" alt="">
                 </div>
                 <div class="content">
-                    <p class="orderNo">1000</p>
+                    <p class="orderNo">5045</p>
                     <p>Lifetime Sales</p>
                 </div>
             </div>
@@ -173,7 +173,7 @@ if (!isset($_SESSION['roleType'])) {
                     <img src="img/revenue.svg" alt="">
                 </div>
                 <div class="content">
-                    <p class="orderNo">1000</p>
+                    <p class="orderNo">145K</p>
                     <p>Lifetime Revenue</p>
                 </div>
             </div>
