@@ -303,9 +303,14 @@ section{
     font-weight: 700;
 }
 
-.form .form-container .forgot{
+.form .form-container .forgot a{
+    color: #ffffff;
+    font-weight: 700;
     font-size: 0.8em;
+    text-decoration: none;
 }
+
+
 
 .form .form-container .submit-btn{
     width: 55%;

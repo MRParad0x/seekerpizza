@@ -55,7 +55,7 @@ if (isset($_POST['logsubmit'])) {
             if (isset($_SESSION['redirectcheckout'])) {
                 header('location: ' . $_SESSION['redirectcheckout']);
             } else {
-                header('location: dashboard.php');
+                header('location: order.php');
             }
         } elseif ($row['roleType'] == ('Customer')) {
             $_SESSION['roleType'] = $row['roleType'];
@@ -254,7 +254,7 @@ if (isset($error)) {
                         <td><input type="password" name="userPassword" class="input-field" placeholder="Password" required></td>
                     </tr>
                     <tr>
-                        <td class="forgot">Forgot password?</td>
+                        <td class="forgot" onclick="document.getElementById('link').click()"><a href="reset_password.php" id='link'> Forgot Pasword? </a></td>
                     </tr>
                     <tr>
                         <td><button type="submit" name="logsubmit" class="submit-btn">Login</button></td>

@@ -35,7 +35,6 @@ if ($_SESSION['roleType'] == 'Manager'): ?>
     <?php
 if ($_SESSION['roleType'] == 'Cashier'): ?>
     <div class="navbar" id="navid">
-        <a class="menubtn" href="dashboard.php"><i id="icon" class="fa-solid fa-gauge"></i>Dashboard</a>
         <a class="menubtn" href="order.php"><i id="icon" class="fa-solid fa-chart-line"></i>Orders</a>
         <a class="menubtn" href="product.php"><i id="icon" class="fa-solid fa-pizza-slice"></i>Product</a>
         <a class="menubtn" href="category.php"><i id="icon" class="fa-solid fa-layer-group"></i>Category</a>

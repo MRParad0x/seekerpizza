@@ -11,6 +11,29 @@ if (isset($_SESSION['roleType'])) {
 
 $host = "login.php";
 
+if (isset($_POST['send'])) {
+
+    $userNIC = $_POST['userNIC'];
+    $userNIC = filter_var($userNIC, FILTER_UNSAFE_RAW);
+    $userEmail = $_POST['userEmail'];
+    $userEmail = filter_var($userEmail, FILTER_UNSAFE_RAW);
+    $userName = $_POST['userName'];
+    $userName = filter_var($userName, FILTER_UNSAFE_RAW);
+
+    $select_user = $conn->prepare("SELECT userNIC, userName, userEmail from user WHERE userEmail = ? AND userName = ? AND userNIC = ? ");
+    $select_user->execute([$userEmail, $userName, $userNIC]);
+    $row = $select_user->fetch(PDO::FETCH_ASSOC);
+
+    if ($select_user->rowCount() > 0) {
+        if ($row['userNIC'] == $userNIC && $row['userEmail'] == $userEmail && $row['userName'] == $userName) {
+            header('location: new_password.php');
+            $_SESSION['userNIC'] = $row['userNIC'];
+        }
+    } else {
+        $regerror[] = 'incorrect NIC, Username or Email!';
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +47,7 @@ $host = "login.php";
 
     <!-- custom css file link  -->
 
-    <link rel='stylesheet' type='text/css' media='screen' href='css/forgot_password.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/reset_password.css'>
 
     <!-- favicon file link  -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
@@ -50,7 +73,7 @@ $host = "login.php";
 
 </head>
 
-<body onload="load()">
+<body>
 
 <!-- Start header -->
 
@@ -61,7 +84,7 @@ $host = "login.php";
 <div class="form">
     <div class="form-container">
 
-<div class="contact-title">
+    <div class="contact-title">
           <h2>Forgot Your Password?</h2>
           <p>Please enter your NIC, Email & Username to reset your password.</p>
     </div>
@@ -75,8 +98,6 @@ if (isset($regerror)) {
 }
 ;
 ?>
-
-    <?php if (!isset($_POST['send'])) {?>
 
     <div class="content">
       <div class="content-container">
@@ -99,56 +120,12 @@ if (isset($regerror)) {
       </div>
     </div>
 
-<?php } else if (isset($_POST['send'])) {
-
-    $userNIC = $_POST['userNIC'];
-    $userNIC = filter_var($userNIC, FILTER_UNSAFE_RAW);
-    $userEmail = $_POST['userEmail'];
-    $userEmail = filter_var($userEmail, FILTER_UNSAFE_RAW);
-    $userName = $_POST['userName'];
-    $userName = filter_var($userName, FILTER_UNSAFE_RAW);
-
-    $select_user = $conn->prepare("SELECT user.userNIC, user.userName, user.userFName, user.userLName, user.userEmail, user.userNumber, user.userAddress, user.userEmail, role.roleId, role.roleType from user INNER JOIN role ON user.roleId = role.roleId WHERE (userEmail = ? OR userName = ?) AND userNIC = ? ");
-    $select_user->execute([$userNIC, $userEmail, $userName]);
-    $row = $select_user->fetch(PDO::FETCH_ASSOC);
-
-    if ($select_user->rowCount() > 0) {
-        if ($row['userNIC'] == $userNIC && $row['userEmail'] == $userEmail && $row['userName'] == $userName) {
-            ?>
-
-  <div class="content-container">
-      <form action="" method="POST">
-        <table class="contact-table">
-        <tr>
-          <td><input type="text" class="input-field" name ="userPassword" placeholder="New Password" required></td>
-        </tr>
-        <tr>
-          <td><input type="text" class="input-field" name ="userNewPassword" placeholder="Confirm Password" required></td>
-        </tr>
-        <tr>
-          <td><input type="submit" name="send" Value="Submit"></td>
-        </tr>
-        </table>
-      </form>
-      </div>
-
-<?php } else {
-            $regerror[] = 'incorrect NIC, Username or Email!';
-        }
-    }
-}?>
-
-</section>
+  </div>
 </div>
-
-
-    </div>
-    </div>
 
     <?php include 'footer.php'?>
 
     <!-- custom js file link  -->
-    <script src='js/index.js'></script>
 
     <script>
     /* Start logo image click functions */
