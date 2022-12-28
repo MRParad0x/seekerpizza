@@ -131,7 +131,7 @@ if ($show_orders->rowCount() > 0) {
                         <td><?=$fetch_orders['orderDate'];?></td>
 						<td><?=$fetch_orders['userFName'];?> <?=$fetch_orders['userLName'];?></td>
 						<td><?=$fetch_orders['orderTotal'];?></td>
-                        <td id="status_color"><?=$fetch_orders['orderStatus'];?></td>
+                        <td class="status_color"><?=$fetch_orders['orderStatus'];?></td>
 						<td>
                             <div class="action">
                                 <a href="userorder.php?vieworder=<?=$fetch_orders['orderId'];?>" class="vieworder" ><i class="fa-solid fa-eye"></i></a>

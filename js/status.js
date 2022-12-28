@@ -1,25 +1,21 @@
 /* Start Order Status color change Function */
 
-var color = document.getElementById("status_color").innerText;
-var i;
-switch (true) {
-  case color == "Completed":
-    document.getElementById("status_color").style.background = "#29a64f";
-    break;
-  case color == "Ready":
-    document.getElementById("status_color").style.background = "#389bc9";
-    break;
-  case color == "Preparing":
-    document.getElementById("status_color").style.background = "#b8892a";
-    break;
-  case color == "Refunded":
-    document.getElementById("status_color").style.background = "#e8701a";
-    break;
-  case color == "Cancelled":
-    document.getElementById("status_color").style.background = "#FF4069";
-    break;
-  default:
-    document.getElementById("status_color").style.background = "#856bbf";
+const collection = document.getElementsByClassName("status_color");
+
+for (let i = 0; i < collection.length; i++) {
+  if (collection[i].innerHTML == "Completed") {
+    collection[i].style.backgroundColor = "#29a64f";
+  } else if (collection[i].innerHTML == "Ready") {
+    collection[i].style.backgroundColor = "#389bc9";
+  } else if (collection[i].innerHTML == "Preparing") {
+    collection[i].style.backgroundColor = "#b8892a";
+  } else if (collection[i].innerHTML == "Refunded") {
+    collection[i].style.backgroundColor = "#e8701a";
+  } else if (collection[i].innerHTML == "Cancelled") {
+    collection[i].style.backgroundColor = "#FF4069";
+  } else {
+    collection[i].style.backgroundColor = "#856bbf";
+  }
 }
 
 /* End Order Status color change Function */

@@ -190,7 +190,7 @@ if ($show_orders->rowCount() > 0) {
                         <td><?=$fetch_orders['orderDate'];?></td>
 						<td><?=$fetch_orders['userFName'];?> <?=$fetch_orders['userLName'];?></td>
 						<td><?=$fetch_orders['orderTotal'];?></td>
-                        <td id="status_color" ><?=$fetch_orders['orderStatus'];?></td>
+                        <td class="status_color" ><?=$fetch_orders['orderStatus'];?></td>
 						<td>
                             <div class="action">
                                 <a href="order.php?vieworder=<?=$fetch_orders['orderId'];?>" class="vieworder" ><i class="fa-solid fa-eye"></i></a>
@@ -247,7 +247,7 @@ if (isset($_GET['update'])) {
                 <option value="" selected hidden><?=$fetch_orders['orderStatus'];?></option>
                 <option value="Cancelled">Cancelled</option>
                 <option value="Refunded">Refunded</option>
-                <option value="Pending">Pending</option>
+                <option value="Pending">Processing</option>
                 <option value="Preparing">Preparing</option>
                 <option value="Ready">Ready</option>
                 <option value="Completed">Completed</option>
