@@ -1,0 +1,181 @@
+:root{
+    --black:#333;
+    --background:rgb(24, 24, 24);
+    --box-shadow:rgb(65, 65, 65);
+    --header-menu-font-size: 1.3em;
+    --header-menu-font-color: #FFFFFF;
+    --header-menu-font-style: 'Poppins', sans-serif;;
+    --activefocus-color: #FF4069;
+    --hover-color: #FF7795;
+    --border: 1rem solid var(--header-menu-font-color);
+    --second-font-style: 'Cairo Play', cursive;
+    --third-font-style: 'Righteous', cursive;
+    --fourth-font-style: font-family: 'Roboto Slab', serif;
+}
+
+body{
+    /* background-color: #151419; */
+    /* background: url(../img/sliderbg.png) no-repeat; */
+    background:linear-gradient( rgba(0, 0, 0, 0.712) 100%, rgba(0, 0, 0, 0.678)100%),url("../img/sliderbg.png");
+    opacity: 1;
+    background-size: cover;
+    background-position: center;
+    margin: auto 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+section{
+    padding: 2rem;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.body-layout{
+    display: block;
+}
+
+/* header  */
+
+.header{
+    position: relative;
+    top:0;
+    left: 0;
+    right: 0;
+    box-shadow:  var(--box-shadow);
+    z-index: 1000;
+    font-size:  var(--header-menu-font-size);
+    font-family: var(--header-menu-font-style);
+    font-weight: 500;
+    margin-bottom: 2em;
+}
+
+.header .site-logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.header img{
+    width: 15%;
+}
+
+.feedback-title{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    color: #ffffff;
+    font-family: var(--header-menu-font-style);
+    text-align: center;
+}
+
+.feedback-title .fa-solid.fa-heart{
+    color: #FF4069;
+}
+
+.content {
+display: flex;
+width: auto;
+justify-content: center;
+}
+
+.content .content-container{
+    width: auto;
+    background-color: #35334163;
+    border-radius: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-right: 1.5em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.content .content-container .feedback-table{
+    width: 100%;
+    height: auto;
+    border-collapse: separate;
+    border-spacing: 40px 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content .content-container input[type="email"],
+.content .content-container input[type="text"],
+.content .content-container textarea{
+    position: relative;
+	margin: 0 0 5px 0;
+    color: #fff;
+    border-radius: 1em;
+	outline: none;
+	background: transparent;
+    border: 3px solid rgba(153, 153, 153, 0.576);
+    box-shadow: rgba(255, 203, 203, 0.2) 0px 2px 8px 0px;
+    width: 100%;
+    padding: 0.8em;
+    appearance: none; 
+    font-family: var(--header-menu-font-style);
+    font-size: 0.8rem;
+    font-weight: 700;
+    resize: vertical;
+}
+
+.content .content-container input[type="email"]:focus:invalid{
+    border: 3px solid #ff4069c9;
+    box-shadow: #ff406979 0px 2px 8px 0px;
+}
+
+.content .content-container input[type="submit"],
+.feedback-go-back-button{
+    border: 3px solid rgba(255, 165, 165, 0.589);
+    box-shadow: rgba(255, 203, 203, 0.2) 0px 2px 8px 0px;
+    cursor: pointer;
+    outline: none;
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
+    border-radius: 1rem;
+    padding: 10px 34px 10px 34px;
+    font-family: var(--header-menu-font-style);
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.feedback-go-back-button{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fa-solid .fa-circle-chevron-left{
+    color: #ffffff;
+}
+
+.content .content-container input[type="submit"]:hover,
+.feedback-go-back-button:hover{
+    background-color: #FF4069;
+    color: #FFFFFF;
+    box-shadow:none;
+    border: 3px solid #FF4069;
+}
+
+.success-msg{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+    display: block;
+    background: #249300;
+    color:#fff;
+    border-radius: 1em;
+    font-family: var(--header-menu-font-style);
+    font-size: 1em;
+    font-weight: 700;
+    width: 465px;
+    padding: 0.8em;
+    text-align: center;
+}
