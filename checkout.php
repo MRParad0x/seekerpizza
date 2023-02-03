@@ -14,6 +14,9 @@ if (isset($_SESSION['roleType'])) {
 }
 $discount = 0;
 $_SESSION['discount'] = 0;
+$_SESSION['couponCode'] = "none";
+$_SESSION['subtotal'] = 0;
+$_SESSION['couponDiscount'] = 0;
 
 if (isset($_POST['submit'])) {
 
@@ -112,6 +115,30 @@ if (isset($_POST['guest'])) {
     $delete_cart_item = $conn->prepare("DELETE FROM shopping_session WHERE ssId = ?");
     $delete_cart_item->execute([$sessionId]);
     header('location:orderconfirmed.php');
+}
+
+if (isset($_POST['apply'])) {
+
+    $couponCode = $_POST['couponCode'];
+    $couponCode = filter_var($couponCode, FILTER_UNSAFE_RAW);
+    $_SESSION['couponCode'] = $couponCode;
+
+    $show_discount = $conn->prepare("SELECT couponCode, couponDiscount from coupon WHERE couponCode = ? ");
+    $show_discount->execute([$couponCode]);
+
+    if ($show_discount->rowCount() > 0) {
+        while ($fetch_discount = $show_discount->fetch(PDO::FETCH_ASSOC)) {
+            $dbcouponCode = $fetch_discount['couponCode'];
+
+            if ($dbcouponCode == $couponCode) {
+                $_SESSION['couponDiscount'] = $fetch_discount['couponDiscount'];
+                $message[] = 'Coupon added.';
+                echo '<style type="text/css"> #cart-discount { display: flex; } </style>';
+            }
+        }
+    } else {
+        $error[] = 'Enter a valid coupon.';
+    }
 }
 
 ?>
@@ -403,41 +430,20 @@ if ($show_products->rowCount() > 0) {
 ?>
         </div>
 
-    <?php if (isset($_POST['apply'])) {
+        <div class="cart-discount" id="cart-discount">
 
-    $couponCode = $_POST['couponCode'];
-    $couponCode = filter_var($couponCode, FILTER_UNSAFE_RAW);
+        <p>Discount&emsp;<i class="fa-solid fa-percent"></i><span class="coupon-saving">Saving <?php echo ($_SESSION['couponDiscount'] * 100) . '%&emsp;<i class="fa-solid fa-tag"></i> ' . $_SESSION['couponCode'] ?></span></p>
+        <p id="coupon-saving" class="bold">
 
-    $show_discount = $conn->prepare("SELECT couponCode, couponDiscount from coupon WHERE couponCode = ? ");
-    $show_discount->execute([$couponCode]);
-
-    if ($show_discount->rowCount() > 0) {
-        while ($fetch_discount = $show_discount->fetch(PDO::FETCH_ASSOC)) {
-            $dbcouponCode = $fetch_discount['couponCode'];
-
-            if ($dbcouponCode == $couponCode) {
-                $_SESSION['couponDiscount'] = $fetch_discount['couponDiscount'];
-                $couponDiscount = $_SESSION['couponDiscount'];
-                ?>
-        <div class="cart-discount">
-
-        <p>Discount&emsp;<i class="fa-solid fa-percent"></i><span class="coupon-saving">Saving <?php echo ($couponDiscount * 100) . '%&emsp;<i class="fa-solid fa-tag"></i> ' . $couponCode ?></span></p>
-        <p id="coupon-saving" class="bold"><?php
-
-                $_SESSION['discount'] = $_SESSION['subtotal'] * $couponDiscount;
-                $discount = $_SESSION['discount'];
-                echo '- LKR ' . $discount;?></p>
+<?php
+$_SESSION['discount'] = $_SESSION['subtotal'] * $_SESSION['couponDiscount'];
+$discount = $_SESSION['discount'];
+echo '- LKR ' . $discount;
+?>
+        </p>
 
         </div>
 
-        <?php $message[] = 'Coupon added.';}}?>
-
-<?php
-} else {
-        $error[] = 'Enter a valid coupon.';
-    }
-}
-?>
         <div class="cart-delivery">
 
         <p>Delivery</p>
@@ -455,6 +461,7 @@ if ($show_products->rowCount() > 0) {
         </div>
 
         </div>
+
         </div>
     </div>
 

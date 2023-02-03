@@ -291,12 +291,12 @@ if (isset($_GET['update'])) {
     <?php
 if (isset($_GET['vieworder'])) {
     $order_id = $_GET['vieworder'];
-    $show_orders = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderStatus, sp_order.orderTotal, user.userFName, user.userLName, user.userAddress from sp_order INNER JOIN user ON sp_order.userNIC = user.userNIC WHERE orderId = ?");
-    // $show_orders = $conn->prepare("SELECT products.productId, products.productName, order_items.orderitemsQty, order_items.orderitemsTotal from products INNER JOIN order_items ON products.productId = order_items.productId WHERE orderId = ?");
+    $show_orders = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderStatus, sp_order.orderTotal, user.userNIC, user.userFName, user.userLName, user.userAddress, guest.guestFName, guest.guestLName, guest.guestAddress from sp_order INNER JOIN user ON sp_order.userNIC = user.userNIC INNER JOIN guest ON sp_order.guestNIC = guest.guestNIC  WHERE orderId = ?");
     $show_orders->execute([$order_id]);
     if ($show_orders->rowCount() > 0) {
         while ($fetch_orders = $show_orders->fetch(PDO::FETCH_ASSOC)) {
-            ?>
+            if ($fetch_orders['userNIC'] != null) {
+                ?>
 
             <tbody class="tbody-one">
 
@@ -313,8 +313,24 @@ if (isset($_GET['vieworder'])) {
         </table>
 
     <?php
-}
-    } else {
+} else {?>
+
+<tbody class="tbody-one">
+
+<tr>
+   <td><?=$fetch_orders['orderId'];?></td>
+   <td><?=$fetch_orders['orderDate'];?></td>
+   <td><?=$fetch_orders['orderStatus'];?></td>
+   <td><?=$fetch_orders['orderTotal'];?></td>
+   <td><?=$fetch_orders['guestFName'];?> <?=$fetch_orders['guestLName'];?></td>
+   <td><?=$fetch_orders['guestAddress'];?></td>
+</tr>
+
+</tbody>
+</table>
+
+        <?php }
+        }} else {
         echo '<p class="empty">no orders added yet!</p>';
     }
 }

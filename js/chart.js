@@ -39,6 +39,8 @@ new Chart(ctx, {
     ],
   },
   options: {
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       y: {
         beginAtZero: true,
@@ -74,6 +76,8 @@ new Chart(p, {
     ],
   },
   options: {
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       y: {
         beginAtZero: true,
@@ -99,6 +103,8 @@ new Chart(pa, {
     ],
   },
   options: {
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       y: {
         beginAtZero: true,
@@ -146,6 +152,7 @@ new Chart(Hbarchart, {
     ],
   },
   options: {
+    responsive: true,
     maintainAspectRatio: false,
     indexAxis: "y",
     scales: {

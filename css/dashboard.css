@@ -314,12 +314,10 @@ body{
     margin-top: 0;
 }
 
-/* .main .main-container .flexbox-one .Total-box-container,
-.main .main-container .flexbox-two .Total-box-container, */
 .main .main-container .flexbox-two .chart-container{
     display: flex;
     position: relative;
-    width: 100%;
+    width: auto;
     height: auto;
 }
 
@@ -395,7 +393,7 @@ body{
 
 .main .main-container .flexbox-two .chart-container .pie-chart-container,
 .main .main-container .flexbox-two .chart-container .polar-chart-container{
-    width: auto;
+    width: 100%;
     height: auto;
     text-align: center;
     background-color: #353341;
@@ -589,4 +587,7 @@ body{
     
 }
 
-
+canvas{
+    width:100% !important;
+    height:auto !important;
+}

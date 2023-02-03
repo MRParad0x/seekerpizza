@@ -222,6 +222,12 @@ section{
     margin-right: 2em;
 }
 
+.content .section-two .cart-discount{
+    display: none;
+    justify-content: space-between;
+    font-size: 1rem;
+}
+
 .content .section-two .cart-discount p,
 .content .section-two .cart-coupon p,
 .content .section-two .cart-subtotal p,
@@ -252,7 +258,7 @@ section{
     margin-right: 0.5em;
 }
 
-.content .section-two .cart-discount,
+
 .content .section-two .cart-coupon,
 .content .section-two .cart-subtotal,
 .content .section-two .cart-total,
@@ -285,13 +291,13 @@ section{
 	background: transparent;
     border: 3px solid rgba(153, 153, 153, 0.576);
     box-shadow: rgba(255, 203, 203, 0.2) 0px 2px 8px 0px;
-    width: 120px;
+    width: 125px;
     padding: 0.3em 0.8em 0.3em 0.8em;
     appearance: none; 
     font-family: var(--header-menu-font-style);
     font-size: 0.8rem;
     font-weight: 500;
-    margin-right: 4.6em;
+    margin-right: 7em;
 }
 
 .cart-coupon .cart-coupon-btn{
@@ -352,6 +358,7 @@ section{
     margin-top: 1em;
     margin-left: auto;
     margin-right: auto;
+    top: 12em;
     left: 0;
     right: 0;
     text-align: center;
