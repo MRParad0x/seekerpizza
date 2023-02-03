@@ -285,7 +285,7 @@ section{
 	background: transparent;
     border: 3px solid rgba(153, 153, 153, 0.576);
     box-shadow: rgba(255, 203, 203, 0.2) 0px 2px 8px 0px;
-    width: 150px;
+    width: 120px;
     padding: 0.3em 0.8em 0.3em 0.8em;
     appearance: none; 
     font-family: var(--header-menu-font-style);
@@ -347,6 +347,80 @@ section{
     background: #FF4069; 
   }
 
+  .notify-msg{
+    position: absolute;
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+  .error-msg{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+    display: block;
+    background: #FF4069;
+    color:#fff;
+    border-radius: 1em;
+    font-family: var(--header-menu-font-style);
+    font-size: 0.8rem;
+    font-weight: 700;
+    width: 465px;
+    padding: 0.8em;
+    text-align: center;
+}
+
+.success-msg{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+    display: block;
+    background: #249300;
+    color:#fff;
+    border-radius: 1em;
+    font-family: var(--header-menu-font-style);
+    font-size: 0.8rem;
+    font-weight: 700;
+    width: 220px;
+    padding: 0.8em;
+    text-align: center;
+}
+
+.error-msg{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+    display: block;
+    background: #FF4069;
+    color:#fff;
+    border-radius: 1em;
+    font-family: var(--header-menu-font-style);
+    font-size: 0.8rem;
+    font-weight: 700;
+    width: 220px;
+    padding: 0.8em;
+    text-align: center;
+}
+
+#success,
+#error{
+    -webkit-animation: cssAnimation 5s forwards; 
+    animation: cssAnimation 5s forwards;
+}
+
+@keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
+}
+@-webkit-keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
+}
 
 
 

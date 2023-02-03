@@ -59,9 +59,7 @@ if (isset($_POST['delete_all'])) {
 if (isset($_POST['update_qty'])) {
     foreach ($_POST['cartitemId'] as $row => $id) {
         $cartitemId = $id;
-        echo "<br/>" . $cartitemId . "<br/>";
         $cartitemQty = ($_POST['cartitemQty'][$row]);
-        echo "<br/>" . $cartitemQty . "<br/>";
         $update_qty = $conn->prepare("UPDATE cart_item SET cartitemQty =? WHERE cartitemId =?");
         $update_qty->execute([$cartitemQty, $cartitemId]);
     }

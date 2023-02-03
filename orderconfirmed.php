@@ -5,9 +5,14 @@ include 'conn.php';
 session_start();
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
+    $ssid = session_id();
 } else {
     $user_id = '';
+    $ssid = session_id();
 }
+
+$discount = 0;
+$_SESSION['discount'] = 0;
 
 ?>
 
@@ -23,6 +28,9 @@ if (isset($_SESSION['user_id'])) {
     <!-- custom css file link  -->
 
     <link rel='stylesheet' type='text/css' media='screen' href='css/orderconfirmed.css'>
+
+    <!-- favicon file link  -->
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -71,8 +79,102 @@ if (isset($_SESSION['user_id'])) {
                 <button onclick="location.href='/dashboard.php';">Go to My Account</button>
                 <button onclick="location.href='/index.php';">Continue Shopping</button>
             </div>
+
+            <div class="order-confirm-container">
+                <h2>Order Details</h2>
+
+            <div class="table-container">
+			<table id="orderconfirm" class="order-confirm-table">
+				<thead>
+					<tr>
+						<th>Item</th>
+                        <th>Qty</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+				<tbody id="pltable">
+    <?php
+
+$show_products = $conn->prepare("SELECT products.productId, products.productName, products.productPrice, order_items.orderitemsQty, order_items.orderitemsTotal from products INNER JOIN order_items ON products.productId = order_items.productId WHERE orderId = ?");
+$show_products->execute([$_SESSION['uuid']]);
+
+if ($show_products->rowCount() > 0) {
+    while ($fetch_products = $show_products->fetch(PDO::FETCH_ASSOC)) {
+        ?>
+
+					<tr>
+                        <td><?=$fetch_products['productName'];?></td>
+                        <td><?=$fetch_products['orderitemsQty'];?></td>
+						<td><?=$fetch_products['orderitemsTotal'];?></td>
+					</tr>
+        <?php
+}
+}
+?>
+				</tbody>
+			</table>
+            </div>
+
+            <div class="cart-subtotal-container">
+            <hr>
+        <div class="cart-subtotal">
+
+<?php
+$show_subtotal = $conn->prepare("SELECT sum(order_items.orderitemsTotal) as subtotal from order_items WHERE orderId = ?");
+$show_subtotal->execute([$_SESSION['uuid']]);
+if ($show_subtotal->rowCount() > 0) {
+    while ($fetch_subtotal = $show_subtotal->fetch(PDO::FETCH_ASSOC)) {
+        $subtotal = $fetch_subtotal['subtotal'];
+    }
+    {?>
+        <p>Subtotal</p>
+        <p class="bold">LKR <?php echo $subtotal; ?></p>
+
+<?php
+}
+}
+?>
         </div>
+
+        <?php
+$show_discount = $conn->prepare("SELECT orderDiscount as discount, orderTotal as total from sp_order WHERE orderId = ?");
+$show_discount->execute([$_SESSION['uuid']]);
+if ($show_discount->rowCount() > 0) {
+    while ($fetch_discount = $show_discount->fetch(PDO::FETCH_ASSOC)) {
+        $discount = $fetch_discount['discount'];
+        $total = $fetch_discount['total'];
+    }
+    if ($discount > 0) {?>
+
+        <div class="cart-discount">
+        <p>Discount</p>
+        <p class="bold"><?php echo '- LKR ' . $discount; ?></p>
+        </div>
+
+<?php }?>
+
+        <div class="cart-delivery">
+        <p>Delivery</p>
+        <p class="bold">Pickup</p>
+        </div>
+
+        <hr>
+
+        <div class="cart-total">
+        <p>Total</p>
+        <p class="bold"><?php echo 'LKR ' . $total ?></p>
+        </div>
+
+<?php
+}
+?>
+
+        </div>
+
+        </div>
+
     </div>
+</div>
 
 </section>
 </div>

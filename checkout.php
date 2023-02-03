@@ -22,7 +22,8 @@ if (isset($_POST['submit'])) {
     $_SESSION['uuid'] = $uuid;
     $orderTotal = $_SESSION['orderTotal'];
     $orderStatus = 'Processing';
-    $orderDiscount = $_SESSION['discount'];
+    $orderDiscount = $_POST['discount'];
+    $orderDiscount = filter_var($orderDiscount, FILTER_UNSAFE_RAW);
 
     $insert_order = $conn->prepare("INSERT INTO sp_order (orderId, userNIC, orderDiscount, orderTotal, orderStatus) VALUES(?,?,?,?,?)");
     $insert_order->execute([$uuid, $userNIC, $orderDiscount, $orderTotal, $orderStatus]);
@@ -61,7 +62,8 @@ if (isset($_POST['guest'])) {
     $_SESSION['uuid'] = $uuid;
     $orderTotal = $_SESSION['orderTotal'];
     $orderStatus = 'Processing';
-    $orderDiscount = $_SESSION['discount'];
+    $orderDiscount = $_POST['discount'];
+    $orderDiscount = filter_var($orderDiscount, FILTER_UNSAFE_RAW);
     $guestFName = $_POST['guestFName'];
     $guestFName = filter_var($guestFName, FILTER_UNSAFE_RAW);
     $guestLName = $_POST['guestLName'];
@@ -151,7 +153,7 @@ if (isset($_POST['guest'])) {
 
 </head>
 
-<body>
+<body onload="apply()">
 
 <div class="body-layout">
 <section class="flex">
@@ -182,6 +184,22 @@ if (isset($_SESSION['roleType'])) {
 
         <div class="section-one">
         <div class="section-one-container">
+
+        <div class="notify-msg">
+
+<?php
+if (isset($message)) {
+    foreach ($message as $message) {
+        echo '<span id="success" class="success-msg">' . $message . '</span>';
+    }
+}
+if (isset($error)) {
+    foreach ($error as $error) {
+        echo '<span id="error" class="error-msg">' . $error . '</span>';
+    }
+}
+?>
+        </div>
 
 <?php
 if (isset($userNIC) && ($userNIC !== null)) {
@@ -240,7 +258,8 @@ if (isset($userNIC) && ($userNIC !== null)) {
                     </tr>
                     <tr>
                         <td>
-                            <input type="hidden" name="uuid" id="uuid" value="">
+                            <input type="hidden" name="uuid" id ="uuid" value="">
+                            <input type="hidden" name="discount" id="discount" value="0">
                             <input type="submit" oncload="uniqueID()" name="submit" value="Submit">
                         </td>
                     </tr>
@@ -302,6 +321,7 @@ if (isset($userNIC) && ($userNIC !== null)) {
                         <td>
                             <input type="hidden" name="uuid" id="uuid" value="">
                             <input type="hidden" name="gid" id="gid" value="">
+                            <input type="hidden" name="discount" id="discount" value="0">
                             <input type="submit" oncload="gid()" name="guest" value="Submit">
                         </td>
                     </tr>
@@ -327,7 +347,7 @@ if (isset($userNIC) && ($userNIC !== null)) {
 
 <?php
 $show_products = $conn->prepare("SELECT products.productId, products.productName, products.productPrice, products.productImage, cart_item.cartitemId, cart_item.cartitemQty, coupon.couponCode, coupon.couponDiscount, products.productPrice*cart_item.cartitemQty as subtotal from cart_item INNER JOIN products ON cart_item.productId = products.productId INNER JOIN coupon ON coupon.couponId = products.couponId WHERE cart_item.sessionId = ? ");
-// $show_products = $conn->prepare("SELECT products.productName, products.productPrice, products.productImage, cart_item.cartitemId, cart_item.cartitemQty, products.productPrice*cart_item.cartitemQty as subtotal from cart_item INNER JOIN products ON cart_item.productId = products.productId WHERE cart_item.sessionId = ? ");
+
 $show_products->execute([$ssid]);
 
 if ($show_products->rowCount() > 0) {
@@ -357,7 +377,7 @@ if ($show_products->rowCount() > 0) {
         <form action="" method="POST">
 
         <div class="cart-coupon">
-        <p>Coupon Code&emsp;<i class="fa-solid fa-tag"></i></p>
+        <p>Coupon Code</p>
         <input type="text" class="cart-coupon-code" name="couponCode" placeholder="Enter the Code">
         <input type="submit" class="cart-coupon-btn" name="apply" value="Apply ">
         </div>
@@ -398,11 +418,10 @@ if ($show_products->rowCount() > 0) {
             if ($dbcouponCode == $couponCode) {
                 $_SESSION['couponDiscount'] = $fetch_discount['couponDiscount'];
                 $couponDiscount = $_SESSION['couponDiscount'];
-
                 ?>
         <div class="cart-discount">
 
-        <p>Discount&emsp;<i class="fa-solid fa-percent"></i><span class="coupon-saving">Coupon saving <?php echo ($couponDiscount * 100) . '% (' . $couponCode . ')' ?></span></p>
+        <p>Discount&emsp;<i class="fa-solid fa-percent"></i><span class="coupon-saving">Saving <?php echo ($couponDiscount * 100) . '%&emsp;<i class="fa-solid fa-tag"></i> ' . $couponCode ?></span></p>
         <p id="coupon-saving" class="bold"><?php
 
                 $_SESSION['discount'] = $_SESSION['subtotal'] * $couponDiscount;
@@ -411,18 +430,12 @@ if ($show_products->rowCount() > 0) {
 
         </div>
 
-        <?php } else {
-                echo '<script>alert("Enter a valid coupon")</script>';
-            }}
-
-        if ($dbcouponCode == $couponCode) {
-
-        }
-
-        ?>
+        <?php $message[] = 'Coupon added.';}}?>
 
 <?php
-}
+} else {
+        $error[] = 'Enter a valid coupon.';
+    }
 }
 ?>
         <div class="cart-delivery">
@@ -473,6 +486,14 @@ if ($show_products->rowCount() > 0) {
         function imageClicked() {
         window.open("index.php", "_self");
    	    }
+    </script>
+
+    <script>
+        function apply(){
+            let txt = document.getElementById("coupon-saving").innerText;
+            var num = txt.replace(/[^0-9]/g, '');
+            document.getElementById("discount").value = num;
+        }
     </script>
 
 </body>
