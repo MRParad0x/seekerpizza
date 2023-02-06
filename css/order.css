@@ -809,6 +809,7 @@ body{
     width: auto;
     margin: 1em;
     border-radius: 2em;
+    margin-bottom: 3em;
 }
 
 .popup-container .popup-box-four .view-order-list{

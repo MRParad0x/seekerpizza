@@ -1,5 +1,7 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+
 include 'conn.php';
 
 session_start();
@@ -22,9 +24,36 @@ if (isset($_POST['send'])) {
     $contactMessage = $_POST['contactMessage'];
     $contactMessage = filter_var($contactMessage, FILTER_UNSAFE_RAW);
 
-    $insert_contact = $conn->prepare("INSERT INTO contact (contactFName, contactSubject, contactEmail, contactMessage) VALUES(?,?,?,?)");
-    $insert_contact->execute([$contactFName, $contactSubject, $contactEmail, $contactMessage]);
-    $message[] = 'Thanks for getting in touch with us! <br/> We\'ll get back to you as soon as we can.';
+    require 'phpmailer/src/Exception.php';
+    require 'phpmailer/src/PHPMailer.php';
+    require 'phpmailer/src/SMTP.php';
+
+    $mail = new PHPMailer(true);
+
+    $mail->isSMTP(); // Set mailer to use SMTP
+    $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
+    $mail->SMTPAuth = true; // Enable SMTP authentication
+    $mail->Username = 'seekerpizzatm@gmail.com'; // SMTP username
+    $mail->Password = 'kqkvkmfhtjevpbaa'; // SMTP password
+    $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
+    $mail->Port = 587; // TCP port to connect to
+
+    $mail->setFrom($contactEmail);
+    $mail->addAddress('seekerpizzatm@gmail.com'); // Add a recipient
+    $mail->addReplyTo($contactEmail, $contactFName);
+    $mail->isHTML(true); // Set email format to HTML
+
+    $mail->Subject = $contactSubject;
+    $mail->Body = $contactMessage;
+
+    if (!$mail->send()) {
+        $error1[] = 'Message could not be sent.';
+        $error2[] = 'Mailer Error: ' . $mail->ErrorInfo;
+    } else {
+        $insert_contact = $conn->prepare("INSERT INTO contact (contactFName, contactSubject, contactEmail, contactMessage) VALUES(?,?,?,?)");
+        $insert_contact->execute([$contactFName, $contactSubject, $contactEmail, $contactMessage]);
+        $sent[] = 'Thanks for getting in touch with us! <br/> We\'ll get back to you as soon as we can.';
+    }
 }
 
 ?>
@@ -116,13 +145,19 @@ if (isset($_POST['send'])) {
 
 <div>
     <?php
-if (isset($message)) {
-    foreach ($message as $message) {
-        echo '<span id="success" class="success-msg">' . $message . '</span>';
+if (isset($sent)) {
+    foreach ((array) $sent as $sent) {
+        echo '<span id="success" class="success-msg">' . $sent . '</span>';
     }
-    ;
+} else if (isset($error1)) {
+    foreach ((array) $error1 as $error1) {
+        echo '<span id="error1" class=".error-msg">' . $error1 . '</span>';
+    }
+} else if (isset($error2)) {
+    foreach ((array) $error2 as $error2) {
+        echo '<span id="error2" class=".error-msg">' . $error2 . '</span>';
+    }
 }
-    ;
     echo "<button class=\"feedback-go-back-button\" onclick=\"location.href='/index.php';\"><i class=\"fa-solid fa-circle-chevron-left\"></i>&nbsp;&nbsp;Go Home</button>";
 }
 ?>

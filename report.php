@@ -155,7 +155,7 @@ if (isset($_SESSION['reportType']) && ($_SESSION['reportType'] !== "Total Earnin
                     <td>Grand Total</td>
                     <td></td>
                     <td><?=$fetch_orders['total_qunatity'];?></td>
-                    <td><?=$fetch_orders['total_revenue'];?></td>
+                    <td><?=$fetch_orders['total_revenue'];?> LKR</td>
                 </tr>
             </table>
     <?php }?>

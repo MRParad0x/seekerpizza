@@ -2,8 +2,8 @@
 
 <div class="notify-msg">
 
-<?php 
-    if (isset($message)) {
+<?php
+if (isset($message)) {
     foreach ($message as $message) {
         echo '<span id="message" class="success-msg">' . $message . '</span>';
     }
@@ -26,9 +26,9 @@
             <a onclick="clickMenu(event)" class='target' href="/#services">Services</a>
             <a id="activecontact" onclick="clickMenu(event)" class='target' href="/contact.php">Contact</a>
             <?php
-                if (!isset($_SESSION['roleType'])) { ?>
+if (!isset($_SESSION['roleType'])) {?>
             <a id="activelogin" onclick="clickMenu(event)" class='target' href="/login.php">Login</a>
-            <?php } ?>
+            <?php }?>
         </nav>
 
 <?php
@@ -50,15 +50,27 @@ if ($host == 'index.php') {
 
 <?php
 if (isset($_SESSION['roleType'])) {
-    echo "<div id=\"user-btn\" class=\"fa-solid fa-user\"><span class=\"user-name\">Hi ";
-    echo $_SESSION['userFName'];
-    echo ",</span></div>";
-}
-?>
+        echo "<div id=\"user-btn\" class=\"fa-solid fa-user\"><span class=\"user-name\">Hi ";
+        echo $_SESSION['userFName'];
+        echo ",</span></div>";
+    }
+    ?>
 
   <div class="dropdown-menu">
-    <a href="/userdashboard.php"><i class="fa-solid fa-gauge"></i>&nbsp;Dashboard</a>
-    <a href="/userorder.php"><i class="fa-solid fa-pizza-slice"></i>&nbsp;Orders</a>
+
+    <?php
+if ($_SESSION['roleType'] == 'Admin') {
+        echo "<a href='/dashboard.php'><i class='fa-solid fa-gauge'></i>&nbsp;Dashboard</a>";
+        echo "<a href='/order.php'><i class='fa-solid fa-pizza-slice'></i>&nbsp;Orders</a>";
+    } else if ($_SESSION['roleType'] == 'Customer') {
+        echo "<a href='/userdashboard.php'><i class='fa-solid fa-gauge'></i>&nbsp;Dashboard</a>";
+        echo "<a href='/userorder.php'><i class='fa-solid fa-pizza-slice'></i>&nbsp;Orders</a>";
+    } else if ($_SESSION['roleType'] == 'Manager') {
+        echo "<a href='/dashboard.php'><i class='fa-solid fa-gauge'></i>&nbsp;Dashboard</a>";
+    } else {
+        echo "<a href='/order.php'><i class='fa-solid fa-pizza-slice'></i>&nbsp;Orders</a>";
+    }
+    ?>
     <a href="/profilesetting.php"><i class="fa-solid fa-gear"></i>&nbsp;Profile</a>
     <a href="/logout.php"><i class="fa-solid fa-right-from-bracket"></i>&nbsp;Logout</a>
   </div>

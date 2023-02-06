@@ -380,10 +380,6 @@ body{
     padding: 1em;
 }
 
-.order-list-container .grand-total-table tr{
-    background-color: #FF4069;
-}
-
 .order-list-container .grand-total-table td{
     border: none;
     color: #ffffff;
@@ -402,11 +398,15 @@ body{
     width: 100%;
 }
 
-.order-list-container .grand-total-table td:nth-child(1){
+.order-list-container .grand-total-table tbody tr td{
+    background-color: #FF4069;
+}
+
+.order-list-container .grand-total-table tbody td:nth-child(1){
     border-radius: 1.5rem 0 0 1.5rem;
 }
 
-.order-list-container .grand-total-table td:nth-last-child(1) {
+.order-list-container .grand-total-table tbody td:nth-last-child(1) {
 	border-radius: 0 1.5rem 1.5rem 0;
 }
 

@@ -330,6 +330,10 @@ section{
     width:40%;
 }
 
+.form{
+    margin-top: 4em;
+}
+
 .form-container .content .content-container{
     width: auto;
     background-color: rgba(17, 17, 17, 0.657);
@@ -412,6 +416,22 @@ section{
     border: 3px solid #FF4069;
 }
 
+.error-msg{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+    display: block;
+    background: #FF4069;
+    color:#fff;
+    border-radius: 1em;
+    font-family: var(--header-menu-font-style);
+    font-size: 0.8rem;
+    font-weight: 700;
+    width: 465px;
+    padding: 0.8em;
+    text-align: center;
+}
+
 .success-msg{
     margin-left: auto;
     margin-right: auto;
@@ -421,11 +441,28 @@ section{
     color:#fff;
     border-radius: 1em;
     font-family: var(--header-menu-font-style);
-    font-size: 1em;
+    font-size: 0.8rem;
     font-weight: 700;
     width: 465px;
     padding: 0.8em;
     text-align: center;
 }
+
+/* #success,
+#error{
+    -webkit-animation: cssAnimation 5s forwards; 
+    animation: cssAnimation 5s forwards;
+}
+
+@keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
+}
+@-webkit-keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
+} */
 
 /* End Form */
