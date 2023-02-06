@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2023 at 08:16 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Feb 06, 2023 at 10:32 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,7 +34,7 @@ CREATE TABLE `cart_item` (
   `productId` varchar(10) NOT NULL,
   `cartitemQty` int(11) NOT NULL,
   `cartitemDate` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `cart_item`
@@ -50,10 +50,14 @@ INSERT INTO `cart_item` (`Id`, `cartitemId`, `sessionId`, `productId`, `cartitem
 (308, 'CII-0308', 'fger5tk3ag1k1v3gcpr649e4tq', 'PR-0015', 2, '2022-12-28'),
 (309, 'CII-0309', 'fger5tk3ag1k1v3gcpr649e4tq', 'PR-0016', 3, '2022-12-28'),
 (310, 'CII-0310', 'fger5tk3ag1k1v3gcpr649e4tq', 'PR-0018', 4, '2022-12-28'),
-(316, 'CII-0316', 'p1ai4dfgoin8e35nhfd70b3tfg', 'PR-0015', 1, '2023-01-27'),
-(317, 'CII-0317', 'p1ai4dfgoin8e35nhfd70b3tfg', 'PR-0024', 1, '2023-01-27'),
-(349, 'CII-0349', 'qp8hra0em039k8iuurb0uvumg0', 'PR-0010', 1, '2023-01-30'),
-(350, 'CII-0350', 'qp8hra0em039k8iuurb0uvumg0', 'PR-0015', 1, '2023-01-30');
+(345, 'CII-0345', '907nkvmvnhnhilur9crcth6lmp', 'PR-0011', 1, '2023-02-01'),
+(346, 'CII-0346', '907nkvmvnhnhilur9crcth6lmp', 'PR-0022', 1, '2023-02-01'),
+(348, 'CII-0348', 'pb2ncgpl9hfsrloq0uvk94d8p0', 'PR-0015', 1, '2023-02-02'),
+(378, 'CII-0378', 'b00pm7t75huqrf12k3f6rdigog', 'PR-0024', 1, '2023-02-03'),
+(379, 'CII-0379', 'b00pm7t75huqrf12k3f6rdigog', 'PR-0016', 1, '2023-02-03'),
+(382, 'CII-0382', 'o3p91vth4h440sh0v8fqjlcr2t', 'PR-0022', 1, '2023-02-04'),
+(383, 'CII-0383', 'o3p91vth4h440sh0v8fqjlcr2t', 'PR-0011', 1, '2023-02-04'),
+(384, 'CII-0384', 'ei5fse4v7mfcgehpd1hgcs039t', 'PR-0024', 1, '2023-02-06');
 
 --
 -- Triggers `cart_item`
@@ -77,7 +81,7 @@ CREATE TABLE `category` (
   `categoryId` varchar(10) NOT NULL,
   `categoryName` varchar(50) NOT NULL,
   `categoryDate` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `category`
@@ -114,7 +118,7 @@ CREATE TABLE `contact` (
   `contactEmail` varchar(100) NOT NULL,
   `contactMessage` longtext NOT NULL,
   `contactDate` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `contact`
@@ -148,7 +152,7 @@ CREATE TABLE `coupon` (
   `couponCode` varchar(100) NOT NULL,
   `couponDiscount` double NOT NULL,
   `couponDate` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `coupon`
@@ -185,7 +189,7 @@ CREATE TABLE `feedback` (
   `feedbackEmail` varchar(50) NOT NULL,
   `feedbackMessage` longtext NOT NULL,
   `feedbackDate` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `feedback`
@@ -198,8 +202,7 @@ INSERT INTO `feedback` (`id`, `feedbackId`, `feedbackFName`, `feedbackEmail`, `f
 (4, 'FE-0004', 'Dasun K', 'dasun@gmail.com', 'nice clean fresh food!', '2022-12-27'),
 (5, 'FE-0005', 'Kelum H', 'kemlum@aol.com', 'Great pizza!', '2022-12-27'),
 (6, 'FE-0006', 'Nimali H', 'nimali@yandex.com', 'fresh & clean foods!', '2022-12-27'),
-(7, 'FE-0007', 'Bimali K', 'bimali@gmail.com', 'Great yummy meals!', '2022-12-27'),
-(8, 'FE-0008', 'Test', 'test1234@gmail.com', 'Great Value!', '2023-01-30');
+(7, 'FE-0007', 'Bimali K', 'bimali@gmail.com', 'Great yummy meals!', '2022-12-27');
 
 --
 -- Triggers `feedback`
@@ -229,14 +232,18 @@ CREATE TABLE `guest` (
   `guestPostalCode` int(11) NOT NULL,
   `guestNumber` int(10) NOT NULL,
   `guestDate` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `guest`
 --
 
 INSERT INTO `guest` (`guestId`, `guestNIC`, `guestEmail`, `guestFName`, `guestLName`, `guestAddress`, `guestCity`, `guestPostalCode`, `guestNumber`, `guestDate`) VALUES
-(6, 'GID-04e3e2ce', 'test@gmail.com', 'test', 'name', 'test', 'test', 10640, 771233243, '2022-12-24');
+(6, 'GID-04e3e2ce', 'test@gmail.com', 'test', 'name', 'test', 'test', 10640, 771233243, '2022-12-24'),
+(7, 'GID-d87c4af8', 'guest12@gmail.com', 'Guest', 'H', '11B', 'Moratuwa', 10560, 771233345, '2023-02-03'),
+(8, 'GID-b40961a8', 'gust32@gmail.com', 'Guest', 'Sanath', 'e33', 'Kaduwela', 11560, 771233345, '2023-02-03'),
+(9, 'GID-baca508d', 'guest20@gmail.com', 'Guest', 'Kemal', 't55', 'Kandy', 9908, 771233243, '2023-02-03'),
+(10, 'GID-cfc8c496', 'guest33@gmail.com', 'Guest', 'Udara', 'T67', 'Galle', 8932, 771233377, '2023-02-03');
 
 -- --------------------------------------------------------
 
@@ -246,7 +253,7 @@ INSERT INTO `guest` (`guestId`, `guestNIC`, `guestEmail`, `guestFName`, `guestLN
 
 CREATE TABLE `id_cart_item` (
   `Id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_cart_item`
@@ -598,7 +605,41 @@ INSERT INTO `id_cart_item` (`Id`) VALUES
 (347),
 (348),
 (349),
-(350);
+(350),
+(351),
+(352),
+(353),
+(354),
+(355),
+(356),
+(357),
+(358),
+(359),
+(360),
+(361),
+(362),
+(363),
+(364),
+(365),
+(366),
+(367),
+(368),
+(369),
+(370),
+(371),
+(372),
+(373),
+(374),
+(375),
+(376),
+(377),
+(378),
+(379),
+(380),
+(381),
+(382),
+(383),
+(384);
 
 -- --------------------------------------------------------
 
@@ -608,7 +649,7 @@ INSERT INTO `id_cart_item` (`Id`) VALUES
 
 CREATE TABLE `id_category` (
   `id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_category`
@@ -618,7 +659,8 @@ INSERT INTO `id_category` (`id`) VALUES
 (1),
 (2),
 (3),
-(4);
+(4),
+(5);
 
 -- --------------------------------------------------------
 
@@ -628,7 +670,7 @@ INSERT INTO `id_category` (`id`) VALUES
 
 CREATE TABLE `id_contact` (
   `id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_contact`
@@ -647,7 +689,7 @@ INSERT INTO `id_contact` (`id`) VALUES
 
 CREATE TABLE `id_coupon` (
   `id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_coupon`
@@ -668,7 +710,7 @@ INSERT INTO `id_coupon` (`id`) VALUES
 
 CREATE TABLE `id_feedback` (
   `id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_feedback`
@@ -681,8 +723,7 @@ INSERT INTO `id_feedback` (`id`) VALUES
 (4),
 (5),
 (6),
-(7),
-(8);
+(7);
 
 -- --------------------------------------------------------
 
@@ -692,7 +733,7 @@ INSERT INTO `id_feedback` (`id`) VALUES
 
 CREATE TABLE `id_order` (
   `Id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_order`
@@ -713,7 +754,7 @@ INSERT INTO `id_order` (`Id`) VALUES
 
 CREATE TABLE `id_order_items` (
   `id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_order_items`
@@ -848,7 +889,32 @@ INSERT INTO `id_order_items` (`id`) VALUES
 (134),
 (135),
 (136),
-(137);
+(137),
+(138),
+(139),
+(140),
+(141),
+(142),
+(143),
+(144),
+(145),
+(146),
+(147),
+(148),
+(149),
+(150),
+(151),
+(152),
+(153),
+(154),
+(155),
+(156),
+(157),
+(158),
+(159),
+(160),
+(161),
+(162);
 
 -- --------------------------------------------------------
 
@@ -858,7 +924,7 @@ INSERT INTO `id_order_items` (`id`) VALUES
 
 CREATE TABLE `id_product` (
   `id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_product`
@@ -895,7 +961,7 @@ INSERT INTO `id_product` (`id`) VALUES
 
 CREATE TABLE `id_role` (
   `id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_role`
@@ -906,7 +972,8 @@ INSERT INTO `id_role` (`id`) VALUES
 (2),
 (3),
 (4),
-(5);
+(5),
+(6);
 
 -- --------------------------------------------------------
 
@@ -916,7 +983,7 @@ INSERT INTO `id_role` (`id`) VALUES
 
 CREATE TABLE `id_shopping_session` (
   `Id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_shopping_session`
@@ -938,7 +1005,7 @@ INSERT INTO `id_shopping_session` (`Id`) VALUES
 
 CREATE TABLE `id_subscriber` (
   `id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `id_subscriber`
@@ -949,15 +1016,7 @@ INSERT INTO `id_subscriber` (`id`) VALUES
 (2),
 (3),
 (4),
-(5),
-(6),
-(7),
-(8),
-(9),
-(10),
-(11),
-(12),
-(13);
+(5);
 
 -- --------------------------------------------------------
 
@@ -973,7 +1032,7 @@ CREATE TABLE `order_items` (
   `orderitemsQty` int(11) NOT NULL,
   `orderitemsTotal` int(11) NOT NULL,
   `orderitemsDate` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `order_items`
@@ -998,13 +1057,38 @@ INSERT INTO `order_items` (`Id`, `orderitemsId`, `orderId`, `productId`, `orderi
 (126, 'OII-0128', 'OID-60487a98', 'PR-0022', 1, 500, '2022-12-28'),
 (127, 'OII-0129', 'OID-56789161', 'PR-0025', 1, 3000, '2022-12-28'),
 (128, 'OII-0130', 'OID-56789161', 'PR-0015', 1, 1300, '2022-12-28'),
-(129, 'OII-0131', 'OID-aa8824d9', 'PR-0010', 1, 2000, '2023-01-26'),
-(130, 'OII-0132', 'OID-aa8824d9', 'PR-0020', 1, 1500, '2023-01-26'),
-(131, 'OII-0133', 'OID-aa8824d9', 'PR-0021', 1, 500, '2023-01-26'),
-(132, 'OII-0134', 'OID-aa8824d9', 'PR-0022', 1, 500, '2023-01-26'),
-(133, 'OII-0135', 'OID-aa8824d9', 'PR-0024', 1, 2000, '2023-01-26'),
-(134, 'OII-0136', 'OID-ed845a09', 'PR-0024', 2, 4000, '2023-01-30'),
-(135, 'OII-0137', 'OID-ed845a09', 'PR-0023', 2, 2600, '2023-01-30');
+(129, 'OII-0131', 'OID-1b179dd8', 'PR-0024', 1, 2000, '2023-02-02'),
+(130, 'OII-0132', 'OID-a198a46c', 'PR-0010', 1, 2000, '2023-02-03'),
+(131, 'OII-0133', 'OID-a198a46c', 'PR-0020', 1, 1500, '2023-02-03'),
+(132, 'OII-0134', 'OID-a198a46c', 'PR-0022', 1, 500, '2023-02-03'),
+(133, 'OII-0135', 'OID-a198a46c', 'PR-0021', 1, 500, '2023-02-03'),
+(134, 'OII-0136', 'OID-a588b368', 'PR-0011', 1, 3000, '2023-02-03'),
+(135, 'OII-0137', 'OID-a588b368', 'PR-0024', 1, 2000, '2023-02-03'),
+(136, 'OII-0138', 'OID-a588b368', 'PR-0021', 1, 500, '2023-02-03'),
+(137, 'OII-0139', 'OID-a588b368', 'PR-0022', 1, 500, '2023-02-03'),
+(138, 'OII-0140', 'OID-00c87c54', 'PR-0024', 1, 2000, '2023-02-03'),
+(139, 'OII-0141', 'OID-7478554a', 'PR-0015', 1, 1300, '2023-02-03'),
+(140, 'OII-0142', 'OID-7478554a', 'PR-0024', 1, 2000, '2023-02-03'),
+(141, 'OII-0143', 'OID-7478554a', 'PR-0019', 1, 2000, '2023-02-03'),
+(142, 'OII-0144', 'OID-7478554a', 'PR-0021', 1, 500, '2023-02-03'),
+(143, 'OII-0145', 'OID-7478554a', 'PR-0022', 1, 500, '2023-02-03'),
+(144, 'OII-0146', 'OID-7478554a', 'PR-0018', 1, 1000, '2023-02-03'),
+(145, 'OII-0147', 'OID-86688398', 'PR-0024', 2, 4000, '2023-02-03'),
+(146, 'OII-0148', 'OID-86688398', 'PR-0023', 3, 3900, '2023-02-03'),
+(147, 'OII-0149', 'OID-e9be6418', 'PR-0015', 2, 2600, '2023-02-03'),
+(148, 'OII-0150', 'OID-a9be9aa9', 'PR-0015', 2, 2600, '2023-02-03'),
+(149, 'OII-0151', 'OID-a9be9aa9', 'PR-0024', 2, 4000, '2023-02-03'),
+(150, 'OII-0152', 'OID-a9be9aa9', 'PR-0023', 1, 1300, '2023-02-03'),
+(151, 'OII-0153', 'OID-a9be9aa9', 'PR-0020', 2, 3000, '2023-02-03'),
+(152, 'OII-0154', 'OID-a9be9aa9', 'PR-0021', 1, 500, '2023-02-03'),
+(153, 'OII-0155', 'OID-a9be9aa9', 'PR-0022', 1, 500, '2023-02-03'),
+(154, 'OII-0156', 'OID-0aff8898', 'PR-0015', 2, 2600, '2023-02-03'),
+(155, 'OII-0157', 'OID-5248acc8', 'PR-0015', 1, 1300, '2023-02-03'),
+(156, 'OII-0158', 'OID-03b86ec2', 'PR-0025', 2, 6000, '2023-02-03'),
+(157, 'OII-0159', 'OID-84081288', 'PR-0011', 1, 3000, '2023-02-03'),
+(158, 'OII-0160', 'OID-84081288', 'PR-0024', 1, 2000, '2023-02-03'),
+(159, 'OII-0161', 'OID-6125fc97', 'PR-0015', 1, 1300, '2023-02-04'),
+(160, 'OII-0162', 'OID-6125fc97', 'PR-0011', 1, 3000, '2023-02-04');
 
 --
 -- Triggers `order_items`
@@ -1033,7 +1117,7 @@ CREATE TABLE `products` (
   `categoryId` varchar(10) NOT NULL,
   `couponId` varchar(10) NOT NULL,
   `productDate` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
@@ -1075,7 +1159,7 @@ CREATE TABLE `role` (
   `roleId` varchar(10) NOT NULL,
   `roleType` varchar(20) NOT NULL,
   `roleDate` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `role`
@@ -1086,7 +1170,7 @@ INSERT INTO `role` (`id`, `roleId`, `roleType`, `roleDate`) VALUES
 (2, 'RO-0002', 'Manager', '2022-12-24'),
 (3, 'RO-0003', 'Cashier', '2022-12-24'),
 (4, 'RO-0004', 'Customer', '2022-12-24'),
-(5, 'RO-0005', 'test', '2022-12-24');
+(5, 'RO-0005', 'test1', '2022-12-24');
 
 --
 -- Triggers `role`
@@ -1109,7 +1193,7 @@ CREATE TABLE `shopping_session` (
   `ssId` varchar(50) NOT NULL,
   `userNIC` varchar(50) DEFAULT NULL,
   `ssDate` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `shopping_session`
@@ -1118,10 +1202,13 @@ CREATE TABLE `shopping_session` (
 INSERT INTO `shopping_session` (`ssId`, `userNIC`, `ssDate`) VALUES
 ('25k1aaq5aqcvq3qcfusjqatbu6', NULL, '2022-12-19'),
 ('2gb8i6uomghhglfoeedndnguqj', NULL, '2022-12-27'),
+('907nkvmvnhnhilur9crcth6lmp', NULL, '2023-02-01'),
+('b00pm7t75huqrf12k3f6rdigog', NULL, '2023-02-03'),
+('ei5fse4v7mfcgehpd1hgcs039t', NULL, '2023-02-06'),
 ('fger5tk3ag1k1v3gcpr649e4tq', NULL, '2022-12-28'),
-('p1ai4dfgoin8e35nhfd70b3tfg', NULL, '2023-01-27'),
-('pidg4e1dkbocn3c3ctt7vcoata', NULL, '2022-12-25'),
-('qp8hra0em039k8iuurb0uvumg0', NULL, '2023-01-30');
+('o3p91vth4h440sh0v8fqjlcr2t', NULL, '2023-02-04'),
+('pb2ncgpl9hfsrloq0uvk94d8p0', NULL, '2023-02-02'),
+('pidg4e1dkbocn3c3ctt7vcoata', NULL, '2022-12-25');
 
 -- --------------------------------------------------------
 
@@ -1137,22 +1224,33 @@ CREATE TABLE `sp_order` (
   `orderTotal` double NOT NULL,
   `orderStatus` varchar(50) NOT NULL,
   `orderDate` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sp_order`
 --
 
 INSERT INTO `sp_order` (`orderId`, `userNIC`, `guestNIC`, `orderDiscount`, `orderTotal`, `orderStatus`, `orderDate`) VALUES
-('OID-1fd8b348', '202525238V', NULL, 0, 4125, 'Ready', '2022-12-28'),
+('OID-00c87c54', '202525238V', NULL, 400, 1600, 'Processing', '2023-02-03'),
+('OID-03b86ec2', NULL, 'GID-baca508d', 1200, 4800, 'Processing', '2023-02-03'),
+('OID-0aff8898', NULL, 'GID-d87c4af8', 0, 2600, 'Processing', '2023-02-03'),
+('OID-1b179dd8', '202525238V', NULL, 0, 2000, 'Processing', '2023-02-02'),
+('OID-1fd8b348', '202525238V', NULL, 0, 4125, 'Completed', '2022-12-28'),
 ('OID-3d0dc956', '202525238V', NULL, 0, 1840, 'Cancelled', '2022-12-24'),
-('OID-56789161', '202516238V', NULL, 0, 4300, 'Completed', '2022-12-28'),
+('OID-5248acc8', NULL, 'GID-b40961a8', 0, 1040, 'Processing', '2023-02-03'),
+('OID-56789161', '202516238V', NULL, 0, 4300, 'Refunded', '2022-12-28'),
 ('OID-5d08eef8', '202525238V', NULL, 0, 6000, 'Processing', '2022-12-27'),
 ('OID-60487a98', '202516238V', NULL, 0, 6000, 'Preparing', '2022-12-28'),
+('OID-6125fc97', '202525238V', NULL, 0, 4300, 'Processing', '2023-02-04'),
+('OID-7478554a', '202525238V', NULL, 1460, 5840, 'Processing', '2023-02-03'),
+('OID-84081288', NULL, 'GID-cfc8c496', 1000, 4000, 'Processing', '2023-02-03'),
+('OID-86688398', '202525238V', NULL, 0, 7900, 'Processing', '2023-02-03'),
 ('OID-a026acb8', '202525238V', NULL, 0, 1040, 'Completed', '2022-12-22'),
-('OID-aa8824d9', '202525238V', NULL, 0, 6500, 'Refunded', '2023-01-26'),
+('OID-a198a46c', '202525238V', NULL, 0, 3600, 'Processing', '2023-02-03'),
+('OID-a588b368', '202525238V', NULL, 0, 4500, 'Processing', '2023-02-03'),
+('OID-a9be9aa9', '202525238V', NULL, 2380, 9520, 'Processing', '2023-02-03'),
 ('OID-bb1ebc88', NULL, 'GID-04e3e2ce', 0, 1500, 'Processing', '2022-12-19'),
-('OID-ed845a09', '202525238V', NULL, 0, 6600, 'Processing', '2023-01-30');
+('OID-e9be6418', '202525238V', NULL, 520, 2080, 'Processing', '2023-02-03');
 
 -- --------------------------------------------------------
 
@@ -1166,7 +1264,7 @@ CREATE TABLE `subscriber` (
   `subscriberName` varchar(50) NOT NULL,
   `subscriberEmail` varchar(100) NOT NULL,
   `subscriberDate` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `subscriber`
@@ -1175,17 +1273,9 @@ CREATE TABLE `subscriber` (
 INSERT INTO `subscriber` (`id`, `subscriberId`, `subscriberName`, `subscriberEmail`, `subscriberDate`) VALUES
 (1, 'SU-0001', 'nimal', 'nimal@gmail.com', '2022-12-24'),
 (2, 'SU-0002', 'amal', 'amal@gmail.com', '2022-12-24'),
-(3, 'SU-0003', 'amila S', 'amilas@gmail.com', '2023-01-30'),
-(4, 'SU-0004', 'Deshan K', 'Deshank@gmail.com', '2023-01-30'),
-(5, 'SU-0005', 'Ranga Q', 'ranga@q.cc', '2023-01-30'),
-(6, 'SU-0006', 'Achala K', 'achala@gg.cc', '2023-01-30'),
-(7, 'SU-0007', 'Bimal S', 'bimal@qq.cc', '2023-01-30'),
-(8, 'SU-0008', 'Supun H', 'supun@gmail.com', '2023-01-30'),
-(9, 'SU-0009', 'Ravi K', 'ravi@jj.cc', '2023-01-30'),
-(10, 'SU-0010', 'Kema L', 'kema@gg.cc', '2023-01-30'),
-(11, 'SU-0011', 'lal D', 'lal@gg.cc', '2023-01-30'),
-(12, 'SU-0012', 'Rozan L', 'rozan@gg.cc', '2023-01-30'),
-(13, 'SU-0013', 'John G', 'john@gg.cc', '2023-01-30');
+(3, 'SU-0003', 'Nisha A', 'nish@gg.cc', '2023-02-01'),
+(4, 'SU-0004', 'Vishwa A', 'vish@gg.cc', '2023-02-01'),
+(5, 'SU-0005', 'Tesla F', 'tesla@gg.cc', '2023-02-01');
 
 --
 -- Triggers `subscriber`
@@ -1217,7 +1307,7 @@ CREATE TABLE `user` (
   `userPostalCode` int(10) NOT NULL,
   `roleId` varchar(10) NOT NULL,
   `userDate` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
@@ -1231,7 +1321,8 @@ INSERT INTO `user` (`userNIC`, `userName`, `userPassword`, `userFName`, `userLNa
 ('202256278V', 'nethmi', '12345678', 'Nethmi', 'de silva', 'nethmi@gmail.com', 778523651, 'Dehiwala', '', 0, 'RO-0002', '2022-12-24'),
 ('202516238V', 'customer', '12345678', 'Amal', 'Perera', 'customer@gmail.com', 775236982, 'Kaduwela', 'Kaduwela', 10640, 'RO-0004', '2022-12-24'),
 ('202522238V', 'manager', '12345678', 'Thushan', 'Pereraa', 'manager@gmail.com', 772563489, 'Colombo 04', '', 0, 'RO-0002', '2022-12-24'),
-('202525238V', 'admin', 'Lahiru22', 'Lahiru', 'Chinthana', 'lahiru@gmail.com', 785295963, '11/2, Pittugala road', 'Malabe', 10640, 'RO-0001', '2022-12-24'),
+('202525238V', 'admin', '19930908', 'Lahiru', 'Chinthana', 'lahiru@gmail.com', 785295963, '11/2, Pittugala road', 'Malabe', 10640, 'RO-0001', '2022-12-24'),
+('202525244V', 'saman', '12345678', 'Saman', 'K', 'saman@gmail.com', 778956390, 'Kaluthara', '', 0, 'RO-0004', '2023-02-02'),
 ('9311314V', 'wafwaf', '12345678', 'awfwaf', 'awfwa', 'wafwa@gmail.com', 785263256, 'fgawfwaf', '', 0, 'RO-0004', '2022-12-24'),
 ('982545632V', 'cashier', '12345678', 'Super', 'Man', 'cashier@gmail.com', 778526325, 'Galle', '', 0, 'RO-0003', '2022-12-24');
 
@@ -1412,13 +1503,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=351;
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=385;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `contact`
@@ -1436,25 +1527,25 @@ ALTER TABLE `coupon`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `guest`
 --
 ALTER TABLE `guest`
-  MODIFY `guestId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `guestId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `id_cart_item`
 --
 ALTER TABLE `id_cart_item`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=351;
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=385;
 
 --
 -- AUTO_INCREMENT for table `id_category`
 --
 ALTER TABLE `id_category`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `id_contact`
@@ -1472,7 +1563,7 @@ ALTER TABLE `id_coupon`
 -- AUTO_INCREMENT for table `id_feedback`
 --
 ALTER TABLE `id_feedback`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `id_order`
@@ -1484,7 +1575,7 @@ ALTER TABLE `id_order`
 -- AUTO_INCREMENT for table `id_order_items`
 --
 ALTER TABLE `id_order_items`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- AUTO_INCREMENT for table `id_product`
@@ -1496,7 +1587,7 @@ ALTER TABLE `id_product`
 -- AUTO_INCREMENT for table `id_role`
 --
 ALTER TABLE `id_role`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `id_shopping_session`
@@ -1508,13 +1599,13 @@ ALTER TABLE `id_shopping_session`
 -- AUTO_INCREMENT for table `id_subscriber`
 --
 ALTER TABLE `id_subscriber`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -1526,13 +1617,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `subscriber`
 --
 ALTER TABLE `subscriber`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
