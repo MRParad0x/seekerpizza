@@ -29,7 +29,8 @@ body{
     flex-direction: row;
     width: auto;
     /* order:2; */
-    margin: 0.5em 2em 0 0;
+    margin: 2em;
+    /* margin: 0.5em 2em 0 0; */
 }
 
 .flexbox .box-one{
@@ -37,14 +38,14 @@ body{
     justify-content: space-between;
     flex-direction: column;
     margin: 1em 0;
-    align-items: center;
+    align-items: left;
     width: 200px;
-    height: 95vh;
+    height: auto;
 }
 
 .flexbox .box-one img{
     display: block;
-    margin-left: auto;
+    /* margin-left: auto; */
     margin-bottom: 1em;
     width: 80%;
 }
@@ -275,7 +276,7 @@ body{
 
 .main .main-container .flexbox-one .dashboard-welcome{
     width: auto;
-    height: auto;
+    height: 100px;
     color: #ffffff;
     font-family: var(--header-menu-font-style);
     margin-bottom: 2em;
@@ -292,22 +293,21 @@ body{
     margin:0;
 }
 
-.main .main-container .flexbox-one .bar-chart-div,
-.main .main-container .flexbox-two .Total-box-container{
+.main .main-container .flexbox-one .Total{
     width: auto;
     height: auto;
-    margin-bottom: 2em;
-}
+} 
 
 .main .main-container .flexbox-one .bar-chart-div .bar-chart-container{
     width: auto;
-    height: auto;
     text-align: center;
     background-color: #353341;
     border-radius: 1em;
     font-family: var(--header-menu-font-style);
     color: #ffffff;
     padding: 25px;
+    margin-bottom: 2em;
+    margin-top: 2em;
 }
 
 .main .main-container .flexbox-one .bar-chart-div .bar-chart-container h3{
@@ -316,16 +316,24 @@ body{
 
 .main .main-container .flexbox-two .chart-container{
     display: flex;
-    position: relative;
     width: auto;
     height: auto;
 }
 
-.main .main-container .flexbox-one .Total-box-container,
-.main .main-container .flexbox-two .Total-box-container{
+.main .main-container .flexbox-one .Total-box-container{
     display: flex;
     width: auto;
     height: auto;
+}
+
+.main .main-container .flexbox-two .Total-box-container{
+    display: flex;
+    width: auto;
+    height: 100px;
+}
+
+.main .main-container .flexbox-two .Total-box-container{
+    margin-bottom: 2em;
 }
 
 .main .main-container .flexbox-one .Total-box{
@@ -336,7 +344,6 @@ body{
     align-items: center;
     margin-right: 2em;
     margin-bottom: 2em;
-    height: 102px;
 }
 
 .main .main-container .flexbox-two .Total-box{
@@ -346,6 +353,7 @@ body{
     width: 50%;
     align-items: center;
     margin-right: 2em;
+    padding: 0.5em;
 }
 
 .main .main-container .flexbox-one .Total-box:nth-child(2),
@@ -366,9 +374,15 @@ body{
     width: 65px;
     margin: auto;
     padding: 2px;
-    margin-left: 1em;
-    margin-right: 2em;
     opacity: 0.8;
+}
+
+.main .main-container .flexbox-one .Total-box img{
+    margin: 1em;
+}
+
+.main .main-container .flexbox-two .Total-box img{
+    margin-right: 1em;
 }
 
 .main .main-container .flexbox-one .Total-box .content,
@@ -379,14 +393,14 @@ body{
 
 .main .main-container .flexbox-one .Total-box .content .orderNo,
 .main .main-container .flexbox-two .Total-box .content .orderNo{
-    font-size: 2em;
+    font-size: 1.5em;
     color: #ffffff;
     font-weight: 700;
 }
 
 .main .main-container .flexbox-one .Total-box .content p,
 .main .main-container .flexbox-two .Total-box .content p{
-    font-size: 1em;
+    font-size: 0.8em;
     color: #ffffffab;
     margin:0;
 }
@@ -408,15 +422,14 @@ body{
 }
 
 .main .main-container .flexbox-two .bar-chart-div .bar-chart-container{
-    margin-top: 2em;
     width: auto;
-    height: auto;
     text-align: center;
     background-color: #353341;
     border-radius: 1em;
     font-family: var(--header-menu-font-style);
     color: #ffffff;
     padding: 19px;
+    margin-bottom: 2em;
 }
 
 .main .main-container .flexbox-two .bar-chart-div .bar-chart-container h3,
@@ -589,5 +602,5 @@ body{
 
 canvas{
     width:100% !important;
-    height:auto !important;
+    height:100%!important;
 }

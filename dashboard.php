@@ -58,6 +58,84 @@ if (!isset($_SESSION['roleType'])) {
 
 <body>
 
+<?php
+
+$show_sandr = $conn->prepare("SELECT MONTHNAME(orderitemsDate) as month, SUM(orderitemsQty) as sales, SUM(orderitemsTotal) as revenue from order_items GROUP BY month;");
+$show_sandr->execute();
+if ($show_sandr->rowCount() > 0) {
+    while ($fetch_sandr = $show_sandr->fetch(PDO::FETCH_ASSOC)) {
+        $month[] = $fetch_sandr['month'];
+        $sales[] = $fetch_sandr['sales'];
+        $revenue[] = $fetch_sandr['revenue'];
+    }}
+
+$show_most_selling_product_list = $conn->prepare("SELECT p.productName as products, SUM(orderitemsQty) as quantity from order_items as o,products as p where p.productId=o.productId group by p.productName order by SUM(orderitemsQty) DESC LIMIT 5;");
+$show_most_selling_product_list->execute();
+if ($show_most_selling_product_list->rowCount() > 0) {
+    while ($fetch_most_selling_product_list = $show_most_selling_product_list->fetch(PDO::FETCH_ASSOC)) {
+        $products[] = $fetch_most_selling_product_list['products'];
+        $quantity[] = $fetch_most_selling_product_list['quantity'];
+    }}
+
+$show_total_customers = $conn->prepare("SELECT count(*) as customers from role as r, user as u where u.roleId=r.roleId and r.roleId='RO-0004' group by u.roleId;");
+$show_total_customers->execute();
+if ($show_total_customers->rowCount() > 0) {
+    while ($fetch_total_customers = $show_total_customers->fetch(PDO::FETCH_ASSOC)) {
+        $customers = $fetch_total_customers['customers'];
+    }}
+
+$show_total_subscribers = $conn->prepare("SELECT count(*) as subscribers  from  subscriber where id is not null;");
+$show_total_subscribers->execute();
+if ($show_total_subscribers->rowCount() > 0) {
+    while ($fetch_total_subscribers = $show_total_subscribers->fetch(PDO::FETCH_ASSOC)) {
+        $subscribers = $fetch_total_subscribers['subscribers'];
+    }}
+
+$show_total_products = $conn->prepare("SELECT count(productId) as products from  products where id is not null;");
+$show_total_products->execute();
+if ($show_total_products->rowCount() > 0) {
+    while ($fetch_total_products = $show_total_products->fetch(PDO::FETCH_ASSOC)) {
+        $totalproducts = $fetch_total_products['products'];
+    }}
+
+$show_total_feedbacks = $conn->prepare("SELECT count(*) as feedbacks from feedback where feedbackId is not null;");
+$show_total_feedbacks->execute();
+if ($show_total_feedbacks->rowCount() > 0) {
+    while ($fetch_total_feedbacks = $show_total_feedbacks->fetch(PDO::FETCH_ASSOC)) {
+        $feedbacks = $fetch_total_feedbacks['feedbacks'];
+    }}
+
+$show_total_sales = $conn->prepare("SELECT COUNT(orderId) as sales from  sp_order where orderId is not null;");
+$show_total_sales->execute();
+if ($show_total_sales->rowCount() > 0) {
+    while ($fetch_total_sales = $show_total_sales->fetch(PDO::FETCH_ASSOC)) {
+        $totalsales = $fetch_total_sales['sales'];
+    }}
+
+$show_total_revenue = $conn->prepare("SELECT SUM(orderitemsTotal) as revenue from order_items where orderitemsTotal is not null;");
+$show_total_revenue->execute();
+if ($show_total_revenue->rowCount() > 0) {
+    while ($fetch_total_revenue = $show_total_revenue->fetch(PDO::FETCH_ASSOC)) {
+        $revenue = $fetch_total_revenue['revenue'];
+    }}
+
+$show_total_category = $conn->prepare("SELECT c.categoryName as category, SUM(orderitemsQty) as catqty from order_items as o,products as p, category as c where p.productId=o.productId and c.categoryId=p.categoryId group by c.categoryName order by SUM(orderitemsQty) DESC;");
+$show_total_category->execute();
+if ($show_total_category->rowCount() > 0) {
+    while ($fetch_total_category = $show_total_category->fetch(PDO::FETCH_ASSOC)) {
+        $category[] = $fetch_total_category['category'];
+        $catqty[] = $fetch_total_category['catqty'];
+    }}
+
+$show_total_gandc = $conn->prepare("SELECT count(*) as gandc from role as r, user as u where u.roleId=r.roleId and r.roleId='RO-0004' group by u.roleId UNION select count(*) as guest from  guest where guestId is not null;");
+$show_total_gandc->execute();
+if ($show_total_gandc->rowCount() > 0) {
+    while ($fetch_total_gandc = $show_total_gandc->fetch(PDO::FETCH_ASSOC)) {
+        $gandc[] = $fetch_total_gandc['gandc'];
+    }}
+
+?>
+
 <!-- Start Verticle Menu -->
 
 <?php include 'menu.php'?>
@@ -104,6 +182,7 @@ if (!isset($_SESSION['roleType'])) {
 
         </div>
 
+        <div class="Total">
         <div class="Total-box-container">
 
         <div class="Total-box">
@@ -111,7 +190,7 @@ if (!isset($_SESSION['roleType'])) {
                 <img src="img/customer.svg" alt="">
             </div>
             <div class="content">
-                <p class="orderNo">2345</p>
+                <p class="orderNo"><?php echo $customers; ?></p>
                 <p>Total Customers</p>
             </div>
         </div>
@@ -121,7 +200,7 @@ if (!isset($_SESSION['roleType'])) {
                 <img src="img/subscribe.svg" alt="">
             </div>
             <div class="content">
-                <p class="orderNo">1879</p>
+                <p class="orderNo"><?php echo $subscribers; ?></p>
                 <p>Total Subscribers</p>
             </div>
         </div>
@@ -135,8 +214,8 @@ if (!isset($_SESSION['roleType'])) {
                     <img src="img/products.svg" alt="">
                 </div>
                 <div class="content">
-                    <p class="orderNo">55</p>
-                    <p>Total Products</p>
+                    <p class="orderNo"><?php echo $totalproducts; ?></p>
+                    <p>Total Foods</p>
                 </div>
             </div>
 
@@ -145,9 +224,10 @@ if (!isset($_SESSION['roleType'])) {
                 <img src="img/feedback.svg" alt="">
             </div>
             <div class="content">
-                <p class="orderNo">950</p>
+                <p class="orderNo"><?php echo $feedbacks; ?></p>
                 <p>Total Feedbacks</p>
             </div>
+        </div>
         </div>
 
 </div>
@@ -163,7 +243,7 @@ if (!isset($_SESSION['roleType'])) {
                     <img src="img/order.svg" alt="">
                 </div>
                 <div class="content">
-                    <p class="orderNo">5045</p>
+                    <p class="orderNo"><?php echo $totalsales; ?></p>
                     <p>Lifetime Sales</p>
                 </div>
             </div>
@@ -173,9 +253,20 @@ if (!isset($_SESSION['roleType'])) {
                     <img src="img/revenue.svg" alt="">
                 </div>
                 <div class="content">
-                    <p class="orderNo">145K</p>
+                    <p class="orderNo"><?php echo ($revenue / 1000) . " K"; ?></p>
                     <p>Lifetime Revenue</p>
                 </div>
+            </div>
+        </div>
+
+        <div class="bar-chart-div">
+
+            <div class="bar-chart-container">
+                    <h3>Top 05 Highest Selling Foods</h3>
+                <div class="bar-chart">
+                    <canvas id="Hbarchart"></canvas>
+                </div>
+
             </div>
         </div>
 
@@ -189,24 +280,13 @@ if (!isset($_SESSION['roleType'])) {
         </div>
 
         <div class="polar-chart-container">
-        <h3>Users</h3>
+        <h3>Customers</h3>
             <div class="polar-area">
                 <canvas id="polararea"></canvas>
             </div>
         </div>
 
         </div>
-
-        <div class="bar-chart-div">
-
-            <div class="bar-chart-container">
-                    <h3>Highest Selling Foods</h3>
-                <div class="bar-chart">
-                    <canvas id="Hbarchart"></canvas>
-                </div>
-
-            </div>
-        </div>
 </div>
 
     </div>
@@ -214,8 +294,11 @@ if (!isset($_SESSION['roleType'])) {
     </div>
 </div>
 
-    <!-- custom js file link  -->
-    <script src='js/chart.js'></script>
+    <!-- custom js file link -->
+    <!-- <script src='js/chart.js'></script> -->
+    <?php include 'chart.php';?>
+
+
 
 
 </body>

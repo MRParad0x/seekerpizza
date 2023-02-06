@@ -19,7 +19,7 @@ $userNIC = $_SESSION['userNIC'];
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <!-- custom css file link  -->
-    <link rel='stylesheet' type='text/css' media='screen' href='css/userorder.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/order.css'>
 
      <!-- favicon file link  -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">

@@ -29,7 +29,8 @@ body{
     flex-direction: row;
     width: auto;
     /* order:2; */
-    margin: 0.5em 2em 0 0;
+    /* margin: 0.5em 2em 0 0; */
+    margin: 2em;
 }
 
 .flexbox .box-one{
@@ -37,14 +38,14 @@ body{
     justify-content: space-between;
     flex-direction: column;
     margin: 1em 0;
-    align-items: center;
+    align-items: left;
     width: 200px;
-    height: 95vh;
+    height: auto;
 }
 
 .flexbox .box-one img{
     display: block;
-    margin-left: auto;
+    /* margin-left: auto; */
     margin-bottom: 1em;
     width: 80%;
 }
@@ -404,7 +405,7 @@ body{
 
 .user-list-container{
     display: block;
-    height:750px;
+    height:730px;
     overflow-y:auto;
     overflow-x:auto;
     margin: 1em 2em 1em 2em;
@@ -412,13 +413,20 @@ body{
 }
 
 .user-list-container .user-list-table{
-    width: 1600px;
+    width: 100%;
     table-layout:auto;
 	border-spacing: 0 15px;
 	border-collapse: separate;
     text-align: left;
     margin: 0;
 }
+
+@media screen and (max-width: 1500px) {
+    
+    .user-list-container .user-list-table{
+        width: 1600px;
+    }
+} 
 
 .user-list-container thead th i{
     margin: 0.5em;
@@ -702,7 +710,7 @@ body{
 .popup-box-three .pro-form input[type='password'],
 .popup-box-three .pro-form input[type='email'],
 .popup-box-one .pro-form input[type='tel']{
-    border: 3px solid rgba(255, 165, 165, 0.589);
+    border: 3px solid rgba(153, 153, 153, 0.576);
     box-shadow: rgba(255, 203, 203, 0.2) 0px 2px 8px 0px;
     outline: 0; 
     width: 220px;
@@ -717,16 +725,30 @@ body{
     font-weight: 700;
 }
 
-.popup-box-one .pro-form input[type='text']:focus,
-.popup-box-one .pro-form input[type='number']:focus,
-.popup-box-one .pro-form input[type='password']:focus,
-.popup-box-one .pro-form input[type='email']:focus,
-.popup-box-three .pro-form input[type='text']:focus,
-.popup-box-three .pro-form input[type='number']:focus,
-.popup-box-three .pro-form input[type='password']:focus,
-.popup-box-three .pro-form input[type='email']:focus{
+.popup-box-one .pro-form input[type='text']:valid,
+.popup-box-one .pro-form input[type='number']:valid,
+.popup-box-one .pro-form input[type='password']:valid,
+.popup-box-one .pro-form input[type='email']:valid,
+.popup-box-three .pro-form input[type='text']:valid,
+.popup-box-three .pro-form input[type='number']:valid,
+.popup-box-three .pro-form input[type='password']:valid,
+.popup-box-three .pro-form input[type='email']:valid
+.popup-box-one .pro-form input[type='tel']:valid{
     border: 3px solid rgba(117, 255, 93, 0.45);
     box-shadow: rgba(255, 203, 203, 0.2) 0px 2px 8px 0px;
+}
+
+.popup-box-one .pro-form input[type='text']:focus:invalid,
+.popup-box-one .pro-form input[type='number']:focus:invalid,
+.popup-box-one .pro-form input[type='password']:focus:invalid,
+.popup-box-one .pro-form input[type='email']:focus:invalid,
+.popup-box-three .pro-form input[type='text']:focus:invalid,
+.popup-box-three .pro-form input[type='number']:focus:invalid,
+.popup-box-three .pro-form input[type='password']:focus:invalid,
+.popup-box-three .pro-form input[type='email']:focus:invalid
+.popup-box-one .pro-form input[type='tel']:focus:invalid{
+    border: 3px solid #ff4069c9;
+    box-shadow: #ff406979 0px 2px 8px 0px;
 }
 
 .popup-box-one .pro-form textarea,
@@ -748,10 +770,16 @@ body{
     font-weight: 700;
 }
 
-.popup-box-one .pro-form textarea:focus,
-.popup-box-three .pro-form textarea:focus {
+.popup-box-one .pro-form textarea:valid,
+.popup-box-three .pro-form textarea:valid {
     border: 3px solid rgba(117, 255, 93, 0.45);
     box-shadow: rgba(255, 203, 203, 0.2) 0px 2px 8px 0px;
+}
+
+.popup-box-one .pro-form textarea:focus:invalid,
+.popup-box-three .pro-form textarea:focus:invalid {
+    border: 3px solid #ff4069c9;
+    box-shadow: #ff406979 0px 2px 8px 0px;
 }
 
 .popup-box-one .pro-form select,
@@ -772,10 +800,16 @@ body{
     font-weight: 700;
 }
 
-.popup-box-one .pro-form select:focus,
-.popup-box-three .pro-form select:focus {
+.popup-box-one .pro-form select:valid,
+.popup-box-three .pro-form select:valid {
     border: 3px solid rgba(117, 255, 93, 0.45);
     box-shadow: rgba(255, 203, 203, 0.2) 0px 2px 8px 0px;
+}
+
+.popup-box-one .pro-form select:focus:invalid,
+.popup-box-three .pro-form select:focus:invalid {
+    border: 3px solid #ff4069c9;
+    box-shadow: #ff406979 0px 2px 8px 0px;
 }
 
 .popup-box-one .pro-form input[type="submit"],
@@ -923,3 +957,4 @@ body{
 }
 
 /* End Pop-up box */
+

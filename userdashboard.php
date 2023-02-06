@@ -66,7 +66,7 @@ if (!isset($_SESSION['roleType'])) {
 
 <!-- Start Header -->
 
-<div class="box-two">
+<div class="box-two" style="height: 925px;">
 
     <div class="header">
     <section class="flex">

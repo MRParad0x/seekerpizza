@@ -220,7 +220,7 @@ if ($show_role->rowCount() > 0) {
     <form action="" method="post" enctype="multipart/form-data" onsubmit="submitPopup()">
         <table class="pro-form">
             <tr>
-                <td><input type="text" name="roleType" placeholder="role Name" required></td>
+                <td><input type="text" name="roleType" placeholder="Role Type" required></td>
             </tr>
             <tr>
                 <td><input type="submit" name="add_role" value="Add" ></td>

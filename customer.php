@@ -117,7 +117,7 @@ if (isset($_GET['delete'])) {
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <!-- custom css file link  -->
-    <link rel='stylesheet' type='text/css' media='screen' href='css/user.css'>
+    <link rel='stylesheet' media='screen' href='css/user.css'>
 
      <!-- favicon file link  -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
