@@ -167,6 +167,7 @@ if ($show_orders->rowCount() > 0) {
                         <th>Order_Id</th>
 						<th>Order_Date</th>
                         <th>Status</th>
+                        <th>Discount</th>
 						<th>Total</th>
                         <th>Name</th>
 						<th>Address</th>
@@ -176,7 +177,7 @@ if ($show_orders->rowCount() > 0) {
     <?php
 if (isset($_GET['vieworder'])) {
     $order_id = $_GET['vieworder'];
-    $show_user_details = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderStatus, sp_order.orderTotal, user.userFName, user.userLName, user.userAddress from sp_order INNER JOIN user ON sp_order.userNIC = user.userNIC WHERE orderId = ?");
+    $show_user_details = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderStatus, sp_order.orderDiscount, sp_order.orderTotal, user.userFName, user.userLName, user.userAddress from sp_order INNER JOIN user ON sp_order.userNIC = user.userNIC WHERE orderId = ?");
     $show_user_details->execute([$order_id]);
     if ($show_orders->rowCount() > 0) {
         while ($fetch_user_details = $show_user_details->fetch(PDO::FETCH_ASSOC)) {
@@ -188,6 +189,7 @@ if (isset($_GET['vieworder'])) {
                         <td><?=$fetch_user_details['orderId'];?></td>
 						<td><?=$fetch_user_details['orderDate'];?></td>
                         <td><?=$fetch_user_details['orderStatus'];?></td>
+                        <td>- <?=$fetch_user_details['orderDiscount'];?></td>
 						<td><?=$fetch_user_details['orderTotal'];?></td>
                         <td><?=$fetch_user_details['userFName'];?> <?=$fetch_user_details['userLName'];?></td>
 						<td><?=$fetch_user_details['userAddress'];?></td>

@@ -282,6 +282,7 @@ if (isset($_GET['update'])) {
                         <th>Order_Id</th>
 						<th>Order_Date</th>
                         <th>Status</th>
+                        <th>Discount</th>
 						<th>Total</th>
                         <th>Name</th>
 						<th>Address</th>
@@ -291,50 +292,54 @@ if (isset($_GET['update'])) {
     <?php
 if (isset($_GET['vieworder'])) {
     $order_id = $_GET['vieworder'];
-    $show_orders = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderStatus, sp_order.orderTotal, user.userNIC, user.userFName, user.userLName, user.userAddress, guest.guestFName, guest.guestLName, guest.guestAddress from sp_order INNER JOIN user ON sp_order.userNIC = user.userNIC INNER JOIN guest ON sp_order.guestNIC = guest.guestNIC  WHERE orderId = ?");
-    $show_orders->execute([$order_id]);
-    if ($show_orders->rowCount() > 0) {
-        while ($fetch_orders = $show_orders->fetch(PDO::FETCH_ASSOC)) {
-            if ($fetch_orders['userNIC'] != null) {
+
+    $show_guest_orders = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderStatus, sp_order.orderDiscount, sp_order.orderTotal, guest.guestNIC, guest.guestFName, guest.guestLName, guest.guestAddress from sp_order INNER JOIN guest ON sp_order.guestNIC = guest.guestNIC  WHERE orderId = ?;");
+    $show_guest_orders->execute([$order_id]);
+    if ($show_guest_orders->rowCount() > 0) {
+        while ($fetch_guest_orders = $show_guest_orders->fetch(PDO::FETCH_ASSOC)) {
+            if ($fetch_guest_orders['guestNIC'] != null) {
                 ?>
-
-            <tbody class="tbody-one">
-
-                     <tr>
-                        <td><?=$fetch_orders['orderId'];?></td>
-						<td><?=$fetch_orders['orderDate'];?></td>
-                        <td><?=$fetch_orders['orderStatus'];?></td>
-						<td><?=$fetch_orders['orderTotal'];?></td>
-                        <td><?=$fetch_orders['userFName'];?> <?=$fetch_orders['userLName'];?></td>
-						<td><?=$fetch_orders['userAddress'];?></td>
-					</tr>
-
-            </tbody>
-        </table>
-
-    <?php
-} else {?>
 
 <tbody class="tbody-one">
 
 <tr>
-   <td><?=$fetch_orders['orderId'];?></td>
-   <td><?=$fetch_orders['orderDate'];?></td>
-   <td><?=$fetch_orders['orderStatus'];?></td>
-   <td><?=$fetch_orders['orderTotal'];?></td>
-   <td><?=$fetch_orders['guestFName'];?> <?=$fetch_orders['guestLName'];?></td>
-   <td><?=$fetch_orders['guestAddress'];?></td>
+   <td><?=$fetch_guest_orders['orderId'];?></td>
+   <td><?=$fetch_guest_orders['orderDate'];?></td>
+   <td><?=$fetch_guest_orders['orderStatus'];?></td>
+   <td>- <?=$fetch_guest_orders['orderDiscount'];?></td>
+   <td><?=$fetch_guest_orders['orderTotal'];?></td>
+   <td><?=$fetch_guest_orders['guestFName'];?> <?=$fetch_guest_orders['guestLName'];?></td>
+   <td><?=$fetch_guest_orders['guestAddress'];?></td>
 </tr>
 
 </tbody>
+
+<?php }}}
+    $show_user_orders = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderStatus, sp_order.orderDiscount, sp_order.orderTotal, user.userNIC, user.userFName, user.userLName, user.userAddress from sp_order INNER JOIN user ON sp_order.userNIC = user.userNIC  WHERE orderId = ?;");
+    $show_user_orders->execute([$order_id]);
+    if ($show_user_orders->rowCount() > 0) {
+        while ($fetch_user_orders = $show_user_orders->fetch(PDO::FETCH_ASSOC)) {
+            if ($fetch_user_orders['userNIC'] != null) {
+                ?>
+
+<tbody class="tbody-one">
+
+         <tr>
+            <td><?=$fetch_user_orders['orderId'];?></td>
+            <td><?=$fetch_user_orders['orderDate'];?></td>
+            <td><?=$fetch_user_orders['orderStatus'];?></td>
+            <td>- <?=$fetch_user_orders['orderDiscount'];?></td>
+            <td><?=$fetch_user_orders['orderTotal'];?></td>
+            <td><?=$fetch_user_orders['userFName'];?> <?=$fetch_user_orders['userLName'];?></td>
+            <td><?=$fetch_user_orders['userAddress'];?></td>
+        </tr>
+
+</tbody>
+
+
+        <?php }}}}?>
 </table>
 
-        <?php }
-        }} else {
-        echo '<p class="empty">no orders added yet!</p>';
-    }
-}
-?>
     <div class="view-order-list-container">
         <table table id="viewordertlisttwo" class="view-order-list">
             <thead class="thead-one">
