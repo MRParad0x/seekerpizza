@@ -111,9 +111,8 @@ if (isset($regerror)) {
         foreach ($changepass as $changepass) {
             echo '<span id="success" class="success-msg">' . $changepass . '</span>';
         }
-        ;
+        echo "<button class=\"log-again-button\" onclick=\"location.href='/login.php';\"><i class=\"fa-solid fa-circle-chevron-right\"></i>&nbsp;&nbsp;Login</button>";
     }
-    ;
 
 }?>
 
