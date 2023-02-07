@@ -21,6 +21,7 @@ if (!isset($_SESSION['roleType'])) {
 
     <!-- custom css file link  -->
     <link rel='stylesheet' type='text/css' media='screen' href='css/feedback.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/notify.css'>
 
      <!-- favicon file link  -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
@@ -71,7 +72,7 @@ if (!isset($_SESSION['roleType'])) {
     <div class="header-container">
     <div><h1>Feedback</h1></div>
 
-    <div><i class="fa-solid fa-bell"></i><a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></div>
+    <div style="display: flex;"><?php include 'notify.php';?></div>
     </div>
 
     </section>
@@ -154,6 +155,7 @@ if ($show_feedback->rowCount() > 0) {
     <script src='js/print.js'></script>
     <script src='js/export.js'></script>
     <script src='js/sort.js'></script>
+    <script src='js/notify.js'></script>
 
 </body>
 

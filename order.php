@@ -47,6 +47,7 @@ if (isset($_GET['delete'])) {
 
     <!-- custom css file link  -->
     <link rel='stylesheet' type='text/css' media='screen' href='css/order.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/notify.css'>
 
      <!-- favicon file link  -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
@@ -79,11 +80,13 @@ if (isset($_GET['delete'])) {
 
 </head>
 
-<body>
+<body onclick="load();">
 
 <!-- Start Verticle Menu -->
 
-<?php include 'menu.php'?>
+<?php
+include 'menu.php';
+?>
 
 <!-- End Verticle Menu -->
 
@@ -126,8 +129,7 @@ if (isset($delete)) {
 ;
 ?>
     </div>
-        <div><i class="fa-solid fa-bell"></i><a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></div>
-        <!-- <button id="addbtn" onclick="openPopup()"> + Create Order</button> -->
+        <div style="display: flex;"><?php include 'notify.php';?></div>
     </div>
 
     </section>
@@ -388,6 +390,8 @@ if ($show_ordered_items->rowCount() > 0) {
     <script src='js/print.js'></script>
     <script src='js/export.js'></script>
     <script src='js/sort.js'></script>
+
+    <script src='js/notify.js'></script>
 
 </body>
 

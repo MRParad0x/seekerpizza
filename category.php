@@ -52,6 +52,7 @@ if (isset($_GET['delete'])) {
 
     <!-- custom css file link  -->
     <link rel='stylesheet' type='text/css' media='screen' href='css/category.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/notify.css'>
 
     <!-- favicon file link  -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
@@ -130,7 +131,7 @@ if (isset($delete)) {
 ;
 ?>
         </div>
-        <div><button id="addbtn" onclick="openPopup()"> + Add Category</button><i class="fa-solid fa-bell"></i><a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></div>
+        <div style="display: flex;"><button id="addbtn" onclick="openPopup()"> + Add Category</button><?php include 'notify.php';?></div>
     </div>
 
     </section>
@@ -295,6 +296,7 @@ if (isset($_GET['update'])) {
     <script src='js/print.js'></script>
     <script src='js/export.js'></script>
     <script src='js/sort.js'></script>
+    <script src='js/notify.js'></script>
 
 </body>
 

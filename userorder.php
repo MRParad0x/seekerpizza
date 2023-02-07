@@ -69,7 +69,7 @@ $userNIC = $_SESSION['userNIC'];
 
     <div class="header-container">
         <div><h1>Orders</h1></div>
-        <div><i class="fa-solid fa-bell"></i><a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></div>
+        <div><a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></div>
     </div>
 
     </section>

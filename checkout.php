@@ -30,7 +30,8 @@ if (isset($_POST['submit'])) {
 
     $insert_order = $conn->prepare("INSERT INTO sp_order (orderId, userNIC, orderDiscount, orderTotal, orderStatus) VALUES(?,?,?,?,?)");
     $insert_order->execute([$uuid, $userNIC, $orderDiscount, $orderTotal, $orderStatus]);
-    $regcreate[] = 'Great! <br> Your account has been successfully created.';
+    $insert_notify_id = $conn->prepare("INSERT INTO notification (orderId) VALUES(?)");
+    $insert_notify_id->execute([$uuid]);
 
     $show_products = $conn->prepare("SELECT products.productId, products.productName, products.productPrice, products.productImage, cart_item.cartitemId, cart_item.cartitemQty, cart_item.sessionId, coupon.couponCode, coupon.couponDiscount, products.productPrice*cart_item.cartitemQty as subtotal from cart_item INNER JOIN products ON cart_item.productId = products.productId INNER JOIN coupon ON coupon.couponId = products.couponId WHERE cart_item.sessionId = ? ");
     $show_products->execute([$ssid]);
@@ -89,7 +90,8 @@ if (isset($_POST['guest'])) {
 
     $insert_order = $conn->prepare("INSERT INTO sp_order (orderId, guestNIC, orderDiscount, orderTotal, orderStatus) VALUES(?,?,?,?,?)");
     $insert_order->execute([$uuid, $gid, $orderDiscount, $orderTotal, $orderStatus]);
-    $regcreate[] = 'Great! <br> Your account has been successfully created.';
+    $insert_notify_id = $conn->prepare("INSERT INTO notification (orderId) VALUES(?)");
+    $insert_notify_id->execute([$uuid]);
 
     $show_products = $conn->prepare("SELECT products.productId, products.productName, products.productPrice, products.productImage, cart_item.cartitemId, cart_item.cartitemQty, cart_item.sessionId, coupon.couponCode, coupon.couponDiscount, products.productPrice*cart_item.cartitemQty as subtotal from cart_item INNER JOIN products ON cart_item.productId = products.productId INNER JOIN coupon ON coupon.couponId = products.couponId WHERE cart_item.sessionId = ? ");
     $show_products->execute([$ssid]);

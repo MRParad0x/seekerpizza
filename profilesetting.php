@@ -46,6 +46,7 @@ if (isset($_POST['update_user'])) {
 
     <!-- custom css file link  -->
     <link rel='stylesheet' type='text/css' media='screen' href='css/profilesetting.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/notify.css'>
 
      <!-- favicon file link  -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
@@ -108,7 +109,7 @@ if (isset($update)) {
 ?>
     </div>
 
-        <div><i class="fa-solid fa-bell"></i><a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></div>
+        <div style="display: flex;"><?php include 'notify.php';?></div>
     </div>
 
     </section>
@@ -205,6 +206,7 @@ if ($show_user_address->rowCount() > 0) {
     <script src='js/status.js'></script>
     <script src='js/print.js'></script>
     <script src='js/sort.js'></script>
+    <script src='js/notify.js'></script>
 </body>
 
 </html>

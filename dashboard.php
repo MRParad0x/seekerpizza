@@ -20,6 +20,7 @@ if (!isset($_SESSION['roleType'])) {
 
     <!-- custom css file link  -->
     <link rel='stylesheet' type='text/css' media='screen' href='css/dashboard.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/notify.css'>
 
      <!-- favicon file link  -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
@@ -56,7 +57,7 @@ if (!isset($_SESSION['roleType'])) {
 
 </head>
 
-<body>
+<body onload="load();">
 
 <?php
 
@@ -151,7 +152,7 @@ if ($show_total_gandc->rowCount() > 0) {
 
     <div class="header-container">
         <div><h1>Dashboard</h1></div>
-        <div><i class="fa-solid fa-bell"></i><a class="menubtn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></div>
+        <div style="display: flex;"><?php include 'notify.php';?></div>
     </div>
 
     </section>
@@ -297,9 +298,7 @@ if ($show_total_gandc->rowCount() > 0) {
     <!-- custom js file link -->
     <!-- <script src='js/chart.js'></script> -->
     <?php include 'chart.php';?>
-
-
-
+    <script src='js/notify.js'></script>
 
 </body>
 

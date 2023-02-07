@@ -1,0 +1,87 @@
+.dropdown .fa-solid.fa-bell.active {
+  background-color: #ff4069;
+  border: 3px solid #ff4069;
+}
+
+.dropdown-menu {
+  padding: 0.5em;
+  display: none;
+  position: absolute;
+  right: 7.5em;
+  background-color: #302e3a;
+  width: 500px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 1em;
+  max-height: 800px;
+}
+
+.dropdown-menu h3 {
+  color: #ffffff63;
+  font-family: var(--header-menu-font-style);
+  margin-left: 0.6em;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  overflow-y: auto;
+}
+
+.dropdown-menu .notifymsg {
+  background-color: #151419;
+  font-size: 0.8em;
+  color: #ffffff;
+  font-family: var(--header-menu-font-style);
+  font-weight: 420;
+  border-radius: 1em;
+  padding: 0.3em;
+  margin: 0.5em;
+}
+
+.dropdown-menu .nonotify {
+  font-size: 0.8em;
+  text-align: center;
+  color: #ffffff63;
+  font-family: var(--header-menu-font-style);
+  font-weight: 500;
+}
+
+.dropdown-menu .notifymsg .fa-solid.fa-gift {
+  margin-right: 0.7em;
+}
+
+.dropdown-menu .notifymsg .neworder {
+  font-weight: 700;
+}
+
+.dropdown-menu .notifymsg input[type="submit"] {
+  border: 3px solid rgba(255, 165, 165, 0.589);
+  box-shadow: rgba(255, 203, 203, 0.2) 0px 2px 8px 0px;
+  cursor: pointer;
+  outline: none;
+  background-color: rgb(0, 0, 0);
+  color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 1px 5px 1px 5px;
+  font-family: var(--header-menu-font-style);
+  font-size: 0.6rem;
+  font-weight: 500;
+  margin-left: 0.9em;
+  transition: 0.3s ease-in-out;
+}
+
+.dropdown-menu .notifymsg input[type="submit"]:hover {
+  background-color: #ff4069;
+  color: #ffffff;
+  box-shadow: none;
+  border: 3px solid #ff4069;
+}
+
+.dropdown-menu .notifymsg p {
+  margin-left: 1em;
+}
+
+.box-two .header .header-container i:active {
+  background-color: #ff4069;
+  border: 3px solid #ff4069;
+}
