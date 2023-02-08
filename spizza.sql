@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2023 at 10:32 AM
+-- Generation Time: Feb 08, 2023 at 05:54 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -56,8 +56,7 @@ INSERT INTO `cart_item` (`Id`, `cartitemId`, `sessionId`, `productId`, `cartitem
 (378, 'CII-0378', 'b00pm7t75huqrf12k3f6rdigog', 'PR-0024', 1, '2023-02-03'),
 (379, 'CII-0379', 'b00pm7t75huqrf12k3f6rdigog', 'PR-0016', 1, '2023-02-03'),
 (382, 'CII-0382', 'o3p91vth4h440sh0v8fqjlcr2t', 'PR-0022', 1, '2023-02-04'),
-(383, 'CII-0383', 'o3p91vth4h440sh0v8fqjlcr2t', 'PR-0011', 1, '2023-02-04'),
-(384, 'CII-0384', 'ei5fse4v7mfcgehpd1hgcs039t', 'PR-0024', 1, '2023-02-06');
+(383, 'CII-0383', 'o3p91vth4h440sh0v8fqjlcr2t', 'PR-0011', 1, '2023-02-04');
 
 --
 -- Triggers `cart_item`
@@ -127,7 +126,13 @@ CREATE TABLE `contact` (
 INSERT INTO `contact` (`id`, `contactId`, `contactFName`, `contactSubject`, `contactEmail`, `contactMessage`, `contactDate`) VALUES
 (1, 'CU-0001', 'Amila F', 'Login page issue', 'amila@gmail.com', 'can\'t login my acount', '2022-12-27'),
 (2, 'CU-0002', 'Kasuni S', 'Order issue', 'kasuni@aol.com', 'can\'t place a order', '2022-12-27'),
-(3, 'CU-0003', 'Nimal S', 'Order ', 'nimal@gmail.com', ' How to place a order?', '2022-12-27');
+(3, 'CU-0003', 'Nimal S', 'Order ', 'nimal@gmail.com', ' How to place a order?', '2022-12-27'),
+(4, 'CU-0004', 'Yudeesha', 'How to Order a Pizza', 'lahiru.chinthana22@gmail.com', 'Hello there,\r\n\r\nThis is great Website!\r\n\r\nThanks!', '2023-02-07'),
+(5, 'CU-0005', 'Yudeesha', 'How to Order a Pizza', 'lahiru.chinthana22@gmail.com', 'Hello there,\r\n\r\nThis is great Website!\r\n\r\nThanks!', '2023-02-07'),
+(6, 'CU-0006', 'Dasun J', 'Website issue', 'lahiru.chinthana22@gmail.com', 'awesome', '2023-02-07'),
+(7, 'CU-0007', 'Kamal D', 'Order received', 'amila@gmail.com', 'Thank you!', '2023-02-07'),
+(8, 'CU-0008', 'Chamal K', 'How to payment', 'chamal@gmail.com', 'Hi there,\r\n\r\nWhat is the payment methods?\r\n\r\nThanks!', '2023-02-07'),
+(9, 'CU-0009', 'Manoi L', 'Pizza Order', 'manoj@gmail.com', 'Hello there,\r\n\r\nOrdered a Pizza\r\n\r\nThanks', '2023-02-07');
 
 --
 -- Triggers `contact`
@@ -639,7 +644,30 @@ INSERT INTO `id_cart_item` (`Id`) VALUES
 (381),
 (382),
 (383),
-(384);
+(384),
+(385),
+(386),
+(387),
+(388),
+(389),
+(390),
+(391),
+(392),
+(393),
+(394),
+(395),
+(396),
+(397),
+(398),
+(399),
+(400),
+(401),
+(402),
+(403),
+(404),
+(405),
+(406),
+(407);
 
 -- --------------------------------------------------------
 
@@ -679,7 +707,13 @@ CREATE TABLE `id_contact` (
 INSERT INTO `id_contact` (`id`) VALUES
 (1),
 (2),
-(3);
+(3),
+(4),
+(5),
+(6),
+(7),
+(8),
+(9);
 
 -- --------------------------------------------------------
 
@@ -914,7 +948,27 @@ INSERT INTO `id_order_items` (`id`) VALUES
 (159),
 (160),
 (161),
-(162);
+(162),
+(163),
+(164),
+(165),
+(166),
+(167),
+(168),
+(169),
+(170),
+(171),
+(172),
+(173),
+(174),
+(175),
+(176),
+(177),
+(178),
+(179),
+(180),
+(181),
+(182);
 
 -- --------------------------------------------------------
 
@@ -1021,6 +1075,17 @@ INSERT INTO `id_subscriber` (`id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notification`
+--
+
+CREATE TABLE `notification` (
+  `id` int(11) NOT NULL,
+  `orderId` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `order_items`
 --
 
@@ -1088,7 +1153,27 @@ INSERT INTO `order_items` (`Id`, `orderitemsId`, `orderId`, `productId`, `orderi
 (157, 'OII-0159', 'OID-84081288', 'PR-0011', 1, 3000, '2023-02-03'),
 (158, 'OII-0160', 'OID-84081288', 'PR-0024', 1, 2000, '2023-02-03'),
 (159, 'OII-0161', 'OID-6125fc97', 'PR-0015', 1, 1300, '2023-02-04'),
-(160, 'OII-0162', 'OID-6125fc97', 'PR-0011', 1, 3000, '2023-02-04');
+(160, 'OII-0162', 'OID-6125fc97', 'PR-0011', 1, 3000, '2023-02-04'),
+(161, 'OII-0163', 'OID-3c630251', 'PR-0015', 1, 1300, '2023-02-07'),
+(162, 'OII-0164', 'OID-3c630251', 'PR-0016', 1, 1500, '2023-02-07'),
+(163, 'OII-0165', 'OID-3c630251', 'PR-0021', 1, 500, '2023-02-07'),
+(164, 'OII-0166', 'OID-3c630251', 'PR-0020', 1, 1500, '2023-02-07'),
+(165, 'OII-0167', 'OID-3c630251', 'PR-0022', 1, 500, '2023-02-07'),
+(166, 'OII-0168', 'OID-9dd35638', 'PR-0024', 1, 2000, '2023-02-07'),
+(167, 'OII-0169', 'OID-cd2c31d1', 'PR-0015', 1, 1300, '2023-02-07'),
+(168, 'OII-0170', 'OID-cd2c31d1', 'PR-0021', 2, 1000, '2023-02-07'),
+(169, 'OII-0171', 'OID-d10ef8f8', 'PR-0015', 1, 1300, '2023-02-07'),
+(170, 'OII-0172', 'OID-bb2ff694', 'PR-0021', 2, 1000, '2023-02-07'),
+(171, 'OII-0173', 'OID-3e4c8568', 'PR-0024', 1, 2000, '2023-02-07'),
+(172, 'OII-0174', 'OID-36e893c8', 'PR-0022', 1, 500, '2023-02-07'),
+(173, 'OII-0175', 'OID-36e893c8', 'PR-0020', 2, 3000, '2023-02-07'),
+(174, 'OII-0176', 'OID-ea48e108', 'PR-0023', 1, 1300, '2023-02-07'),
+(175, 'OII-0177', 'OID-ea48e108', 'PR-0021', 1, 500, '2023-02-07'),
+(176, 'OII-0178', 'OID-46c43639', 'PR-0023', 1, 1300, '2023-02-07'),
+(177, 'OII-0179', 'OID-b8785d48', 'PR-0016', 1, 1500, '2023-02-07'),
+(178, 'OII-0180', 'OID-b8785d48', 'PR-0024', 1, 2000, '2023-02-07'),
+(179, 'OII-0181', 'OID-b8785d48', 'PR-0018', 1, 1000, '2023-02-07'),
+(180, 'OII-0182', 'OID-b8785d48', 'PR-0021', 1, 500, '2023-02-07');
 
 --
 -- Triggers `order_items`
@@ -1200,12 +1285,15 @@ CREATE TABLE `shopping_session` (
 --
 
 INSERT INTO `shopping_session` (`ssId`, `userNIC`, `ssDate`) VALUES
+('19pdjsnr41g6866e08997fcc29', NULL, '2023-02-08'),
 ('25k1aaq5aqcvq3qcfusjqatbu6', NULL, '2022-12-19'),
 ('2gb8i6uomghhglfoeedndnguqj', NULL, '2022-12-27'),
+('84edff1ff3vqnpk2as1hhpn1fj', NULL, '2023-02-08'),
 ('907nkvmvnhnhilur9crcth6lmp', NULL, '2023-02-01'),
 ('b00pm7t75huqrf12k3f6rdigog', NULL, '2023-02-03'),
 ('ei5fse4v7mfcgehpd1hgcs039t', NULL, '2023-02-06'),
 ('fger5tk3ag1k1v3gcpr649e4tq', NULL, '2022-12-28'),
+('mlf6edd8rl2362f42pnhgrkgem', NULL, '2023-02-08'),
 ('o3p91vth4h440sh0v8fqjlcr2t', NULL, '2023-02-04'),
 ('pb2ncgpl9hfsrloq0uvk94d8p0', NULL, '2023-02-02'),
 ('pidg4e1dkbocn3c3ctt7vcoata', NULL, '2022-12-25');
@@ -1231,12 +1319,16 @@ CREATE TABLE `sp_order` (
 --
 
 INSERT INTO `sp_order` (`orderId`, `userNIC`, `guestNIC`, `orderDiscount`, `orderTotal`, `orderStatus`, `orderDate`) VALUES
-('OID-00c87c54', '202525238V', NULL, 400, 1600, 'Processing', '2023-02-03'),
+('OID-00c87c54', '202525238V', NULL, 400, 1600, 'Completed', '2023-02-03'),
 ('OID-03b86ec2', NULL, 'GID-baca508d', 1200, 4800, 'Processing', '2023-02-03'),
 ('OID-0aff8898', NULL, 'GID-d87c4af8', 0, 2600, 'Processing', '2023-02-03'),
-('OID-1b179dd8', '202525238V', NULL, 0, 2000, 'Processing', '2023-02-02'),
+('OID-1b179dd8', '202525238V', NULL, 0, 2000, 'Completed', '2023-02-02'),
 ('OID-1fd8b348', '202525238V', NULL, 0, 4125, 'Completed', '2022-12-28'),
+('OID-36e893c8', '202525238V', NULL, 0, 3500, 'Processing', '2023-02-07'),
+('OID-3c630251', '202525238V', NULL, 1060, 4240, 'Processing', '2023-02-07'),
 ('OID-3d0dc956', '202525238V', NULL, 0, 1840, 'Cancelled', '2022-12-24'),
+('OID-3e4c8568', '202525238V', NULL, 0, 2000, 'Processing', '2023-02-07'),
+('OID-46c43639', '202525238V', NULL, 0, 1300, 'Processing', '2023-02-07'),
 ('OID-5248acc8', NULL, 'GID-b40961a8', 0, 1040, 'Processing', '2023-02-03'),
 ('OID-56789161', '202516238V', NULL, 0, 4300, 'Refunded', '2022-12-28'),
 ('OID-5d08eef8', '202525238V', NULL, 0, 6000, 'Processing', '2022-12-27'),
@@ -1245,12 +1337,18 @@ INSERT INTO `sp_order` (`orderId`, `userNIC`, `guestNIC`, `orderDiscount`, `orde
 ('OID-7478554a', '202525238V', NULL, 1460, 5840, 'Processing', '2023-02-03'),
 ('OID-84081288', NULL, 'GID-cfc8c496', 1000, 4000, 'Processing', '2023-02-03'),
 ('OID-86688398', '202525238V', NULL, 0, 7900, 'Processing', '2023-02-03'),
+('OID-9dd35638', '202525238V', NULL, 400, 1600, 'Processing', '2023-02-07'),
 ('OID-a026acb8', '202525238V', NULL, 0, 1040, 'Completed', '2022-12-22'),
 ('OID-a198a46c', '202525238V', NULL, 0, 3600, 'Processing', '2023-02-03'),
 ('OID-a588b368', '202525238V', NULL, 0, 4500, 'Processing', '2023-02-03'),
 ('OID-a9be9aa9', '202525238V', NULL, 2380, 9520, 'Processing', '2023-02-03'),
+('OID-b8785d48', '202516238V', NULL, 1000, 4000, 'Processing', '2023-02-07'),
 ('OID-bb1ebc88', NULL, 'GID-04e3e2ce', 0, 1500, 'Processing', '2022-12-19'),
-('OID-e9be6418', '202525238V', NULL, 520, 2080, 'Processing', '2023-02-03');
+('OID-bb2ff694', '202525238V', NULL, 200, 800, 'Processing', '2023-02-07'),
+('OID-cd2c31d1', '202525238V', NULL, 575, 1725, 'Processing', '2023-02-07'),
+('OID-d10ef8f8', '202525238V', NULL, 455, 845, 'Processing', '2023-02-07'),
+('OID-e9be6418', '202525238V', NULL, 520, 2080, 'Processing', '2023-02-03'),
+('OID-ea48e108', '202525238V', NULL, 450, 1350, 'Processing', '2023-02-07');
 
 -- --------------------------------------------------------
 
@@ -1321,7 +1419,7 @@ INSERT INTO `user` (`userNIC`, `userName`, `userPassword`, `userFName`, `userLNa
 ('202256278V', 'nethmi', '12345678', 'Nethmi', 'de silva', 'nethmi@gmail.com', 778523651, 'Dehiwala', '', 0, 'RO-0002', '2022-12-24'),
 ('202516238V', 'customer', '12345678', 'Amal', 'Perera', 'customer@gmail.com', 775236982, 'Kaduwela', 'Kaduwela', 10640, 'RO-0004', '2022-12-24'),
 ('202522238V', 'manager', '12345678', 'Thushan', 'Pereraa', 'manager@gmail.com', 772563489, 'Colombo 04', '', 0, 'RO-0002', '2022-12-24'),
-('202525238V', 'admin', '19930908', 'Lahiru', 'Chinthana', 'lahiru@gmail.com', 785295963, '11/2, Pittugala road', 'Malabe', 10640, 'RO-0001', '2022-12-24'),
+('202525238V', 'admin', 'Lahiru22', 'Lahiru', 'Chinthana', 'lahiru@gmail.com', 785295963, '10D, Pittugala road', 'Malabe', 10640, 'RO-0001', '2022-12-24'),
 ('202525244V', 'saman', '12345678', 'Saman', 'K', 'saman@gmail.com', 778956390, 'Kaluthara', '', 0, 'RO-0004', '2023-02-02'),
 ('9311314V', 'wafwaf', '12345678', 'awfwaf', 'awfwa', 'wafwa@gmail.com', 785263256, 'fgawfwaf', '', 0, 'RO-0004', '2022-12-24'),
 ('982545632V', 'cashier', '12345678', 'Super', 'Man', 'cashier@gmail.com', 778526325, 'Galle', '', 0, 'RO-0003', '2022-12-24');
@@ -1439,6 +1537,12 @@ ALTER TABLE `id_subscriber`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `notification`
+--
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `order_items`
 --
 ALTER TABLE `order_items`
@@ -1503,7 +1607,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=385;
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=408;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -1515,7 +1619,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `coupon`
@@ -1539,7 +1643,7 @@ ALTER TABLE `guest`
 -- AUTO_INCREMENT for table `id_cart_item`
 --
 ALTER TABLE `id_cart_item`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=385;
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=408;
 
 --
 -- AUTO_INCREMENT for table `id_category`
@@ -1551,7 +1655,7 @@ ALTER TABLE `id_category`
 -- AUTO_INCREMENT for table `id_contact`
 --
 ALTER TABLE `id_contact`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `id_coupon`
@@ -1575,7 +1679,7 @@ ALTER TABLE `id_order`
 -- AUTO_INCREMENT for table `id_order_items`
 --
 ALTER TABLE `id_order_items`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
 
 --
 -- AUTO_INCREMENT for table `id_product`
@@ -1602,10 +1706,16 @@ ALTER TABLE `id_subscriber`
   MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
 
 --
 -- AUTO_INCREMENT for table `products`
