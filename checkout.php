@@ -282,7 +282,7 @@ if (isset($userNIC) && ($userNIC !== null)) {
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input type="tel" name="phoneNumber" placeholder="Phone Number" value="<?=$fetch_address['userNumber'];?>" required>
+                            <input type="tel" name="phoneNumber" placeholder="Phone Number" value="<?=$fetch_address['userNumber'];?>" id="checkNumber" pattern="\d{10}" required>
                         </td>
                     </tr>
                     <tr>
@@ -343,7 +343,7 @@ if (isset($userNIC) && ($userNIC !== null)) {
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input type="tel" name="guestNumber" placeholder="Phone Number" value="" required>
+                            <input type="tel" name="guestNumber" placeholder="Phone Number" value="" id="checkNumber" pattern="\d{10}" required>
                         </td>
                     </tr>
                     <tr>
@@ -471,6 +471,7 @@ echo '- LKR ' . $discount;
 </div>
 
     <!-- custom js file link  -->
+    <script src='js/validation.js'></script>
     <script>
         function uniqueID(){
         function chr4(){

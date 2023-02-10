@@ -178,6 +178,9 @@ body{
 }
 
 .success-msg{
+    position: absolute;
+    left: 0;
+    right: 0;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 1em;
@@ -186,14 +189,17 @@ body{
     color:#fff;
     border-radius: 1em;
     font-family: var(--header-menu-font-style);
-    font-size: 1em;
-    font-weight: 700;
+    font-size: 0.9rem;
+    font-weight: 500;
     width: 465px;
     padding: 0.8em;
     text-align: center;
 }
 
 .delete-msg{
+    position: absolute;
+    left: 0;
+    right: 0;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 1em;
@@ -202,8 +208,8 @@ body{
     color:#fff;
     border-radius: 1em;
     font-family: var(--header-menu-font-style);
-    font-size: 1em;
-    font-weight: 700;
+    font-size: 0.9rem;
+    font-weight: 500;
     width: 465px;
     padding: 0.8em;
     text-align: center;

@@ -3,7 +3,7 @@
 <div class="box-one">
 
     <div class="logo">
-    <img src="img/logovertical.png" alt="">
+    <img onclick="imageClicked()" src="img/logovertical.png" alt="">
     </div>
 
     <?php
@@ -62,3 +62,14 @@ if ($_SESSION['roleType'] == 'Customer'): ?>
     </div>
 
 </div>
+
+<script>
+    /* Start logo image click functions */
+
+    function imageClicked() {
+    window.open("index.php", '_blank').focus();
+    }
+
+    /* End logo image click functions */
+
+</script>

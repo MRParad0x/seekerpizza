@@ -174,60 +174,10 @@ body{
     cursor: pointer;
 }
 
-.success-msg{
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 1em;
-    display: block;
-    background: #249300;
-    color:#fff;
-    border-radius: 1em;
-    font-family: var(--header-menu-font-style);
-    font-size: 1em;
-    font-weight: 700;
-    width: 465px;
-    padding: 0.8em;
-    text-align: center;
-}
-
-.delete-msg{
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 1em;
-    display: block;
-    background: #249300;
-    color:#fff;
-    border-radius: 1em;
-    font-family: var(--header-menu-font-style);
-    font-size: 1em;
-    font-weight: 700;
-    width: 465px;
-    padding: 0.8em;
-    text-align: center;
-}
-
-#success,
-#delete,
-#error{
-    -webkit-animation: cssAnimation 5s forwards; 
-    animation: cssAnimation 5s forwards;
-}
-
-@keyframes cssAnimation {
-    0%   {opacity: 1;}
-    90%  {opacity: 1;}
-    100% {opacity: 0;}
-}
-@-webkit-keyframes cssAnimation {
-    0%   {opacity: 1;}
-    90%  {opacity: 1;}
-    100% {opacity: 0;}
-}
-
 .error-msg{
-    /* position: absolute;
+    position: absolute;
     left: 0;
-    right: 0; */
+    right: 0;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 1em;
@@ -236,14 +186,17 @@ body{
     color:#fff;
     border-radius: 1em;
     font-family: var(--header-menu-font-style);
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 0.9rem;
+    font-weight: 500;
     width: 465px;
     padding: 0.8em;
     text-align: center;
 }
 
 .success-msg{
+    position: absolute;
+    left: 0;
+    right: 0;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 1em;
@@ -252,14 +205,17 @@ body{
     color:#fff;
     border-radius: 1em;
     font-family: var(--header-menu-font-style);
-    font-size: 1em;
-    font-weight: 700;
+    font-size: 0.9rem;
+    font-weight: 500;
     width: 465px;
     padding: 0.8em;
     text-align: center;
 }
 
 .delete-msg{
+    position: absolute;
+    left: 0;
+    right: 0;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 1em;
@@ -268,8 +224,8 @@ body{
     color:#fff;
     border-radius: 1em;
     font-family: var(--header-menu-font-style);
-    font-size: 1em;
-    font-weight: 700;
+    font-size: 0.9rem;
+    font-weight: 500;
     width: 465px;
     padding: 0.8em;
     text-align: center;
@@ -581,7 +537,7 @@ body{
 
 .popup-box-one,
 .popup-box-three{
-   position: fixed;
+   position: absolute;
    width:350px;
    height:auto;
    border: 2px solid  rgb(0, 0, 0);
@@ -596,6 +552,7 @@ body{
    z-index: 9999;
    opacity: 0;
    transition: 0.5s;
+   margin-top: 2em;
 }
 
 #popupone.active,

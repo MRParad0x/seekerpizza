@@ -232,7 +232,9 @@ if ($show_orders->rowCount() > 0) {
     <?php
 if (isset($_GET['update'])) {
     $update_id = $_GET['update'];
+
     $show_orders = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderTotal, sp_order.orderStatus, user.userFName, user.userLName FROM sp_order INNER JOIN USER ON sp_order.userNIC = user.userNIC WHERE orderId = ?");
+    // $show_orders = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderTotal, sp_order.orderStatus, user.userFName, user.userLName FROM sp_order INNER JOIN USER ON sp_order.userNIC = user.userNIC WHERE orderId = 'OID-00c87c54' UNION SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderTotal, sp_order.orderStatus, guest.guestFName, guest.guestLName FROM sp_order INNER JOIN guest ON sp_order.guestNIC = guest.guestNIC WHERE orderId = 'OID-00c87c54'");
     $show_orders->execute([$update_id]);
     if ($show_orders->rowCount() > 0) {
         while ($fetch_orders = $show_orders->fetch(PDO::FETCH_ASSOC)) {
@@ -261,12 +263,38 @@ if (isset($_GET['update'])) {
         </table>
     </form>
     <?php
-}
-    } else {
-        echo '<p class="empty">no orders added yet!</p>';
-    }
-}
-?>
+
+        }} else {
+        $show_orders = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderTotal, sp_order.orderStatus, guest.guestFName, guest.guestLName FROM sp_order INNER JOIN guest ON sp_order.guestNIC = guest.guestNIC WHERE orderId = ?");
+        // $show_orders = $conn->prepare("SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderTotal, sp_order.orderStatus, user.userFName, user.userLName FROM sp_order INNER JOIN USER ON sp_order.userNIC = user.userNIC WHERE orderId = 'OID-00c87c54' UNION SELECT sp_order.orderId, sp_order.orderDate, sp_order.orderTotal, sp_order.orderStatus, guest.guestFName, guest.guestLName FROM sp_order INNER JOIN guest ON sp_order.guestNIC = guest.guestNIC WHERE orderId = 'OID-00c87c54'");
+        $show_orders->execute([$update_id]);
+        if ($show_orders->rowCount() > 0) {
+            while ($fetch_orders = $show_orders->fetch(PDO::FETCH_ASSOC)) {?>
+
+<form action="order.php" method="post" enctype="multipart/form-data">
+        <table class="pro-form">
+            <tr>
+                <td><input type="hidden" name="orderId" value="<?=$fetch_orders['orderId'];?>" ></td>
+            </tr>
+            <tr>
+                <td>
+                <select name="orderStatus" required>
+                <option value="" selected hidden><?=$fetch_orders['orderStatus'];?></option>
+                <option value="Cancelled">Cancelled</option>
+                <option value="Refunded">Refunded</option>
+                <option value="Pending">Processing</option>
+                <option value="Preparing">Preparing</option>
+                <option value="Ready">Ready</option>
+                <option value="Completed">Completed</option>
+                </select>
+                </td>
+            <tr>
+                <td><input type="submit" name="update_order" value="Update"></td>
+            </tr>
+        </table>
+    </form>
+    <?php }}}}?>
+
     </div>
 
 <!-- End Pop-up order Update Box -  -->

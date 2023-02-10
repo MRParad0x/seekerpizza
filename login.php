@@ -19,10 +19,11 @@ if (isset($_POST['logsubmit'])) {
     $userEmail = filter_var($userEmail, FILTER_UNSAFE_RAW);
     $userPassword = $_POST['userPassword'];
     $userPassword = filter_var($userPassword, FILTER_UNSAFE_RAW);
+    $hashedPassword = MD5($userPassword);
 
     $select_user = $conn->prepare("SELECT user.userNIC, user.userName, user.userFName, user.userLName, user.userEmail, user.userNumber, user.userAddress, user.userEmail, role.roleId, role.roleType from user INNER JOIN role ON user.roleId = role.roleId WHERE (userEmail = ? OR userName = ?) AND userPassword = ? ");
     // $select_user = $conn->prepare("SELECT * FROM user WHERE (userEmail = ? OR userName = ?) AND userPassword = ? ");
-    $select_user->execute([$userEmail, $userEmail, $userPassword]);
+    $select_user->execute([$userEmail, $userEmail, $hashedPassword]);
     $row = $select_user->fetch(PDO::FETCH_ASSOC);
 
     if ($select_user->rowCount() > 0) {
@@ -93,6 +94,7 @@ if (isset($_POST['regsubmit'])) {
     $userNumber = filter_var($userNumber, FILTER_UNSAFE_RAW);
     $userAddress = $_POST['userAddress'];
     $userAddress = filter_var($userAddress, FILTER_UNSAFE_RAW);
+    $hashedPassword = md5($userPassword);
 
     $select_users = $conn->prepare("SELECT * FROM user WHERE userNIC = ?");
     $select_users->execute([$userNIC]);
@@ -126,7 +128,7 @@ if (isset($_POST['regsubmit'])) {
         }
     } else {
         $insert_user = $conn->prepare("INSERT INTO user (userNIC, userName, userPassword, userFName, userLName, userEmail, userNumber, userAddress, roleId) VALUES(?,?,?,?,?,?,?,?,?)");
-        $insert_user->execute([$userNIC, $userName, $userPassword, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $roleId]);
+        $insert_user->execute([$userNIC, $userName, $hashedPassword, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $roleId]);
         $regcreate[] = 'Great! <br> Your account has been successfully created.';
     }
 }
@@ -251,7 +253,7 @@ if ($show_role->rowCount() > 0) {
 ?>
                     </tr>
                     <tr>
-                        <td><input type="text" class="input-field" name ="userNIC" placeholder="NIC" id="checkNIC" pattern="[\d{9}]+V$" required></td>
+                        <td><input type="text" class="input-field" name ="userNIC" placeholder="NIC" id="checkNIC" pattern="[\d{9}]+V$|\d{12}" required></td>
                     </tr>
                     <tr>
                         <td><input type="text" class="input-field" name ="userName" placeholder="Username" required></td>
@@ -288,7 +290,7 @@ if ($show_role->rowCount() > 0) {
     </div>
     </main>
 
-    <div class="popup-box-two" id="popuptwo">
+    <!-- <div class="popup-box-two" id="popuptwo">
     <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
     <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
     <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
@@ -296,7 +298,7 @@ if ($show_role->rowCount() > 0) {
     <h2>Congratulations!</h2>
     <p>Your account has been sucessfully created.</p>
     <button onclick="okay();">Okay</button>
-    </div>
+    </div> -->
 
     <?php include 'footer.php'?>
 

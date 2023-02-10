@@ -421,8 +421,8 @@ if ($show_products->rowCount() > 0) {
                     </div>
                     <div class="newsletter-box-form">
                         <form action="" method="post">
-                        <input type="text" name="subscriberFName" id="email" placeholder="Enter your Full Name" required autocomplete="off">
-                        <input type="email" name="subscriberEmail" id="email" placeholder="Enter your email address" required autocomplete="off">
+                        <input type="text" name="subscriberFName" placeholder="Enter your Full Name" required autocomplete="off">
+                        <input type="email" name="subscriberEmail" placeholder="Enter your email address" required autocomplete="off">
                         <button type="submit" name="subscribe">Subscribe</button>
                         </form>
                     </div>

@@ -78,11 +78,11 @@ $_SESSION['discount'] = 0;
                 <p>Your will receive an order confirmation email with details of your order.</p>
 
                 <?php
-if ($_SESSION['roleType'] == 'Admin') {
-    echo "<button onclick=\"location.href='/dashboard.php';\">Go to My Account</button>";
-} else if ($_SESSION['roleType'] == 'Customer') {
+if (isset($_SESSION['roleType']) && $_SESSION['roleType'] == 'Admin') {
+    echo "<button onclick=\"location.href='/errordashboard.php';\">Go to My Account</button>";
+} else if (isset($_SESSION['roleType']) && $_SESSION['roleType'] == 'Customer') {
     echo "<button onclick=\"location.href='/userdashboard.php';\">Go to My Account</button>";
-} else if ($_SESSION['roleType'] == 'Manager') {
+} else if (isset($_SESSION['roleType']) && $_SESSION['roleType'] == 'Manager') {
     echo "<button onclick=\"location.href='/dashboard.php';\">Go to My Account</button>";
 } else {
 

@@ -26,9 +26,11 @@ if (isset($message)) {
             <a onclick="clickMenu(event)" class='target' href="/#services">Services</a>
             <a id="activecontact" onclick="clickMenu(event)" class='target' href="/contact.php">Contact</a>
             <?php
-if (!isset($_SESSION['roleType'])) {?>
+if (isset($_SESSION['roleType'])) {?>
             <a id="activelogin" onclick="clickMenu(event)" class='target' href="/login.php">Login</a>
-            <?php }?>
+            <?php } else {?>
+                <a id="activelogin" onclick="clickMenu(event)" class='target' href="/login.php">Login</a>
+                <?php }?>
         </nav>
 
 <?php

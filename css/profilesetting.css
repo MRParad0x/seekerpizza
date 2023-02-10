@@ -262,7 +262,21 @@ body{
     text-align: center;
 }
 
-#success{
+.error-msg{
+    margin-left: 0.5em;;
+    display: block;
+    background: #FF4069;
+    color:#fff;
+    border-radius: 1em;
+    font-family: var(--header-menu-font-style);
+    font-size: 0.8rem;
+    font-weight: 700;
+    width: 465px;
+    padding: 0.8em;
+    text-align: center;
+}
+
+#success, #error-msg{
     -webkit-animation: cssAnimation 5s forwards; 
     animation: cssAnimation 5s forwards;
 }

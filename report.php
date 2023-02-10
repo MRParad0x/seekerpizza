@@ -8,7 +8,7 @@ if (!isset($_SESSION['roleType'])) {
 }
 
 $dateone = "2013-01-08";
-$datetwo = "2022-12-25";
+$datetwo = date('Y-m-d');
 $_SESSION['dateone'] = $dateone;
 $_SESSION['datetwo'] = $datetwo;
 $_SESSION['reportType'] = "Total Earnings";
@@ -110,9 +110,9 @@ if (isset($_POST['datesubmit'])) {
 
     <div class="date-form">
         <p class="date-form-label">From</p>
-        <input id="search" name="dateone" type="date" value="2013-01-08" required />
+        <input id="search" name="dateone" type="date" value="<?php echo $dateone; ?>" required />
         <p class="date-form-label">To</p>
-        <input id="search" name="datetwo" type="date" value="2022-12-25" required />
+        <input id="search" name="datetwo" type="date" value="<?php echo $datetwo; ?>" required />
         <select name="reportType">
             <option>Total Earnings</option>
             <option>Most Selling Products</option>
@@ -122,7 +122,7 @@ if (isset($_POST['datesubmit'])) {
 
     <div class="function-button">
         <button name="datesubmit" id="repviewbtn"><i class="fa-solid fa-eye"></i><span>View</span></button>
-        <button id="ordprintbtn"><i class="fa-solid fa-print"></i><span>Print</span></button>
+        <button id="repprintbtn"><i class="fa-solid fa-print"></i><span>Print</span></button>
         <button id="exportbtn"><i class="fa-solid fa-file-export"></i><span>Export</span></button>
     </div>
     </div>
@@ -167,7 +167,7 @@ if (isset($_SESSION['reportType']) && ($_SESSION['reportType'] !== "Total Earnin
 						<th>ID<i class="fa-solid fa-sort"></i></th>
                         <th>Product<i class="fa-solid fa-sort"></i></th>
 						<th>QTY<i class="fa-solid fa-sort"></i></th>
-                        <th>Total Price<i class="fa-solid fa-sort"></i></th>
+                        <th>Total<i class="fa-solid fa-sort"></i></th>
 					</tr>
 				</thead>
 				<tbody id="pltable">

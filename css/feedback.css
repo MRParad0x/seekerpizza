@@ -176,56 +176,6 @@ body{
 .box-two .header .header-container .menubtn{
     margin-left: 0.8em;
 }
-
-.success-msg{
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 1em;
-    display: block;
-    background: #249300;
-    color:#fff;
-    border-radius: 1em;
-    font-family: var(--header-menu-font-style);
-    font-size: 1em;
-    font-weight: 700;
-    width: 465px;
-    padding: 0.8em;
-    text-align: center;
-}
-
-.delete-msg{
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 1em;
-    display: block;
-    background: #249300;
-    color:#fff;
-    border-radius: 1em;
-    font-family: var(--header-menu-font-style);
-    font-size: 1em;
-    font-weight: 700;
-    width: 465px;
-    padding: 0.8em;
-    text-align: center;
-}
-
-#success,
-#delete,
-#error{
-    -webkit-animation: cssAnimation 5s forwards; 
-    animation: cssAnimation 5s forwards;
-}
-
-@keyframes cssAnimation {
-    0%   {opacity: 1;}
-    90%  {opacity: 1;}
-    100% {opacity: 0;}
-}
-@-webkit-keyframes cssAnimation {
-    0%   {opacity: 1;}
-    90%  {opacity: 1;}
-    100% {opacity: 0;}
-}
    
 .box-two .header .header-container button{
     border: 3px solid rgba(255, 165, 165, 0.589);

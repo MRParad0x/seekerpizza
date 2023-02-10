@@ -927,6 +927,16 @@ section{
     font-size: 0.8rem;
     font-weight: 700;
 }
+
+.newsletter-box-container .newsletter-box-form input:valid{
+    border: 3px solid rgba(39, 124, 60, 0.308);
+    box-shadow: rgba(87, 255, 129, 0.199) 0px 2px 8px 0px;
+}
+
+.newsletter-box-container .newsletter-box-form input:focus:invalid{
+    border: 3px solid #ff4069c9;
+    box-shadow: #ff406979 0px 2px 8px 0px;
+}
   
 .newsletter-box-container .newsletter-box-form button{
     position: absolute;
@@ -1059,7 +1069,7 @@ section{
 }
 
 .shopping-cart .cart-content .col1{
-    width: 100%;
+    width: 75%;
  }
 
 .shopping-cart .cart-content .item-name{
@@ -1067,7 +1077,7 @@ section{
    font-size: 1.2em;
    font-weight: 500;
    color:#ffffff;
-   margin-right: 7em;
+   margin-right: 6em;
 }
 
 .shopping-cart .cart-content .item-price,

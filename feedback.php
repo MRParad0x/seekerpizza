@@ -93,7 +93,7 @@ if (!isset($_SESSION['roleType'])) {
     </div>
 
     <div class="function-button">
-    <button id="ordprintbtn"><i class="fa-solid fa-print"></i><span>Print</span></button>
+    <button id="feeprintbtn"><i class="fa-solid fa-print"></i><span>Print</span></button>
     <button id="exportbtn"><i class="fa-solid fa-file-export"></i><span>Export</span></button>
     </div>
 
@@ -115,7 +115,7 @@ if (!isset($_SESSION['roleType'])) {
 					<tr>
 						<th>ID<i class="fa-solid fa-sort"></i></th>
                         <th>Date<i class="fa-solid fa-sort"></i></th>
-						<th>Full Name<i class="fa-solid fa-sort"></i></th>
+						<th>Name<i class="fa-solid fa-sort"></i></th>
 						<th>Email<i class="fa-solid fa-sort"></i></th>
 						<th>Message<i class="fa-solid fa-sort"></i></th>
 					</tr>

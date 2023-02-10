@@ -481,3 +481,117 @@ jQuery(function ($) {
 });
 
 /* End Order items List Print Button Function */
+
+/* Start Feedback Page Print Button Function */
+
+jQuery(function ($) {
+  $("#feeprintbtn").click(function () {
+    // parse the HTML table element having an id=exportTable
+    var dataSource = shield.DataSource.create({
+      data: ".order-list-table",
+      schema: {
+        header: true,
+        footer: true,
+        type: "table",
+        fields: {
+          ID: { type: String },
+          Date: { type: String },
+          Name: { type: String },
+          Email: { type: String },
+          Message: { type: String },
+        },
+      },
+    });
+
+    // when parsing is done, export the data to PDF
+    dataSource.read().then(function (data) {
+      var pdf = new shield.exp.PDFDocument({
+        author: "SeekersPizza",
+        created: new Date(),
+      });
+
+      pdf.addPage("a4", "potrait");
+
+      pdf.table(
+        50,
+        50,
+        data,
+        [
+          { field: "ID", title: "Order ID", width: 70 },
+          { field: "Date", title: "Date", width: 70 },
+          { field: "Name", title: "Full Name", width: 150 },
+          { field: "Email", title: "Email", width: 80 },
+          { field: "Message", title: "Message", width: 80 },
+        ],
+        {
+          margins: {
+            top: 50,
+            left: 50,
+          },
+        }
+      );
+
+      pdf.saveAs({
+        fileName: "FeedbackListPDF",
+      });
+    });
+  });
+});
+
+/* End Feedback Page Print Button Function */
+
+/* Start Report Page Print Button Function */
+
+jQuery(function ($) {
+  $("#repprintbtn").click(function () {
+    // parse the HTML table element having an id=exportTable
+    var dataSource = shield.DataSource.create({
+      data: ".order-list-table",
+      schema: {
+        header: true,
+        footer: true,
+        type: "table",
+        fields: {
+          ID: { type: String },
+          Product: { type: String },
+          QTY: { type: Number },
+          Total_Price: { type: String },
+        },
+      },
+    });
+
+    // when parsing is done, export the data to PDF
+    dataSource.read().then(function (data) {
+      var pdf = new shield.exp.PDFDocument({
+        author: "SeekersPizza",
+        created: new Date(),
+      });
+
+      pdf.addPage("a4", "potrait");
+
+      pdf.table(
+        50,
+        50,
+        data,
+        [
+          { field: "ID", title: "ID", width: 70 },
+          { field: "Product", title: "Product", width: 70 },
+          { field: "QTY", title: "QTY", width: 80 },
+          { field: "Total_Price", title: "Total Price", width: 80 },
+        ],
+        {
+          margins: {
+            top: 50,
+            left: 50,
+          },
+        }
+      );
+
+      pdf.saveAs({
+        fileName: "ReportListPDF",
+      });
+    });
+  });
+});
+
+/* End Report Page Print Button Function */

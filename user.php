@@ -59,7 +59,7 @@ if (isset($_POST['add_user'])) {
     } else {
         $insert_user = $conn->prepare("INSERT INTO user (userNIC, userName, userPassword, userFName, userLName, userEmail, userNumber, userAddress, roleId) VALUES(?,?,?,?,?,?,?,?,?)");
         $insert_user->execute([$userNIC, $userName, $userPassword, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $roleId]);
-        $add[] = 'New Customer has been successfully Added.';
+        $add[] = 'New User has been successfully Added.';
     }
 
     // $select_users = $conn->prepare("SELECT * FROM user WHERE userNIC = ?");
@@ -471,6 +471,7 @@ $show_role = $conn->prepare("SELECT * FROM role WHERE roleType IN ('Admin', 'Man
     <script src='js/export.js'></script>
     <script src='js/sort.js'></script>
     <script src='js/notify.js'></script>
+    <script src='js/validation.js'></script>
 
 </body>
 

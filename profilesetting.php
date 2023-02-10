@@ -11,8 +11,8 @@ if (isset($_POST['update_user'])) {
 
     $userNIC = $_SESSION['userNIC'];
     $userNIC = filter_var($userNIC, FILTER_UNSAFE_RAW);
-    $userName = $_POST['userName'];
-    $userName = filter_var($userName, FILTER_UNSAFE_RAW);
+    // $userName = $_POST['userName'];
+    // $userName = filter_var($userName, FILTER_UNSAFE_RAW);
     $userFName = $_POST['userFName'];
     $userFName = filter_var($userFName, FILTER_UNSAFE_RAW);
     $userLName = $_POST['userLName'];
@@ -28,9 +28,25 @@ if (isset($_POST['update_user'])) {
     $userPostalCode = $_POST['userPostalCode'];
     $userPostalCode = filter_var($userPostalCode, FILTER_UNSAFE_RAW);
 
-    $update_user = $conn->prepare("UPDATE user SET userName = ?, userFName = ?, userLName = ?, userEmail = ?, userNumber = ?, userAddress = ?, userCity = ?, userPostalCode = ? WHERE userNIC = ?");
-    $update_user->execute([$userName, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $userCity, $userPostalCode, $userNIC]);
+    $select_email = $conn->prepare("SELECT * FROM user WHERE userEmail = ?");
+    $select_email->execute([$userEmail]);
+    $row2 = $select_email->fetch(PDO::FETCH_ASSOC);
+
+    $update_user = $conn->prepare("UPDATE user SET userFName = ?, userLName = ?, userEmail = ?, userNumber = ?, userAddress = ?, userCity = ?, userPostalCode = ? WHERE userNIC = ?");
+    $update_user->execute([$userFName, $userLName, $userEmail, $userNumber, $userAddress, $userCity, $userPostalCode, $userNIC]);
     $update[] = 'Profile details has been successfully updated.';
+
+    // if ($select_email->rowCount() > 0) {
+    //     if ($row2['userEmail'] == ($userEmail)) {
+    //         $uperror[] = 'Email already exists! Use the different email';
+    //         echo "<script>alert('done1')</script>";
+    //     }
+    // } else {
+    //     $update_user = $conn->prepare("UPDATE user SET userFName = ?, userLName = ?, userEmail = ?, userNumber = ?, userAddress = ?, userCity = ?, userPostalCode = ? WHERE userNIC = ?");
+    //     $update_user->execute([$userFName, $userLName, $userEmail, $userNumber, $userAddress, $userCity, $userPostalCode, $userNIC]);
+    //     $update[] = 'Profile details has been successfully updated.';
+    // }
+
 }
 
 ?>
@@ -107,6 +123,15 @@ if (isset($update)) {
 }
 ;
 ?>
+    <?php
+if (isset($uperror)) {
+    foreach ($uperror as $uperror) {
+        echo '<span id="error-msg" class="error-msg">' . $uperror . '</span>';
+    }
+    ;
+}
+;
+?>
     </div>
 
         <div style="display: flex;"><?php include 'notify.php';?></div>
@@ -147,12 +172,12 @@ if ($show_user_address->rowCount() > 0) {
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input type="text" name="userName" placeholder="Username" value="<?=$fetch_address['userName'];?>" required>
+                            <input type="text" name="userName" placeholder="Username" value="<?=$fetch_address['userName'];?>" required disabled>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input type="text" name="userEmail" placeholder="Email" value="<?=$fetch_address['userEmail'];?>" required>
+                            <input type="email" name="userEmail" placeholder="Email" value="<?=$fetch_address['userEmail'];?>" required>
                         </td>
                     </tr>
                     <tr>
@@ -178,7 +203,7 @@ if ($show_user_address->rowCount() > 0) {
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input type="text" name="userNumber" placeholder="User Phone No" value="<?=$fetch_address['userNumber'];?>" required>
+                            <input type="tel" name="userNumber" placeholder="User Phone No" value="<?=$fetch_address['userNumber'];?>" id="checkNumber" pattern="\d{10}" required>
                         </td>
                     </tr>
                     <tr>
@@ -207,6 +232,7 @@ if ($show_user_address->rowCount() > 0) {
     <script src='js/print.js'></script>
     <script src='js/sort.js'></script>
     <script src='js/notify.js'></script>
+    <script src='js/validation.js'></script>
 </body>
 
 </html>

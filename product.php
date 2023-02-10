@@ -93,6 +93,7 @@ if (isset($_GET['delete'])) {
     $delete_product->execute([$delete_id]);
     // $delete_cart = $conn->prepare("DELETE FROM cart WHERE productId = ?");
     // $delete_cart->execute([$delete_id]);
+    $delete[] = 'Product has been successfully deleted.';
     header('location:product.php');
 
 }

@@ -303,14 +303,22 @@ section{
     font-weight: 700;
 }
 
+.form .form-container .input-field:valid{
+    border: 3px solid rgba(39, 124, 60, 0.308);
+    box-shadow: rgba(87, 255, 129, 0.199) 0px 2px 8px 0px;
+}
+
+.form .form-container .input-field:focus:invalid{
+    border: 3px solid #ff4069c9;
+    box-shadow: #ff406979 0px 2px 8px 0px;
+}
+
 .form .form-container .forgot a{
     color: #ffffff;
     font-weight: 700;
     font-size: 0.8em;
     text-decoration: none;
 }
-
-
 
 .form .form-container .submit-btn{
     width: 55%;
