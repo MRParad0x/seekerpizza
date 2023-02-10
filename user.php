@@ -325,7 +325,7 @@ if ($show_category->rowCount() > 0) {
                 </select>
                 </td>
             <tr>
-                <td><input id="pId" type="text" name="userNIC" placeholder="User NIC" id="checkNIC" pattern="[\d{9}]+V$" required></td>
+                <td><input id="pId" type="text" name="userNIC" placeholder="User NIC" id="checkNIC" pattern="[\d{9}]+V$|\d{12}" required></td>
             </tr>
             </tr>
             <tr>
@@ -411,7 +411,7 @@ $show_role = $conn->prepare("SELECT * FROM role WHERE roleType IN ('Admin', 'Man
                 </td>
             </tr>
             <tr>
-                <td><input id="pId" type="text" name="userNIC" placeholder="User NIC" value="<?=$fetch_user['userNIC'];?>" id="checkNIC" pattern="[\d{9}]+V$" required ></td>
+                <td><input id="pId" type="text" name="userNIC" placeholder="User NIC" value="<?=$fetch_user['userNIC'];?>" id="checkNIC" pattern="[\d{9}]+V$|\d{12}" required ></td>
             </tr>
             </tr>
             <tr>

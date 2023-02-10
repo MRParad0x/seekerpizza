@@ -322,7 +322,7 @@ if ($show_role->rowCount() > 0) {
 }
 ?>
             <tr>
-                <td><input id="pId" type="text" name="userNIC" placeholder="User NIC" id="checkNIC" pattern="[\d{9}]+V$" required></td>
+                <td><input id="pId" type="text" name="userNIC" placeholder="User NIC" id="checkNIC" pattern="[\d{9}]+V$|\d{12}" required></td>
             </tr>
             <tr>
                 <td><input type="text" name="userName" placeholder="Username" required></td>
@@ -400,7 +400,7 @@ $show_role = $conn->prepare("SELECT * FROM role WHERE roleType IN ('Customer')")
             ?>
             </tr>
             <tr>
-                <td><input id="pId" type="text" name="userNIC" placeholder="User NIC" value="<?=$fetch_user['userNIC'];?>" id="checkNIC" pattern="[\d{9}]+V$" ></td>
+                <td><input id="pId" type="text" name="userNIC" placeholder="User NIC" value="<?=$fetch_user['userNIC'];?>" id="checkNIC" pattern="[\d{9}]+V$|\d{12}" ></td>
             </tr>
             </tr>
             <tr>

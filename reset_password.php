@@ -104,7 +104,7 @@ if (isset($regerror)) {
       <form action="" method="POST">
         <table class="contact-table">
         <tr>
-          <td><input type="text" class="input-field" name ="userNIC" placeholder="User NIC" required></td>
+          <td><input type="text" class="input-field" name ="userNIC" placeholder="User NIC" id="checkNIC" pattern="[\d{9}]+V$|\d{12}" required></td>
         </tr>
         <tr>
           <td><input type="email" class="input-field" name ="userEmail" placeholder="userEmail" required></td>
@@ -126,7 +126,7 @@ if (isset($regerror)) {
     <?php include 'footer.php'?>
 
     <!-- custom js file link  -->
-
+    <script src='js/validation.js'></script>
     <script>
     /* Start logo image click functions */
 
