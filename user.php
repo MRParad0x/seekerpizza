@@ -90,9 +90,10 @@ if (isset($_POST['update_user'])) {
     $userNumber = filter_var($userNumber, FILTER_UNSAFE_RAW);
     $userAddress = $_POST['userAddress'];
     $userAddress = filter_var($userAddress, FILTER_UNSAFE_RAW);
+    $hashedPassword = md5($userPassword);
 
     $update_user = $conn->prepare("UPDATE user SET userName = ?, userPassword = ?, userFName = ?, userLName = ?, userEmail = ?, userNumber = ?, userAddress = ?, roleId = ? WHERE userNIC = ?");
-    $update_user->execute([$userName, $userPassword, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $roleId, $userNIC]);
+    $update_user->execute([$userName, $hashedPassword, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $roleId, $userNIC]);
     $update[] = 'User has been successfully updated.';
 }
 
@@ -325,7 +326,7 @@ if ($show_category->rowCount() > 0) {
                 </select>
                 </td>
             <tr>
-                <td><input id="pId" type="text" name="userNIC" placeholder="User NIC" id="checkNIC" pattern="[\d{9}]+V$|\d{12}" required></td>
+                <td><input type="text" name="userNIC" placeholder="User NIC" id="checkNIC" pattern="[\d{9}]+V$|\d{12}" required></td>
             </tr>
             </tr>
             <tr>
@@ -411,34 +412,30 @@ $show_role = $conn->prepare("SELECT * FROM role WHERE roleType IN ('Admin', 'Man
                 </td>
             </tr>
             <tr>
-                <td><input id="pId" type="text" name="userNIC" placeholder="User NIC" value="<?=$fetch_user['userNIC'];?>" id="checkNIC" pattern="[\d{9}]+V$|\d{12}" required ></td>
-            </tr>
-            </tr>
-            <tr>
-                <td><input type="text" name="userName" placeholder="Username" value="<?=$fetch_user['userName'];?>" ></td>
+            <input type="hidden" name="userNIC" placeholder="User NIC" value="<?=$fetch_user['userNIC'];?>" id="checkNIC" pattern="[\d{9}]+V$|\d{12}">
+                <td><input type="text" name="userName" placeholder="Username" value="<?=$fetch_user['userName'];?>" required></td>
             </tr>
             <tr>
-                <td><input type="password" name="userPassword" placeholder="User Password" value="<?=$fetch_user['userPassword'];?>" id="password" minlength="8"></td>
+                <td><input type="password" name="userPassword" placeholder="User Password" value="<?=$fetch_user['userPassword'];?>" id="password" minlength="8" required></td>
             </tr>
             <tr>
-                <td><input type="password" name="userConPassword" placeholder="Confirm Password" value="<?=$fetch_user['userPassword'];?>" id="confirm_password" minlength="8"></td>
+                <td><input type="password" name="userConPassword" placeholder="Confirm Password" value="<?=$fetch_user['userPassword'];?>" id="confirm_password" minlength="8" required></td>
             </tr>
             <tr>
-                <td><input type="text" name="userFName" placeholder="User First Name" value="<?=$fetch_user['userFName'];?>" ></td>
+                <td><input type="text" name="userFName" placeholder="User First Name" value="<?=$fetch_user['userFName'];?>" required></td>
             </tr>
             <tr>
-                <td><input type="text" name="userLName" placeholder="User Last Name" value="<?=$fetch_user['userLName'];?>" ></td>
+                <td><input type="text" name="userLName" placeholder="User Last Name" value="<?=$fetch_user['userLName'];?>" required></td>
             </tr>
             <tr>
-                <td><input type="email" name="userEmail" placeholder="User Email" value="<?=$fetch_user['userEmail'];?>" ></td>
+                <td><input type="email" name="userEmail" placeholder="User Email" value="<?=$fetch_user['userEmail'];?>" required></td>
             </tr>
             <tr>
-                <td><input type="text" name="userNumber" placeholder="User Phone No" value="<?=$fetch_user['userNumber'];?>" id="checkNumber" pattern="\d{10}"></td>
+                <td><input type="text" name="userNumber" placeholder="User Phone No" value="<?=$fetch_user['userNumber'];?>" id="checkNumber" pattern="\d{10}" required></td>
             </tr>
             <tr>
-                <td><input type="text" name="userAddress" placeholder="User Address" value="<?=$fetch_user['userAddress'];?>" ></td>
+                <td><input type="text" name="userAddress" placeholder="User Address" value="<?=$fetch_user['userAddress'];?>" required></td>
             </tr>
-            <tr>
             <tr>
                 <td><input type="submit" name="update_user" value="Update"></td>
             </tr>
