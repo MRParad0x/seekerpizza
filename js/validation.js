@@ -44,7 +44,7 @@ nic_input.addEventListener("invalid", () => {
     nic_input.setCustomValidity("Please enter NIC number");
   } else {
     nic_input.setCustomValidity(
-      "Please enter the NIC in this format: 952632143V"
+      "Please enter the NIC in this format: 952632143V 0r 9526321432345"
     );
   }
 });

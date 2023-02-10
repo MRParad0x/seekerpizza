@@ -27,6 +27,7 @@ if (isset($_POST['add_user'])) {
     $userNumber = filter_var($userNumber, FILTER_UNSAFE_RAW);
     $userAddress = $_POST['userAddress'];
     $userAddress = filter_var($userAddress, FILTER_UNSAFE_RAW);
+    $hashedPassword = md5($userPassword);
 
     $select_users = $conn->prepare("SELECT * FROM user WHERE userNIC = ?");
     $select_users->execute([$userNIC]);
@@ -58,7 +59,7 @@ if (isset($_POST['add_user'])) {
         }
     } else {
         $insert_user = $conn->prepare("INSERT INTO user (userNIC, userName, userPassword, userFName, userLName, userEmail, userNumber, userAddress, roleId) VALUES(?,?,?,?,?,?,?,?,?)");
-        $insert_user->execute([$userNIC, $userName, $userPassword, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $roleId]);
+        $insert_user->execute([$userNIC, $userName, $hashedPassword, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $roleId]);
         $add[] = 'New Customer has been successfully Added.';
     }
 
@@ -89,9 +90,10 @@ if (isset($_POST['update_user'])) {
     $userNumber = filter_var($userNumber, FILTER_UNSAFE_RAW);
     $userAddress = $_POST['userAddress'];
     $userAddress = filter_var($userAddress, FILTER_UNSAFE_RAW);
+    $hashedPassword = md5($userPassword);
 
     $update_user = $conn->prepare("UPDATE user SET userName = ?, userPassword = ?, userFName = ?, userLName = ?, userEmail = ?, userNumber = ?, userAddress = ?, roleId = ? WHERE userNIC = ?");
-    $update_user->execute([$userName, $userPassword, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $roleId, $userNIC]);
+    $update_user->execute([$userName, $hashedPassword, $userFName, $userLName, $userEmail, $userNumber, $userAddress, $roleId, $userNIC]);
     $update[] = 'Customer has been successfully updated.';
 }
 

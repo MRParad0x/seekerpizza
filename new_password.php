@@ -18,9 +18,10 @@ if (isset($_POST['send'])) {
     $userNIC = $_SESSION['userNIC'];
     $userPassword = $_POST['userPassword'];
     $userPassword = filter_var($userPassword, FILTER_UNSAFE_RAW);
+    $hashedPassword = md5($userPassword);
 
     $update_product = $conn->prepare("UPDATE user SET userPassword = ? WHERE userNIC = ?");
-    $update_product->execute([$userPassword, $userNIC]);
+    $update_product->execute([$hashedPassword, $userNIC]);
     $changepass[] = 'Great! <br> Your password has been successfully changed.';
 }
 

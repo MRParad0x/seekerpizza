@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 10, 2023 at 10:50 AM
+-- Generation Time: Feb 10, 2023 at 11:10 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -1504,11 +1504,11 @@ INSERT INTO `user` (`userNIC`, `userName`, `userPassword`, `userFName`, `userLNa
 ('202522238V', 'manager', '25d55ad283aa400af464c76d713c07ad', 'Thushan', 'Pereraa', 'manager@gmail.com', '0772563489', 'Colombo 04', 'galle', 10640, 'RO-0002', '2022-12-24'),
 ('202525238V', 'admin', '81dc9bdb52d04dc20036dbd8313ed055', 'Lahiru', 'Chinthana', 'lahiru@gmail.com', '0785295963', '10D, Pittugala road', 'Malabe', 10640, 'RO-0001', '2022-12-24'),
 ('202525244V', 'saman', '25d55ad283aa400af464c76d713c07ad', 'Saman', 'K', 'saman@gmail.com', '0778956390', 'Kaluthara', '', 0, 'RO-0004', '2023-02-02'),
-('212224425V', 'admin2', '12345678', 'admin', 'two', 'admin2@gmail.com', '0778956300', 'kandy', '', 0, 'RO-0001', '2023-02-10'),
+('212224425V', 'admin2', '25d55ad283aa400af464c76d713c07ad', 'admin', 'two', 'admin2@gmail.com', '0778956300', 'kandy', '', 0, 'RO-0001', '2023-02-10'),
 ('9311314V', 'wafwaf', '25d55ad283aa400af464c76d713c07ad', 'awfwaf', 'awfwa', 'wafwa@gmail.com', '0785263256', 'fgawfwaf', '', 0, 'RO-0004', '2022-12-24'),
-('982525238V', 'sudee', '12345678', 'sudee', 'l', 'sudee@gg.cc', '0718956300', 'galle', '', 0, 'RO-0004', '2023-02-10'),
+('982525238V', 'sudee', '25d55ad283aa400af464c76d713c07ad', 'sudee', 'l', 'sudee@gg.cc', '0718956300', 'galle', '', 0, 'RO-0004', '2023-02-10'),
 ('982545632V', 'cashier', '25d55ad283aa400af464c76d713c07ad', 'Super', 'Man', 'cashier@gmail.com', '0778526325', 'Galle', 'kandy', 8867, 'RO-0003', '2022-12-24'),
-('991824425V', 'josh', '12345678', 'josh', 'b', 'josh@gg.cc', '0778956322', 'kandy', '', 0, 'RO-0004', '2023-02-10');
+('991824425V', 'josh', '25d55ad283aa400af464c76d713c07ad', 'josh', 'b', 'josh@gg.cc', '0778956322', 'kandy', '', 0, 'RO-0004', '2023-02-10');
 
 --
 -- Indexes for dumped tables
