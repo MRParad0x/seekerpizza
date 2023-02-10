@@ -222,7 +222,7 @@ if (isset($error)) {
 ;
 ?>
                     <tr>
-                        <td><input type="text" v-bind:class="{'error-boarder' : $v.age.$invalid}" name="userEmail" class="input-field" placeholder="Email" required></td>
+                        <td><input type="text" v-bind:class="{'error-boarder' : $v.age.$invalid}" name="userEmail" class="input-field" placeholder="Email or Username" required></td>
                     </tr>
                     <tr>
                         <td><input type="password" name="userPassword" class="input-field" placeholder="Password" required></td>
